@@ -991,6 +991,160 @@ Model df: 5.   Total lags used: 78</code></pre>
 </div>
 </div>
 </div>
+<p><strong>Linear Regression with ARMA Errors — UK Weekly Fruit &amp; Vegetable Prices</strong></p>
+<hr>
+<p><strong>Data and Sample</strong></p>
+<p>Following aggregation to one mean price per week and joining all predictor series via LOCF alignment, the effective estimation sample covers September 2017 to February 2026 — 393 observations after dropping weeks with any missing regressor, and 392 after first differencing. The start date is determined by fertiliser data availability, which begins in January 2017, with the first complete weekly observation appearing in September 2017 after LOCF propagation. All models are therefore estimated on an 8.5-year window.</p>
+<p>A note on data construction: <code>df_price_weekly</code> contained 8,308 rows (multiple commodities per week) which inflated the join to 134,162 rows before the groupby aggregation collapsed it back to 527 unique weekly dates. The group-level mean correctly handles this but it’s worth noting that the price variable entering the regression is an average across all fruit and vegetable commodities in the dataset rather than a single price series.</p>
+<hr>
+<p><strong>Stationarity</strong></p>
+<p>ADF tests on all variables in levels confirmed that price is stationary (p &lt; 0.01) while all five predictors — fuel price (p = 0.707), CPI (p = 0.093), API (p = 0.724), fertiliser (p = 0.728), and SPPI (p = 0.740) — are non-stationary. To avoid spurious regression from mixing integrated and stationary series, all predictors were first-differenced before entering the model. The response variable (differenced price) was constructed consistently, yielding a stationary regression framework throughout.</p>
+<hr>
+<p><strong>Model Specifications</strong></p>
+<p>Four models were estimated using <code>auto.arima</code> with the <code>xreg</code> argument, which fits a linear regression on the specified predictors while modelling the residual autocorrelation structure as an ARMA process:</p>
+<p><strong>Model 1 — Full model (all predictors):</strong> The selected error structure was ARIMA(1,0,1)(0,0,1)[52], a model with AR(1), MA(1), and a seasonal MA term at lag 52. This is a richer error specification than the baseline, suggesting the regressors absorb some but not all of the autocorrelation structure.</p>
+<p><strong>Model 2 — CPI only (Granger-motivated):</strong> Selected ARIMA(2,0,3) errors — a more complex non-seasonal ARMA structure. This model achieved the best AIC of all four specifications (−101.33), making it the statistically preferred model.</p>
+<p><strong>Model 3 — CPI + Fuel:</strong> Also selected ARIMA(2,0,3) errors with an additional intercept term. AIC of −99.44, marginally weaker than the CPI-only model.</p>
+<p><strong>Model 4 — ARIMA baseline (no regressors):</strong> Selected ARIMA(2,0,1)(0,0,1)[52] with zero mean. AIC of −99.36 and the best BIC of all models (−79.50), reflecting its parsimony.</p>
+<hr>
+<p><strong>Model Comparison</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>RMSE</th>
+<th>MAE</th>
+<th>MASE</th>
+<th>AIC</th>
+<th>BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full (all predictors)</td>
+<td>0.2101</td>
+<td>0.1131</td>
+<td>0.6561</td>
+<td>−89.76</td>
+<td>−54.02</td>
+</tr>
+<tr class="even">
+<td>CPI only</td>
+<td>0.2080</td>
+<td>0.1188</td>
+<td>0.6895</td>
+<td><strong>−101.33</strong></td>
+<td>−73.53</td>
+</tr>
+<tr class="odd">
+<td>CPI + Fuel</td>
+<td><strong>0.2071</strong></td>
+<td>0.1190</td>
+<td>0.6901</td>
+<td>−99.44</td>
+<td>−63.70</td>
+</tr>
+<tr class="even">
+<td>ARIMA baseline</td>
+<td>0.2098</td>
+<td><strong>0.1128</strong></td>
+<td><strong>0.6545</strong></td>
+<td>−99.36</td>
+<td><strong>−79.50</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The results present a nuanced picture. By AIC, the CPI-only model is preferred. By BIC — which penalises complexity more heavily — the pure ARIMA baseline wins, suggesting the parsimony gain from dropping all regressors outweighs their marginal predictive contribution when degrees of freedom are properly penalised. By RMSE and MAE, the differences across models are very small (RMSE range: 0.207–0.210), indicating that no model dominates substantially in terms of point forecast accuracy. The full model has the worst AIC despite having the most parameters, confirming that adding API, fertiliser, and SPPI alongside CPI and fuel adds no useful predictive information.</p>
+<hr>
+<p><strong>Coefficient Significance — Full Model</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Estimate</th>
+<th>Std. Error</th>
+<th>t-stat</th>
+<th>Significant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AR(1)</td>
+<td>0.827</td>
+<td>0.034</td>
+<td>24.41</td>
+<td>✓ (5%)</td>
+</tr>
+<tr class="even">
+<td>MA(1)</td>
+<td>−0.987</td>
+<td>0.012</td>
+<td>−85.30</td>
+<td>✓ (5%)</td>
+</tr>
+<tr class="odd">
+<td>SMA(1)</td>
+<td>0.171</td>
+<td>0.055</td>
+<td>3.08</td>
+<td>✓ (5%)</td>
+</tr>
+<tr class="even">
+<td>Δ fuel_price</td>
+<td>−0.0004</td>
+<td>0.005</td>
+<td>−0.08</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Δ CPI</td>
+<td>0.0016</td>
+<td>0.005</td>
+<td>0.33</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>Δ API</td>
+<td>0.0049</td>
+<td>0.009</td>
+<td>0.56</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Δ fertiliser</td>
+<td>−0.0001</td>
+<td>0.0004</td>
+<td>−0.33</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>Δ SPPI</td>
+<td>0.0020</td>
+<td>0.015</td>
+<td>0.13</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>This is the most important result in the table. Every ARMA error term is highly significant, while every regression coefficient is completely insignificant with t-statistics all below 0.6. This means the predictors — including CPI, which was the strongest Granger-cause — add no statistically significant explanatory power to price changes once the autocorrelation structure is accounted for. The model is effectively capturing price dynamics through its own lagged errors, not through the macroeconomic regressors.</p>
+<hr>
+<p><strong>Residual Diagnostics</strong></p>
+<p>Both the full model and the CPI-only model pass the Ljung-Box test at lag 20 (full model p = 0.611, CPI model p = 0.847), confirming that short-run autocorrelation in residuals has been adequately captured. The more stringent <code>checkresiduals()</code> test at 78 lags flags marginal autocorrelation in the full model (p = 0.007) but not in the CPI model (p = 0.080), giving the CPI-only specification a slight edge on residual adequacy as well as AIC.</p>
+<hr>
+<p><strong>Forecast</strong></p>
+<p>Both forecast plots show the 52-week ahead prediction of weekly <em>changes</em> in the price index (Δ price), not the level. Since the models are fit on first-differenced data, the forecasts converge rapidly toward zero change — consistent with the absence of a drift term and the mean-reverting nature of differenced price series. The prediction intervals widen substantially over the horizon, reflecting genuine uncertainty about future macroeconomic conditions. The regressor values are held fixed at their last observed differenced values for the forecast period, which is a conservative assumption but unavoidable without separate forecasts for CPI, fuel, and other inputs.</p>
+<hr>
+<p><strong>Synthesis and Interpretation</strong></p>
+<p>The central finding from the regression with ARMA errors analysis is that <strong>macroeconomic and agricultural cost predictors do not contribute statistically significant explanatory power to weekly UK fruit and vegetable price changes once the autocorrelation structure is controlled for</strong>. This is a striking complement to the Granger causality results, which showed CPI as a significant predictor at monthly and quarterly frequencies. The reconciliation is that Granger causality operates at the level of the raw series and captures longer-horizon predictability, while the regression with ARMA errors operates on first-differenced weekly changes where the signal-to-noise ratio is much lower and the ARMA terms absorb most of the predictable structure.</p>
+<p>The BIC-preferred model is the pure ARIMA(2,0,1)(0,0,1)[52] baseline, suggesting that for weekly price change prediction, a well-specified time series model without external regressors is as good as — or better than — any combination of macroeconomic covariates tested here. This does not contradict the Granger findings; it means that while CPI movements precede price movements at monthly and quarterly horizons, the week-to-week transmission is too noisy and delayed to be captured by contemporaneous differenced regressors in a regression framework.</p>
 
 </main>
 <!-- /main column -->
