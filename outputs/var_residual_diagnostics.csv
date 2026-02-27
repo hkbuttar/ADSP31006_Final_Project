@@ -1,0 +1,21 @@
+model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,normality_p,autocorr_ok,normality_ok
+Beetroot — VAR(1),-0,0.0298,0.0017,0.0038,Shapiro-Wilk,0,FALSE,FALSE
+Bulb Onions (Red) — VAR(1),-0,0.0776,2e-4,0.0111,Shapiro-Wilk,0,FALSE,FALSE
+Bulb Onions (Yellow) — VAR(1),0,0.0684,0.4935,0.214,Shapiro-Wilk,0,TRUE,FALSE
+Cabbage — VAR(1),-0,0.0325,0.0017,0.0048,Shapiro-Wilk,0,FALSE,FALSE
+Carrots — VAR(1),-0,0.0332,0.0109,0.0128,Shapiro-Wilk,0,FALSE,FALSE
+Cooking Apples — VAR(1),0,0.1518,4e-4,0.0069,Shapiro-Wilk,0,FALSE,FALSE
+Leeks — VAR(1),-0,0.124,0,0,Shapiro-Wilk,0,FALSE,FALSE
+Lettuce — VAR(1),-0,0.0343,0.2228,0.3828,Shapiro-Wilk,0,TRUE,FALSE
+Pears — VAR(1),-0,0.1521,0.012,0.0706,Shapiro-Wilk,0,FALSE,FALSE
+Dessert Apples — VAR(1),-0,0.0935,0.0025,0.0076,Shapiro-Wilk,0,FALSE,FALSE
+Cucumbers — VAR(1),0,0.2032,0.1136,0.589,Shapiro-Wilk,0,TRUE,FALSE
+Strawberries — VAR(1),0,1.393,0.0636,0.2561,Shapiro-Wilk,0,TRUE,FALSE
+Tomatoes (Round) — VAR(1),0,0.2841,0.0203,0.1241,Shapiro-Wilk,0,FALSE,FALSE
+Tomatoes (Vine) — VAR(1),-0,0.4511,0.6703,0.5472,Shapiro-Wilk,0,TRUE,FALSE
+Asparagus — VAR(1),-0,2.4215,0.0283,1e-4,Shapiro-Wilk,0,FALSE,FALSE
+Capsicums (Red) — VAR(1),0,0.3483,0.7253,0.3022,Shapiro-Wilk,0,TRUE,FALSE
+Capsicums (Green) — VAR(1),-0,0.3665,0.5867,0.7971,Shapiro-Wilk,0,TRUE,FALSE
+Curly kale — VAR(1),-0,0.207,0,0,Shapiro-Wilk,0,FALSE,FALSE
+Pak choi — VAR(1),-0,0.2009,0.1551,0.6816,Shapiro-Wilk,0,TRUE,FALSE
+Spring greens — VAR(1),0,0.1506,0.0072,0.0957,Shapiro-Wilk,0,FALSE,FALSE

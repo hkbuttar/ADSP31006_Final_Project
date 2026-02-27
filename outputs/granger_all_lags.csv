@@ -1,0 +1,1281 @@
+predictor,lag,f_stat,p_value,significant,commodity,target_d_order,pred_d_order
+api_energy_and_lubricants,1,0.1634,0.6862,FALSE,Beetroot,0,1
+api_energy_and_lubricants,2,0.3771,0.6861,FALSE,Beetroot,0,1
+api_energy_and_lubricants,3,0.1906,0.9028,FALSE,Beetroot,0,1
+api_energy_and_lubricants,4,0.1832,0.9471,FALSE,Beetroot,0,1
+api_energy_and_lubricants,5,0.8161,0.5386,FALSE,Beetroot,0,1
+api_energy_and_lubricants,6,0.7638,0.5987,FALSE,Beetroot,0,1
+api_energy_and_lubricants,7,0.6421,0.721,FALSE,Beetroot,0,1
+api_energy_and_lubricants,8,1.3946,0.1967,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,1,0.029,0.8648,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,2,0.2561,0.7742,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,3,0.6843,0.562,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,4,0.9695,0.424,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,5,1.5827,0.1636,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,6,1.495,0.1782,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,7,1.2246,0.2877,FALSE,Beetroot,0,1
+api_fertilisers_and_soil_improvers,8,1.725,0.0906,FALSE,Beetroot,0,1
+api_plant_protection_products,1,8e-4,0.978,FALSE,Beetroot,0,1
+api_plant_protection_products,2,0.3966,0.6729,FALSE,Beetroot,0,1
+api_plant_protection_products,3,1.5346,0.2049,FALSE,Beetroot,0,1
+api_plant_protection_products,4,1.6816,0.1532,FALSE,Beetroot,0,1
+api_plant_protection_products,5,1.3651,0.2363,FALSE,Beetroot,0,1
+api_plant_protection_products,6,1.0082,0.4193,FALSE,Beetroot,0,1
+api_plant_protection_products,7,0.896,0.5094,FALSE,Beetroot,0,1
+api_plant_protection_products,8,0.9854,0.4467,FALSE,Beetroot,0,1
+api_fresh_fruit,1,0.5515,0.4581,FALSE,Beetroot,0,1
+api_fresh_fruit,2,0.311,0.7329,FALSE,Beetroot,0,1
+api_fresh_fruit,3,0.7458,0.5252,FALSE,Beetroot,0,1
+api_fresh_fruit,4,0.5869,0.6723,FALSE,Beetroot,0,1
+api_fresh_fruit,5,0.5954,0.7035,FALSE,Beetroot,0,1
+api_fresh_fruit,6,0.536,0.7809,FALSE,Beetroot,0,1
+api_fresh_fruit,7,0.5908,0.7635,FALSE,Beetroot,0,1
+api_fresh_fruit,8,0.7806,0.6201,FALSE,Beetroot,0,1
+api_fresh_vegetables,1,1.5429,0.2148,FALSE,Beetroot,0,1
+api_fresh_vegetables,2,0.9951,0.3705,FALSE,Beetroot,0,1
+api_fresh_vegetables,3,1.0913,0.3525,FALSE,Beetroot,0,1
+api_fresh_vegetables,4,1.5865,0.1769,FALSE,Beetroot,0,1
+api_fresh_vegetables,5,1.3189,0.2549,FALSE,Beetroot,0,1
+api_fresh_vegetables,6,1.0769,0.3754,FALSE,Beetroot,0,1
+api_fresh_vegetables,7,0.9866,0.4403,FALSE,Beetroot,0,1
+api_fresh_vegetables,8,1.1681,0.317,FALSE,Beetroot,0,1
+fuel_petrol_price,1,0.3877,0.5338,FALSE,Beetroot,0,1
+fuel_petrol_price,2,1.0514,0.3503,FALSE,Beetroot,0,1
+fuel_petrol_price,3,0.7279,0.5357,FALSE,Beetroot,0,1
+fuel_petrol_price,4,0.8522,0.4927,FALSE,Beetroot,0,1
+fuel_petrol_price,5,1.4614,0.2013,FALSE,Beetroot,0,1
+fuel_petrol_price,6,1.2852,0.2627,FALSE,Beetroot,0,1
+fuel_petrol_price,7,1.1811,0.3123,FALSE,Beetroot,0,1
+fuel_petrol_price,8,1.1632,0.3201,FALSE,Beetroot,0,1
+fuel_diesel_price,1,0.0056,0.9405,FALSE,Beetroot,0,1
+fuel_diesel_price,2,0.1498,0.8609,FALSE,Beetroot,0,1
+fuel_diesel_price,3,0.2748,0.8436,FALSE,Beetroot,0,1
+fuel_diesel_price,4,0.3662,0.8327,FALSE,Beetroot,0,1
+fuel_diesel_price,5,1.289,0.2675,FALSE,Beetroot,0,1
+fuel_diesel_price,6,1.0256,0.4079,FALSE,Beetroot,0,1
+fuel_diesel_price,7,1.5231,0.1575,FALSE,Beetroot,0,1
+fuel_diesel_price,8,1.3987,0.1949,FALSE,Beetroot,0,1
+sppi_road_freight,1,1.6963,0.1935,FALSE,Beetroot,0,1
+sppi_road_freight,2,1.0499,0.3509,FALSE,Beetroot,0,1
+sppi_road_freight,3,0.6591,0.5777,FALSE,Beetroot,0,1
+sppi_road_freight,4,0.6853,0.6025,FALSE,Beetroot,0,1
+sppi_road_freight,5,1.6473,0.1465,FALSE,Beetroot,0,1
+sppi_road_freight,6,1.4598,0.1908,FALSE,Beetroot,0,1
+sppi_road_freight,7,1.2075,0.2974,FALSE,Beetroot,0,1
+sppi_road_freight,8,1.0445,0.4019,FALSE,Beetroot,0,1
+api_energy_and_lubricants,1,0.0707,0.7904,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,2,0.0721,0.9304,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,3,0.1801,0.9099,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,4,0.1901,0.9435,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,5,0.1796,0.9702,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,6,0.2684,0.9515,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,7,0.6818,0.6875,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,8,0.6707,0.7174,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,1,0.4575,0.4992,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,2,0.368,0.6924,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,3,0.274,0.8442,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,4,0.2251,0.9243,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,5,0.4146,0.8386,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,6,0.3876,0.8869,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,7,0.4559,0.8661,FALSE,Bulb Onions (Red),0,1
+api_fertilisers_and_soil_improvers,8,0.4138,0.9126,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,1,1.5557,0.213,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,2,0.8283,0.4375,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,3,1.9495,0.121,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,4,1.8156,0.1249,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,5,1.6398,0.1483,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,6,1.325,0.2447,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,7,1.3245,0.237,FALSE,Bulb Onions (Red),0,1
+api_plant_protection_products,8,1.1928,0.3018,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,1,0.616,0.433,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,2,0.9808,0.3759,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,3,0.6737,0.5685,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,4,0.7675,0.5468,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,5,0.6567,0.6565,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,6,0.5771,0.7486,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,7,0.5475,0.7982,FALSE,Bulb Onions (Red),0,1
+api_fresh_fruit,8,1.3939,0.1972,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,1,0.019,0.8905,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,2,0.4388,0.6451,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,3,0.2786,0.8409,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,4,0.2458,0.9121,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,5,0.1834,0.9688,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,6,0.1964,0.9777,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,7,0.2573,0.9697,FALSE,Bulb Onions (Red),0,1
+api_fresh_vegetables,8,0.2975,0.9666,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,1,0.0475,0.8276,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,2,0.0382,0.9625,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,3,0.2544,0.8582,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,4,0.4031,0.8064,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,5,0.6542,0.6584,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,6,0.5905,0.738,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,7,0.7296,0.647,FALSE,Bulb Onions (Red),0,1
+fuel_petrol_price,8,0.6372,0.7465,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,1,7e-4,0.9782,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,2,0.0065,0.9935,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,3,0.4028,0.7511,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,4,0.5357,0.7096,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,5,0.6702,0.6463,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,6,0.5708,0.7536,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,7,0.6958,0.6756,FALSE,Bulb Onions (Red),0,1
+fuel_diesel_price,8,0.622,0.7595,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,1,0.0633,0.8014,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,2,0.1432,0.8666,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,3,0.0776,0.9721,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,4,0.041,0.9968,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,5,0.0542,0.9981,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,6,0.068,0.9988,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,7,0.0578,0.9997,FALSE,Bulb Onions (Red),0,1
+sppi_road_freight,8,0.0989,0.9992,FALSE,Bulb Onions (Red),0,1
+api_energy_and_lubricants,1,0.2263,0.6345,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,2,0.2792,0.7565,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,3,0.2098,0.8896,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,4,0.2259,0.9239,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,5,0.211,0.9578,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,6,0.1758,0.9833,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,7,0.15,0.9939,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,8,0.1292,0.998,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,1,1.1217,0.2901,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,2,0.5577,0.5729,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,3,0.3602,0.7818,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,4,0.4115,0.8004,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,5,0.4164,0.8374,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,6,0.389,0.8861,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,7,0.3319,0.9393,FALSE,Bulb Onions (Yellow),0,1
+api_fertilisers_and_soil_improvers,8,0.3067,0.9634,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,1,0.2608,0.6098,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,2,0.1653,0.8477,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,3,0.4478,0.719,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,4,0.4689,0.7586,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,5,0.4764,0.7939,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,6,0.3951,0.8822,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,7,0.435,0.8801,FALSE,Bulb Onions (Yellow),0,1
+api_plant_protection_products,8,0.3811,0.9306,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,1,0.8599,0.3543,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,2,0.7528,0.4717,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,3,0.6945,0.5558,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,4,0.503,0.7336,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,5,0.4153,0.8381,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,6,0.3579,0.9052,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,7,0.3066,0.9509,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_fruit,8,0.5195,0.8419,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,1,0.1619,0.6876,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,2,0.0709,0.9316,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,3,0.1836,0.9076,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,4,0.1445,0.9654,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,5,0.2538,0.9378,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,6,0.2117,0.9731,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,7,0.2307,0.9778,FALSE,Bulb Onions (Yellow),0,1
+api_fresh_vegetables,8,0.2334,0.9846,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,1,0.3903,0.5325,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,2,0.3021,0.7394,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,3,0.213,0.8874,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,4,0.3023,0.8764,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,5,1.6934,0.1349,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,6,1.4054,0.211,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,7,1.9689,0.058,FALSE,Bulb Onions (Yellow),0,1
+fuel_petrol_price,8,1.7693,0.0813,FALSE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,1,0.2277,0.6335,FALSE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,2,2.6686,0.0705,FALSE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,3,1.9844,0.1156,FALSE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,4,2.0751,0.0832,FALSE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,5,2.6554,0.0223,TRUE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,6,2.2616,0.0369,TRUE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,7,2.1399,0.0386,TRUE,Bulb Onions (Yellow),0,1
+fuel_diesel_price,8,1.9172,0.056,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,1,0.0876,0.7674,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,2,0.107,0.8986,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,3,0.0604,0.9805,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,4,0.0621,0.9929,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,5,0.0875,0.9942,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,6,0.1919,0.979,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,7,0.2032,0.9847,FALSE,Bulb Onions (Yellow),0,1
+sppi_road_freight,8,0.1792,0.9936,FALSE,Bulb Onions (Yellow),0,1
+api_energy_and_lubricants,1,0.7347,0.3918,FALSE,Cabbage,0,1
+api_energy_and_lubricants,2,0.9366,0.3927,FALSE,Cabbage,0,1
+api_energy_and_lubricants,3,0.6406,0.5892,FALSE,Cabbage,0,1
+api_energy_and_lubricants,4,0.5739,0.6817,FALSE,Cabbage,0,1
+api_energy_and_lubricants,5,0.4163,0.8374,FALSE,Cabbage,0,1
+api_energy_and_lubricants,6,0.465,0.8342,FALSE,Cabbage,0,1
+api_energy_and_lubricants,7,0.592,0.7625,FALSE,Cabbage,0,1
+api_energy_and_lubricants,8,0.584,0.7912,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,1,1.4989,0.2215,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,2,2.0361,0.1318,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,3,1.3901,0.2452,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,4,0.9336,0.4442,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,5,0.6545,0.6582,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,6,0.5394,0.7782,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,7,0.6209,0.7388,FALSE,Cabbage,0,1
+api_fertilisers_and_soil_improvers,8,0.5643,0.8072,FALSE,Cabbage,0,1
+api_plant_protection_products,1,0.0095,0.9226,FALSE,Cabbage,0,1
+api_plant_protection_products,2,0.0354,0.9652,FALSE,Cabbage,0,1
+api_plant_protection_products,3,0.1159,0.9508,FALSE,Cabbage,0,1
+api_plant_protection_products,4,0.0829,0.9876,FALSE,Cabbage,0,1
+api_plant_protection_products,5,0.0923,0.9934,FALSE,Cabbage,0,1
+api_plant_protection_products,6,0.0976,0.9966,FALSE,Cabbage,0,1
+api_plant_protection_products,7,0.2487,0.9725,FALSE,Cabbage,0,1
+api_plant_protection_products,8,0.2229,0.9867,FALSE,Cabbage,0,1
+api_fresh_fruit,1,0.488,0.4852,FALSE,Cabbage,0,1
+api_fresh_fruit,2,1.5709,0.209,FALSE,Cabbage,0,1
+api_fresh_fruit,3,1.0652,0.3636,FALSE,Cabbage,0,1
+api_fresh_fruit,4,0.6683,0.6143,FALSE,Cabbage,0,1
+api_fresh_fruit,5,0.4414,0.8196,FALSE,Cabbage,0,1
+api_fresh_fruit,6,0.9239,0.4774,FALSE,Cabbage,0,1
+api_fresh_fruit,7,0.7715,0.6116,FALSE,Cabbage,0,1
+api_fresh_fruit,8,0.6847,0.7051,FALSE,Cabbage,0,1
+api_fresh_vegetables,1,0.0213,0.8839,FALSE,Cabbage,0,1
+api_fresh_vegetables,2,0.0158,0.9843,FALSE,Cabbage,0,1
+api_fresh_vegetables,3,0.6308,0.5954,FALSE,Cabbage,0,1
+api_fresh_vegetables,4,0.7845,0.5357,FALSE,Cabbage,0,1
+api_fresh_vegetables,5,0.5422,0.7443,FALSE,Cabbage,0,1
+api_fresh_vegetables,6,0.4836,0.8206,FALSE,Cabbage,0,1
+api_fresh_vegetables,7,0.5658,0.7837,FALSE,Cabbage,0,1
+api_fresh_vegetables,8,0.9408,0.4824,FALSE,Cabbage,0,1
+fuel_petrol_price,1,0.0981,0.7543,FALSE,Cabbage,0,1
+fuel_petrol_price,2,1.4852,0.2276,FALSE,Cabbage,0,1
+fuel_petrol_price,3,1.0126,0.3869,FALSE,Cabbage,0,1
+fuel_petrol_price,4,0.7342,0.569,FALSE,Cabbage,0,1
+fuel_petrol_price,5,0.6538,0.6588,FALSE,Cabbage,0,1
+fuel_petrol_price,6,0.6529,0.6878,FALSE,Cabbage,0,1
+fuel_petrol_price,7,0.8788,0.5231,FALSE,Cabbage,0,1
+fuel_petrol_price,8,0.7992,0.6036,FALSE,Cabbage,0,1
+fuel_diesel_price,1,0.1046,0.7465,FALSE,Cabbage,0,1
+fuel_diesel_price,2,0.4437,0.642,FALSE,Cabbage,0,1
+fuel_diesel_price,3,1.247,0.2922,FALSE,Cabbage,0,1
+fuel_diesel_price,4,1.2032,0.3087,FALSE,Cabbage,0,1
+fuel_diesel_price,5,1.4126,0.2184,FALSE,Cabbage,0,1
+fuel_diesel_price,6,1.3075,0.2523,FALSE,Cabbage,0,1
+fuel_diesel_price,7,1.5893,0.1366,FALSE,Cabbage,0,1
+fuel_diesel_price,8,1.407,0.1913,FALSE,Cabbage,0,1
+sppi_road_freight,1,0.798,0.3722,FALSE,Cabbage,0,1
+sppi_road_freight,2,0.7321,0.4815,FALSE,Cabbage,0,1
+sppi_road_freight,3,0.5078,0.6771,FALSE,Cabbage,0,1
+sppi_road_freight,4,0.3016,0.8768,FALSE,Cabbage,0,1
+sppi_road_freight,5,0.2148,0.9562,FALSE,Cabbage,0,1
+sppi_road_freight,6,0.2086,0.974,FALSE,Cabbage,0,1
+sppi_road_freight,7,0.2426,0.9743,FALSE,Cabbage,0,1
+sppi_road_freight,8,0.2882,0.9697,FALSE,Cabbage,0,1
+api_energy_and_lubricants,1,1.6297,0.2024,FALSE,Carrots,0,1
+api_energy_and_lubricants,2,1.0883,0.3377,FALSE,Carrots,0,1
+api_energy_and_lubricants,3,0.792,0.4988,FALSE,Carrots,0,1
+api_energy_and_lubricants,4,0.6545,0.6239,FALSE,Carrots,0,1
+api_energy_and_lubricants,5,0.6241,0.6815,FALSE,Carrots,0,1
+api_energy_and_lubricants,6,0.8724,0.5151,FALSE,Carrots,0,1
+api_energy_and_lubricants,7,0.7863,0.5991,FALSE,Carrots,0,1
+api_energy_and_lubricants,8,0.7614,0.6371,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,1,0.0311,0.8601,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,2,0.637,0.5294,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,3,0.3921,0.7587,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,4,0.4742,0.7547,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,5,0.4723,0.7969,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,6,0.5262,0.7885,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,7,0.4822,0.8475,FALSE,Carrots,0,1
+api_fertilisers_and_soil_improvers,8,0.4328,0.9013,FALSE,Carrots,0,1
+api_plant_protection_products,1,0.0027,0.9582,FALSE,Carrots,0,1
+api_plant_protection_products,2,0.0347,0.9659,FALSE,Carrots,0,1
+api_plant_protection_products,3,0.0172,0.9969,FALSE,Carrots,0,1
+api_plant_protection_products,4,0.0344,0.9977,FALSE,Carrots,0,1
+api_plant_protection_products,5,0.3036,0.9107,FALSE,Carrots,0,1
+api_plant_protection_products,6,0.2016,0.9762,FALSE,Carrots,0,1
+api_plant_protection_products,7,0.18,0.9893,FALSE,Carrots,0,1
+api_plant_protection_products,8,0.1746,0.9942,FALSE,Carrots,0,1
+api_fresh_fruit,1,1.6931,0.1939,FALSE,Carrots,0,1
+api_fresh_fruit,2,0.913,0.4021,FALSE,Carrots,0,1
+api_fresh_fruit,3,0.64,0.5896,FALSE,Carrots,0,1
+api_fresh_fruit,4,0.931,0.4458,FALSE,Carrots,0,1
+api_fresh_fruit,5,0.7084,0.6174,FALSE,Carrots,0,1
+api_fresh_fruit,6,0.4998,0.8085,FALSE,Carrots,0,1
+api_fresh_fruit,7,0.5889,0.7651,FALSE,Carrots,0,1
+api_fresh_fruit,8,0.6229,0.7587,FALSE,Carrots,0,1
+api_fresh_vegetables,1,1.8947,0.1694,FALSE,Carrots,0,1
+api_fresh_vegetables,2,0.8765,0.417,FALSE,Carrots,0,1
+api_fresh_vegetables,3,0.6223,0.6009,FALSE,Carrots,0,1
+api_fresh_vegetables,4,0.7284,0.5729,FALSE,Carrots,0,1
+api_fresh_vegetables,5,0.5752,0.719,FALSE,Carrots,0,1
+api_fresh_vegetables,6,0.4224,0.8641,FALSE,Carrots,0,1
+api_fresh_vegetables,7,0.346,0.9323,FALSE,Carrots,0,1
+api_fresh_vegetables,8,0.5951,0.7821,FALSE,Carrots,0,1
+fuel_petrol_price,1,0.0394,0.8427,FALSE,Carrots,0,1
+fuel_petrol_price,2,0.6247,0.5359,FALSE,Carrots,0,1
+fuel_petrol_price,3,0.4416,0.7234,FALSE,Carrots,0,1
+fuel_petrol_price,4,0.3404,0.8507,FALSE,Carrots,0,1
+fuel_petrol_price,5,0.3151,0.9039,FALSE,Carrots,0,1
+fuel_petrol_price,6,0.3001,0.9367,FALSE,Carrots,0,1
+fuel_petrol_price,7,0.3199,0.9449,FALSE,Carrots,0,1
+fuel_petrol_price,8,0.6107,0.769,FALSE,Carrots,0,1
+fuel_diesel_price,1,0.0136,0.9074,FALSE,Carrots,0,1
+fuel_diesel_price,2,0.6087,0.5445,FALSE,Carrots,0,1
+fuel_diesel_price,3,0.4492,0.718,FALSE,Carrots,0,1
+fuel_diesel_price,4,0.6516,0.626,FALSE,Carrots,0,1
+fuel_diesel_price,5,0.8897,0.4878,FALSE,Carrots,0,1
+fuel_diesel_price,6,0.8291,0.5478,FALSE,Carrots,0,1
+fuel_diesel_price,7,0.8067,0.5821,FALSE,Carrots,0,1
+fuel_diesel_price,8,0.7911,0.6107,FALSE,Carrots,0,1
+sppi_road_freight,1,0.1435,0.705,FALSE,Carrots,0,1
+sppi_road_freight,2,0.288,0.7499,FALSE,Carrots,0,1
+sppi_road_freight,3,0.2102,0.8894,FALSE,Carrots,0,1
+sppi_road_freight,4,0.1302,0.9713,FALSE,Carrots,0,1
+sppi_road_freight,5,0.1098,0.9901,FALSE,Carrots,0,1
+sppi_road_freight,6,0.3289,0.9217,FALSE,Carrots,0,1
+sppi_road_freight,7,0.3978,0.9035,FALSE,Carrots,0,1
+sppi_road_freight,8,0.3564,0.9427,FALSE,Carrots,0,1
+api_energy_and_lubricants,1,0.0593,0.8077,FALSE,Cooking Apples,0,1
+api_energy_and_lubricants,2,0.0757,0.9271,FALSE,Cooking Apples,0,1
+api_energy_and_lubricants,3,0.6202,0.6022,FALSE,Cooking Apples,0,1
+api_energy_and_lubricants,4,2.0134,0.0917,FALSE,Cooking Apples,0,1
+api_energy_and_lubricants,5,2.4704,0.0319,TRUE,Cooking Apples,0,1
+api_energy_and_lubricants,6,2.1405,0.0478,TRUE,Cooking Apples,0,1
+api_energy_and_lubricants,7,1.9736,0.0573,FALSE,Cooking Apples,0,1
+api_energy_and_lubricants,8,1.8911,0.0598,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,1,0.0074,0.9313,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,2,0.0395,0.9613,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,3,0.4751,0.6998,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,4,0.3685,0.8311,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,5,0.3191,0.9015,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,6,0.3617,0.9029,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,7,0.3806,0.9137,FALSE,Cooking Apples,0,1
+api_fertilisers_and_soil_improvers,8,0.3223,0.9575,FALSE,Cooking Apples,0,1
+api_plant_protection_products,1,3e-4,0.986,FALSE,Cooking Apples,0,1
+api_plant_protection_products,2,0.0219,0.9784,FALSE,Cooking Apples,0,1
+api_plant_protection_products,3,0.0158,0.9973,FALSE,Cooking Apples,0,1
+api_plant_protection_products,4,0.0121,0.9997,FALSE,Cooking Apples,0,1
+api_plant_protection_products,5,0.9442,0.4521,FALSE,Cooking Apples,0,1
+api_plant_protection_products,6,2.9863,0.0072,TRUE,Cooking Apples,0,1
+api_plant_protection_products,7,4.6625,0,TRUE,Cooking Apples,0,1
+api_plant_protection_products,8,6.7954,0,TRUE,Cooking Apples,0,1
+api_fresh_fruit,1,0.0949,0.7582,FALSE,Cooking Apples,0,1
+api_fresh_fruit,2,0.0662,0.936,FALSE,Cooking Apples,0,1
+api_fresh_fruit,3,0.1925,0.9015,FALSE,Cooking Apples,0,1
+api_fresh_fruit,4,6.7611,0,TRUE,Cooking Apples,0,1
+api_fresh_fruit,5,11.1178,0,TRUE,Cooking Apples,0,1
+api_fresh_fruit,6,9.8876,0,TRUE,Cooking Apples,0,1
+api_fresh_fruit,7,8.5534,0,TRUE,Cooking Apples,0,1
+api_fresh_fruit,8,7.8688,0,TRUE,Cooking Apples,0,1
+api_fresh_vegetables,1,0.0033,0.9545,FALSE,Cooking Apples,0,1
+api_fresh_vegetables,2,0.1794,0.8359,FALSE,Cooking Apples,0,1
+api_fresh_vegetables,3,0.202,0.895,FALSE,Cooking Apples,0,1
+api_fresh_vegetables,4,3.9247,0.0038,TRUE,Cooking Apples,0,1
+api_fresh_vegetables,5,3.811,0.0022,TRUE,Cooking Apples,0,1
+api_fresh_vegetables,6,3.259,0.0038,TRUE,Cooking Apples,0,1
+api_fresh_vegetables,7,3.1961,0.0026,TRUE,Cooking Apples,0,1
+api_fresh_vegetables,8,3.3263,0.0011,TRUE,Cooking Apples,0,1
+fuel_petrol_price,1,0.0027,0.9583,FALSE,Cooking Apples,0,1
+fuel_petrol_price,2,0.0336,0.967,FALSE,Cooking Apples,0,1
+fuel_petrol_price,3,0.1028,0.9584,FALSE,Cooking Apples,0,1
+fuel_petrol_price,4,0.0824,0.9878,FALSE,Cooking Apples,0,1
+fuel_petrol_price,5,0.0793,0.9954,FALSE,Cooking Apples,0,1
+fuel_petrol_price,6,0.0772,0.9982,FALSE,Cooking Apples,0,1
+fuel_petrol_price,7,0.0719,0.9994,FALSE,Cooking Apples,0,1
+fuel_petrol_price,8,0.0757,0.9997,FALSE,Cooking Apples,0,1
+fuel_diesel_price,1,0.0147,0.9036,FALSE,Cooking Apples,0,1
+fuel_diesel_price,2,0.021,0.9792,FALSE,Cooking Apples,0,1
+fuel_diesel_price,3,0.0568,0.9822,FALSE,Cooking Apples,0,1
+fuel_diesel_price,4,0.0929,0.9847,FALSE,Cooking Apples,0,1
+fuel_diesel_price,5,0.1692,0.9739,FALSE,Cooking Apples,0,1
+fuel_diesel_price,6,0.1678,0.9852,FALSE,Cooking Apples,0,1
+fuel_diesel_price,7,0.1461,0.9944,FALSE,Cooking Apples,0,1
+fuel_diesel_price,8,0.1558,0.9961,FALSE,Cooking Apples,0,1
+sppi_road_freight,1,0.099,0.7532,FALSE,Cooking Apples,0,1
+sppi_road_freight,2,0.1884,0.8284,FALSE,Cooking Apples,0,1
+sppi_road_freight,3,0.1192,0.9488,FALSE,Cooking Apples,0,1
+sppi_road_freight,4,0.0893,0.9858,FALSE,Cooking Apples,0,1
+sppi_road_freight,5,0.0829,0.9949,FALSE,Cooking Apples,0,1
+sppi_road_freight,6,0.0753,0.9984,FALSE,Cooking Apples,0,1
+sppi_road_freight,7,0.0642,0.9996,FALSE,Cooking Apples,0,1
+sppi_road_freight,8,0.06,0.9999,FALSE,Cooking Apples,0,1
+api_energy_and_lubricants,1,0.1899,0.6632,FALSE,Leeks,0,1
+api_energy_and_lubricants,2,0.0369,0.9637,FALSE,Leeks,0,1
+api_energy_and_lubricants,3,0.0623,0.9796,FALSE,Leeks,0,1
+api_energy_and_lubricants,4,1.0416,0.3854,FALSE,Leeks,0,1
+api_energy_and_lubricants,5,0.8661,0.5038,FALSE,Leeks,0,1
+api_energy_and_lubricants,6,0.8459,0.535,FALSE,Leeks,0,1
+api_energy_and_lubricants,7,0.749,0.6305,FALSE,Leeks,0,1
+api_energy_and_lubricants,8,1.7172,0.0926,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,1,0.1031,0.7483,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,2,0.0184,0.9818,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,3,0.0119,0.9982,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,4,0.0865,0.9866,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,5,0.1799,0.9701,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,6,0.2854,0.9438,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,7,0.2725,0.9644,FALSE,Leeks,0,1
+api_fertilisers_and_soil_improvers,8,1.1071,0.3572,FALSE,Leeks,0,1
+api_plant_protection_products,1,0.0179,0.8937,FALSE,Leeks,0,1
+api_plant_protection_products,2,0.033,0.9675,FALSE,Leeks,0,1
+api_plant_protection_products,3,0.1635,0.9209,FALSE,Leeks,0,1
+api_plant_protection_products,4,1.4827,0.2065,FALSE,Leeks,0,1
+api_plant_protection_products,5,1.2288,0.2947,FALSE,Leeks,0,1
+api_plant_protection_products,6,1.0345,0.4022,FALSE,Leeks,0,1
+api_plant_protection_products,7,0.8785,0.5234,FALSE,Leeks,0,1
+api_plant_protection_products,8,0.7624,0.6362,FALSE,Leeks,0,1
+api_fresh_fruit,1,11.7472,7e-4,TRUE,Leeks,0,0
+api_fresh_fruit,2,4.1146,0.017,TRUE,Leeks,0,0
+api_fresh_fruit,3,2.8013,0.0397,TRUE,Leeks,0,0
+api_fresh_fruit,4,1.7473,0.1387,FALSE,Leeks,0,0
+api_fresh_fruit,5,1.9027,0.0928,FALSE,Leeks,0,0
+api_fresh_fruit,6,1.9303,0.0747,FALSE,Leeks,0,0
+api_fresh_fruit,7,1.7198,0.1027,FALSE,Leeks,0,0
+api_fresh_fruit,8,1.473,0.1651,FALSE,Leeks,0,0
+api_fresh_vegetables,1,0.0074,0.9314,FALSE,Leeks,0,1
+api_fresh_vegetables,2,0.0214,0.9788,FALSE,Leeks,0,1
+api_fresh_vegetables,3,0.0288,0.9934,FALSE,Leeks,0,1
+api_fresh_vegetables,4,0.9156,0.4547,FALSE,Leeks,0,1
+api_fresh_vegetables,5,0.7836,0.5619,FALSE,Leeks,0,1
+api_fresh_vegetables,6,0.6497,0.6904,FALSE,Leeks,0,1
+api_fresh_vegetables,7,0.5635,0.7855,FALSE,Leeks,0,1
+api_fresh_vegetables,8,0.4904,0.8631,FALSE,Leeks,0,1
+fuel_petrol_price,1,0.4095,0.5226,FALSE,Leeks,0,1
+fuel_petrol_price,2,0.2421,0.7851,FALSE,Leeks,0,1
+fuel_petrol_price,3,0.1877,0.9048,FALSE,Leeks,0,1
+fuel_petrol_price,4,0.2003,0.9381,FALSE,Leeks,0,1
+fuel_petrol_price,5,0.2037,0.9608,FALSE,Leeks,0,1
+fuel_petrol_price,6,0.246,0.9608,FALSE,Leeks,0,1
+fuel_petrol_price,7,0.2854,0.9595,FALSE,Leeks,0,1
+fuel_petrol_price,8,0.2738,0.9742,FALSE,Leeks,0,1
+fuel_diesel_price,1,0.1464,0.7022,FALSE,Leeks,0,1
+fuel_diesel_price,2,0.1251,0.8824,FALSE,Leeks,0,1
+fuel_diesel_price,3,0.1215,0.9474,FALSE,Leeks,0,1
+fuel_diesel_price,4,0.0456,0.9961,FALSE,Leeks,0,1
+fuel_diesel_price,5,0.0841,0.9947,FALSE,Leeks,0,1
+fuel_diesel_price,6,0.1845,0.9811,FALSE,Leeks,0,1
+fuel_diesel_price,7,0.2135,0.9823,FALSE,Leeks,0,1
+fuel_diesel_price,8,0.2003,0.9907,FALSE,Leeks,0,1
+sppi_road_freight,1,0.0089,0.9251,FALSE,Leeks,0,1
+sppi_road_freight,2,0.1204,0.8866,FALSE,Leeks,0,1
+sppi_road_freight,3,0.1738,0.9141,FALSE,Leeks,0,1
+sppi_road_freight,4,0.1722,0.9525,FALSE,Leeks,0,1
+sppi_road_freight,5,0.1761,0.9714,FALSE,Leeks,0,1
+sppi_road_freight,6,0.1473,0.9895,FALSE,Leeks,0,1
+sppi_road_freight,7,0.228,0.9785,FALSE,Leeks,0,1
+sppi_road_freight,8,0.1984,0.991,FALSE,Leeks,0,1
+api_energy_and_lubricants,1,0.3903,0.5325,FALSE,Lettuce,0,1
+api_energy_and_lubricants,2,0.6483,0.5234,FALSE,Lettuce,0,1
+api_energy_and_lubricants,3,0.6241,0.5997,FALSE,Lettuce,0,1
+api_energy_and_lubricants,4,0.4632,0.7628,FALSE,Lettuce,0,1
+api_energy_and_lubricants,5,0.4481,0.8147,FALSE,Lettuce,0,1
+api_energy_and_lubricants,6,0.4446,0.8488,FALSE,Lettuce,0,1
+api_energy_and_lubricants,7,0.6137,0.7448,FALSE,Lettuce,0,1
+api_energy_and_lubricants,8,0.6134,0.7667,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,1,0.2229,0.637,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,2,0.4811,0.6184,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,3,0.3905,0.7599,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,4,0.3129,0.8693,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,5,0.4336,0.8252,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,6,0.4203,0.8655,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,7,0.7136,0.6606,FALSE,Lettuce,0,1
+api_fertilisers_and_soil_improvers,8,1.2159,0.2879,FALSE,Lettuce,0,1
+api_plant_protection_products,1,0.0708,0.7903,FALSE,Lettuce,0,1
+api_plant_protection_products,2,0.4488,0.6387,FALSE,Lettuce,0,1
+api_plant_protection_products,3,0.4489,0.7182,FALSE,Lettuce,0,1
+api_plant_protection_products,4,0.3803,0.8227,FALSE,Lettuce,0,1
+api_plant_protection_products,5,1.2758,0.2733,FALSE,Lettuce,0,1
+api_plant_protection_products,6,1.0818,0.3724,FALSE,Lettuce,0,1
+api_plant_protection_products,7,1.0105,0.4231,FALSE,Lettuce,0,1
+api_plant_protection_products,8,1.0198,0.4201,FALSE,Lettuce,0,1
+api_fresh_fruit,1,0.13,0.7186,FALSE,Lettuce,0,1
+api_fresh_fruit,2,0.0515,0.9498,FALSE,Lettuce,0,1
+api_fresh_fruit,3,0.2284,0.8766,FALSE,Lettuce,0,1
+api_fresh_fruit,4,0.1888,0.9442,FALSE,Lettuce,0,1
+api_fresh_fruit,5,0.1239,0.987,FALSE,Lettuce,0,1
+api_fresh_fruit,6,0.1814,0.9819,FALSE,Lettuce,0,1
+api_fresh_fruit,7,0.6836,0.686,FALSE,Lettuce,0,1
+api_fresh_fruit,8,0.6603,0.7265,FALSE,Lettuce,0,1
+api_fresh_vegetables,1,5.5581,0.0188,TRUE,Lettuce,0,1
+api_fresh_vegetables,2,3.0466,0.0485,TRUE,Lettuce,0,1
+api_fresh_vegetables,3,2.0788,0.1023,FALSE,Lettuce,0,1
+api_fresh_vegetables,4,1.7599,0.1359,FALSE,Lettuce,0,1
+api_fresh_vegetables,5,1.333,0.2491,FALSE,Lettuce,0,1
+api_fresh_vegetables,6,1.1259,0.3462,FALSE,Lettuce,0,1
+api_fresh_vegetables,7,0.9678,0.4543,FALSE,Lettuce,0,1
+api_fresh_vegetables,8,1.0764,0.3785,FALSE,Lettuce,0,1
+fuel_petrol_price,1,4.8056,0.0289,TRUE,Lettuce,0,1
+fuel_petrol_price,2,2.8665,0.058,FALSE,Lettuce,0,1
+fuel_petrol_price,3,2.1177,0.0973,FALSE,Lettuce,0,1
+fuel_petrol_price,4,1.567,0.1821,FALSE,Lettuce,0,1
+fuel_petrol_price,5,2.0992,0.0645,FALSE,Lettuce,0,1
+fuel_petrol_price,6,1.8513,0.0879,FALSE,Lettuce,0,1
+fuel_petrol_price,7,1.5837,0.1383,FALSE,Lettuce,0,1
+fuel_petrol_price,8,1.3757,0.2051,FALSE,Lettuce,0,1
+fuel_diesel_price,1,5.396,0.0206,TRUE,Lettuce,0,1
+fuel_diesel_price,2,3.1861,0.0423,TRUE,Lettuce,0,1
+fuel_diesel_price,3,2.2413,0.0828,FALSE,Lettuce,0,1
+fuel_diesel_price,4,1.7274,0.1429,FALSE,Lettuce,0,1
+fuel_diesel_price,5,2.1767,0.0558,FALSE,Lettuce,0,1
+fuel_diesel_price,6,1.9879,0.0662,FALSE,Lettuce,0,1
+fuel_diesel_price,7,1.7749,0.0906,FALSE,Lettuce,0,1
+fuel_diesel_price,8,1.5273,0.1455,FALSE,Lettuce,0,1
+sppi_road_freight,1,0.0398,0.8419,FALSE,Lettuce,0,1
+sppi_road_freight,2,0.0231,0.9772,FALSE,Lettuce,0,1
+sppi_road_freight,3,0.0329,0.992,FALSE,Lettuce,0,1
+sppi_road_freight,4,0.1776,0.9499,FALSE,Lettuce,0,1
+sppi_road_freight,5,0.2211,0.9534,FALSE,Lettuce,0,1
+sppi_road_freight,6,0.4509,0.8443,FALSE,Lettuce,0,1
+sppi_road_freight,7,0.3977,0.9035,FALSE,Lettuce,0,1
+sppi_road_freight,8,0.3891,0.9263,FALSE,Lettuce,0,1
+api_energy_and_lubricants,1,3.9093,0.0488,TRUE,Pears,0,1
+api_energy_and_lubricants,2,3.3817,0.0352,TRUE,Pears,0,1
+api_energy_and_lubricants,3,2.3191,0.0753,FALSE,Pears,0,1
+api_energy_and_lubricants,4,1.8888,0.1121,FALSE,Pears,0,1
+api_energy_and_lubricants,5,1.5562,0.1721,FALSE,Pears,0,1
+api_energy_and_lubricants,6,1.5998000000000001,0.1465,FALSE,Pears,0,1
+api_energy_and_lubricants,7,1.6971,0.1089,FALSE,Pears,0,1
+api_energy_and_lubricants,8,1.4544,0.1733,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,1,0.9154,0.3394,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,2,0.9388,0.3921,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,3,0.6254,0.5991,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,4,0.5194,0.7215,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,5,0.4465,0.8158,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,6,0.4967,0.8107,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,7,0.5237,0.8165,FALSE,Pears,0,1
+api_fertilisers_and_soil_improvers,8,0.4512,0.8894,FALSE,Pears,0,1
+api_plant_protection_products,1,1.1746,0.2792,FALSE,Pears,0,1
+api_plant_protection_products,2,1.0159,0.3632,FALSE,Pears,0,1
+api_plant_protection_products,3,1.0285,0.3801,FALSE,Pears,0,1
+api_plant_protection_products,4,1.0643,0.3742,FALSE,Pears,0,1
+api_plant_protection_products,5,1.3159,0.2569,FALSE,Pears,0,1
+api_plant_protection_products,6,1.1624,0.3262,FALSE,Pears,0,1
+api_plant_protection_products,7,1.0407,0.4024,FALSE,Pears,0,1
+api_plant_protection_products,8,0.9235,0.4971,FALSE,Pears,0,1
+api_fresh_fruit,1,3.8421,0.0508,FALSE,Pears,0,0
+api_fresh_fruit,2,1.1421,0.3204,FALSE,Pears,0,0
+api_fresh_fruit,3,0.8673,0.4583,FALSE,Pears,0,0
+api_fresh_fruit,4,1.157,0.3298,FALSE,Pears,0,0
+api_fresh_fruit,5,1.139,0.3395,FALSE,Pears,0,0
+api_fresh_fruit,6,1.7718,0.1043,FALSE,Pears,0,0
+api_fresh_fruit,7,1.4497,0.1848,FALSE,Pears,0,0
+api_fresh_fruit,8,1.4246,0.1852,FALSE,Pears,0,0
+api_fresh_vegetables,1,0.0023,0.9621,FALSE,Pears,0,1
+api_fresh_vegetables,2,0.0736,0.929,FALSE,Pears,0,1
+api_fresh_vegetables,3,0.2152,0.8859,FALSE,Pears,0,1
+api_fresh_vegetables,4,0.1355,0.9692,FALSE,Pears,0,1
+api_fresh_vegetables,5,0.224,0.952,FALSE,Pears,0,1
+api_fresh_vegetables,6,0.1885,0.9799,FALSE,Pears,0,1
+api_fresh_vegetables,7,0.2259,0.979,FALSE,Pears,0,1
+api_fresh_vegetables,8,0.4459,0.8928,FALSE,Pears,0,1
+fuel_petrol_price,1,2.7603,0.0976,FALSE,Pears,0,1
+fuel_petrol_price,2,2.1119,0.1226,FALSE,Pears,0,1
+fuel_petrol_price,3,1.4384,0.2315,FALSE,Pears,0,1
+fuel_petrol_price,4,1.4629,0.2132,FALSE,Pears,0,1
+fuel_petrol_price,5,1.6489,0.1467,FALSE,Pears,0,1
+fuel_petrol_price,6,1.4545,0.1934,FALSE,Pears,0,1
+fuel_petrol_price,7,1.2128,0.2951,FALSE,Pears,0,1
+fuel_petrol_price,8,1.1637,0.3207,FALSE,Pears,0,1
+fuel_diesel_price,1,1.9525,0.1632,FALSE,Pears,0,1
+fuel_diesel_price,2,1.9124,0.1494,FALSE,Pears,0,1
+fuel_diesel_price,3,1.2827,0.2802,FALSE,Pears,0,1
+fuel_diesel_price,4,0.9844,0.4161,FALSE,Pears,0,1
+fuel_diesel_price,5,1.3573,0.2401,FALSE,Pears,0,1
+fuel_diesel_price,6,1.1799,0.3166,FALSE,Pears,0,1
+fuel_diesel_price,7,0.9881,0.4398,FALSE,Pears,0,1
+fuel_diesel_price,8,0.9023,0.5148,FALSE,Pears,0,1
+sppi_road_freight,1,0.5711,0.4504,FALSE,Pears,0,1
+sppi_road_freight,2,0.0697,0.9327,FALSE,Pears,0,1
+sppi_road_freight,3,0.0858,0.9678,FALSE,Pears,0,1
+sppi_road_freight,4,0.1714,0.9529,FALSE,Pears,0,1
+sppi_road_freight,5,0.1247,0.9868,FALSE,Pears,0,1
+sppi_road_freight,6,0.4347,0.8555,FALSE,Pears,0,1
+sppi_road_freight,7,0.5023,0.8326,FALSE,Pears,0,1
+sppi_road_freight,8,0.5313,0.8326,FALSE,Pears,0,1
+api_energy_and_lubricants,1,0.342,0.559,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,2,2.0802,0.1263,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,3,1.9843,0.1158,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,4,1.4606,0.2135,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,5,1.2298,0.2943,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,6,1.4981,0.1774,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,7,1.3432,0.2285,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,8,1.2889,0.2476,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,1,0.0586,0.8088,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,2,0.7742,0.4618,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,3,1.5596,0.1987,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,4,1.2125,0.3049,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,5,0.9812,0.4289,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,6,0.842,0.538,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,7,0.7369,0.6408,FALSE,Dessert Apples,0,1
+api_fertilisers_and_soil_improvers,8,0.683,0.7066,FALSE,Dessert Apples,0,1
+api_plant_protection_products,1,2.8602,0.0916,FALSE,Dessert Apples,0,1
+api_plant_protection_products,2,0.2866,0.751,FALSE,Dessert Apples,0,1
+api_plant_protection_products,3,0.4476,0.7191,FALSE,Dessert Apples,0,1
+api_plant_protection_products,4,0.7016,0.5912,FALSE,Dessert Apples,0,1
+api_plant_protection_products,5,1.0142,0.4089,FALSE,Dessert Apples,0,1
+api_plant_protection_products,6,0.8681,0.5183,FALSE,Dessert Apples,0,1
+api_plant_protection_products,7,1.0284,0.4105,FALSE,Dessert Apples,0,1
+api_plant_protection_products,8,1.5094,0.152,FALSE,Dessert Apples,0,1
+api_fresh_fruit,1,7e-4,0.9783,FALSE,Dessert Apples,0,1
+api_fresh_fruit,2,0.5979,0.5504,FALSE,Dessert Apples,0,1
+api_fresh_fruit,3,0.4948,0.6861,FALSE,Dessert Apples,0,1
+api_fresh_fruit,4,0.2787,0.8917,FALSE,Dessert Apples,0,1
+api_fresh_fruit,5,0.2851,0.9212,FALSE,Dessert Apples,0,1
+api_fresh_fruit,6,0.7311,0.6248,FALSE,Dessert Apples,0,1
+api_fresh_fruit,7,0.6307,0.7305,FALSE,Dessert Apples,0,1
+api_fresh_fruit,8,0.8637,0.5473,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,1,0.0373,0.847,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,2,0.0937,0.9106,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,3,0.1502,0.9295,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,4,0.0405,0.9969,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,5,0.1053,0.9911,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,6,0.0978,0.9966,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,7,0.2534,0.971,FALSE,Dessert Apples,0,1
+api_fresh_vegetables,8,0.4786,0.8713,FALSE,Dessert Apples,0,1
+fuel_petrol_price,1,0.0606,0.8057,FALSE,Dessert Apples,0,1
+fuel_petrol_price,2,0.617,0.5401,FALSE,Dessert Apples,0,1
+fuel_petrol_price,3,0.4074,0.7478,FALSE,Dessert Apples,0,1
+fuel_petrol_price,4,0.3426,0.8492,FALSE,Dessert Apples,0,1
+fuel_petrol_price,5,0.5591,0.7313,FALSE,Dessert Apples,0,1
+fuel_petrol_price,6,0.5679,0.7559,FALSE,Dessert Apples,0,1
+fuel_petrol_price,7,0.4697,0.8564,FALSE,Dessert Apples,0,1
+fuel_petrol_price,8,0.412,0.9136,FALSE,Dessert Apples,0,1
+fuel_diesel_price,1,0.104,0.7472,FALSE,Dessert Apples,0,1
+fuel_diesel_price,2,0.8455,0.4301,FALSE,Dessert Apples,0,1
+fuel_diesel_price,3,0.4983,0.6836,FALSE,Dessert Apples,0,1
+fuel_diesel_price,4,0.5089,0.7292,FALSE,Dessert Apples,0,1
+fuel_diesel_price,5,0.4749,0.795,FALSE,Dessert Apples,0,1
+fuel_diesel_price,6,0.4672,0.8326,FALSE,Dessert Apples,0,1
+fuel_diesel_price,7,0.3883,0.9091,FALSE,Dessert Apples,0,1
+fuel_diesel_price,8,0.3419,0.9493,FALSE,Dessert Apples,0,1
+sppi_road_freight,1,3.1445,0.077,FALSE,Dessert Apples,0,1
+sppi_road_freight,2,2.7952,0.0623,FALSE,Dessert Apples,0,1
+sppi_road_freight,3,2.0766,0.1028,FALSE,Dessert Apples,0,1
+sppi_road_freight,4,1.475,0.2091,FALSE,Dessert Apples,0,1
+sppi_road_freight,5,1.1591,0.3288,FALSE,Dessert Apples,0,1
+sppi_road_freight,6,0.9589,0.453,FALSE,Dessert Apples,0,1
+sppi_road_freight,7,0.8621,0.5367,FALSE,Dessert Apples,0,1
+sppi_road_freight,8,0.8085,0.5954,FALSE,Dessert Apples,0,1
+api_energy_and_lubricants,1,0.0107,0.9175,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,2,1.9078,0.15,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,3,2.3318,0.0741,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,4,1.977,0.0977,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,5,1.6259,0.1526,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,6,1.4961,0.1788,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,7,1.3289,0.2358,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,8,1.2715,0.2576,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,1,0.0048,0.945,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,2,1.6157,0.2003,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,3,1.749,0.1568,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,4,1.6234,0.168,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,5,1.3709,0.2348,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,6,1.1654,0.3245,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,7,1.0149,0.4205,FALSE,Cucumbers,0,1
+api_fertilisers_and_soil_improvers,8,0.9117,0.5068,FALSE,Cucumbers,0,1
+api_plant_protection_products,1,0.2859,0.5932,FALSE,Cucumbers,0,1
+api_plant_protection_products,2,0.4588,0.6324,FALSE,Cucumbers,0,1
+api_plant_protection_products,3,0.7115,0.5457,FALSE,Cucumbers,0,1
+api_plant_protection_products,4,0.5737,0.6819,FALSE,Cucumbers,0,1
+api_plant_protection_products,5,0.5303,0.7533,FALSE,Cucumbers,0,1
+api_plant_protection_products,6,0.6163,0.7172,FALSE,Cucumbers,0,1
+api_plant_protection_products,7,0.5338,0.8088,FALSE,Cucumbers,0,1
+api_plant_protection_products,8,0.4639,0.8811,FALSE,Cucumbers,0,1
+api_fresh_fruit,1,0.0319,0.8584,FALSE,Cucumbers,0,1
+api_fresh_fruit,2,3.0601,0.0482,TRUE,Cucumbers,0,1
+api_fresh_fruit,3,2.7281,0.0441,TRUE,Cucumbers,0,1
+api_fresh_fruit,4,2.1426,0.0753,FALSE,Cucumbers,0,1
+api_fresh_fruit,5,2.001,0.0781,FALSE,Cucumbers,0,1
+api_fresh_fruit,6,1.7662,0.1054,FALSE,Cucumbers,0,1
+api_fresh_fruit,7,1.5288,0.1567,FALSE,Cucumbers,0,1
+api_fresh_fruit,8,1.3629,0.2121,FALSE,Cucumbers,0,1
+api_fresh_vegetables,1,0.0484,0.8261,FALSE,Cucumbers,0,1
+api_fresh_vegetables,2,0.5629,0.5701,FALSE,Cucumbers,0,1
+api_fresh_vegetables,3,0.5478,0.65,FALSE,Cucumbers,0,1
+api_fresh_vegetables,4,0.4121,0.79990000000000006,FALSE,Cucumbers,0,1
+api_fresh_vegetables,5,0.3767,0.8646,FALSE,Cucumbers,0,1
+api_fresh_vegetables,6,0.3193,0.9267,FALSE,Cucumbers,0,1
+api_fresh_vegetables,7,0.3823,0.9125,FALSE,Cucumbers,0,1
+api_fresh_vegetables,8,0.6344,0.7487,FALSE,Cucumbers,0,1
+fuel_petrol_price,1,2.0482,0.1533,FALSE,Cucumbers,0,1
+fuel_petrol_price,2,1.6856,0.1869,FALSE,Cucumbers,0,1
+fuel_petrol_price,3,1.0439,0.3732,FALSE,Cucumbers,0,1
+fuel_petrol_price,4,15.8862,0,TRUE,Cucumbers,0,1
+fuel_petrol_price,5,13.4627,0,TRUE,Cucumbers,0,1
+fuel_petrol_price,6,12.5056,0,TRUE,Cucumbers,0,1
+fuel_petrol_price,7,10.6979,0,TRUE,Cucumbers,0,1
+fuel_petrol_price,8,9.3209,0,TRUE,Cucumbers,0,1
+fuel_diesel_price,1,1.6399,0.2012,FALSE,Cucumbers,0,1
+fuel_diesel_price,2,1.4943,0.2259,FALSE,Cucumbers,0,1
+fuel_diesel_price,3,1.1274,0.338,FALSE,Cucumbers,0,1
+fuel_diesel_price,4,16.0881,0,TRUE,Cucumbers,0,1
+fuel_diesel_price,5,13.2379,0,TRUE,Cucumbers,0,1
+fuel_diesel_price,6,11.9706,0,TRUE,Cucumbers,0,1
+fuel_diesel_price,7,10.3829,0,TRUE,Cucumbers,0,1
+fuel_diesel_price,8,9.0747,0,TRUE,Cucumbers,0,1
+sppi_road_freight,1,0.2445,0.6213,FALSE,Cucumbers,0,1
+sppi_road_freight,2,0.7563,0.4702,FALSE,Cucumbers,0,1
+sppi_road_freight,3,0.4185,0.7399,FALSE,Cucumbers,0,1
+sppi_road_freight,4,0.787,0.5343,FALSE,Cucumbers,0,1
+sppi_road_freight,5,0.6443,0.666,FALSE,Cucumbers,0,1
+sppi_road_freight,6,0.7955,0.5741,FALSE,Cucumbers,0,1
+sppi_road_freight,7,0.6633,0.7031,FALSE,Cucumbers,0,1
+sppi_road_freight,8,1.2618,0.2632,FALSE,Cucumbers,0,1
+api_energy_and_lubricants,1,0.1351,0.7135,FALSE,Strawberries,0,1
+api_energy_and_lubricants,2,0.6209,0.5382,FALSE,Strawberries,0,1
+api_energy_and_lubricants,3,0.3844,0.7643,FALSE,Strawberries,0,1
+api_energy_and_lubricants,4,0.5215,0.72,FALSE,Strawberries,0,1
+api_energy_and_lubricants,5,0.4334,0.8251,FALSE,Strawberries,0,1
+api_energy_and_lubricants,6,0.3611,0.903,FALSE,Strawberries,0,1
+api_energy_and_lubricants,7,0.2772,0.9625,FALSE,Strawberries,0,1
+api_energy_and_lubricants,8,0.6143,0.7656,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,1,0.1492,0.6996,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,2,0.526,0.5916,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,3,0.3249,0.8074,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,4,0.3838,0.8202,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,5,0.3257,0.8973,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,6,0.2695,0.9508,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,7,0.2004,0.9852,FALSE,Strawberries,0,1
+api_fertilisers_and_soil_improvers,8,0.4973,0.8577,FALSE,Strawberries,0,1
+api_plant_protection_products,1,0.2977,0.5858,FALSE,Strawberries,0,1
+api_plant_protection_products,2,0.5162,0.5973,FALSE,Strawberries,0,1
+api_plant_protection_products,3,0.6123,0.6075,FALSE,Strawberries,0,1
+api_plant_protection_products,4,0.5676,0.6864,FALSE,Strawberries,0,1
+api_plant_protection_products,5,0.5555,0.7341,FALSE,Strawberries,0,1
+api_plant_protection_products,6,0.4716,0.8291,FALSE,Strawberries,0,1
+api_plant_protection_products,7,0.4991,0.8349,FALSE,Strawberries,0,1
+api_plant_protection_products,8,0.4795,0.8702,FALSE,Strawberries,0,1
+api_fresh_fruit,1,0.0427,0.8364,FALSE,Strawberries,0,1
+api_fresh_fruit,2,0.5872,0.5566,FALSE,Strawberries,0,1
+api_fresh_fruit,3,0.5151,0.6722,FALSE,Strawberries,0,1
+api_fresh_fruit,4,0.3642,0.834,FALSE,Strawberries,0,1
+api_fresh_fruit,5,0.3423,0.8869,FALSE,Strawberries,0,1
+api_fresh_fruit,6,0.5015,0.807,FALSE,Strawberries,0,1
+api_fresh_fruit,7,0.7611,0.6204,FALSE,Strawberries,0,1
+api_fresh_fruit,8,0.9721,0.4582,FALSE,Strawberries,0,1
+api_fresh_vegetables,1,0.2928,0.5888,FALSE,Strawberries,0,1
+api_fresh_vegetables,2,0.7037,0.4956,FALSE,Strawberries,0,1
+api_fresh_vegetables,3,0.5661,0.6378,FALSE,Strawberries,0,1
+api_fresh_vegetables,4,0.5106,0.728,FALSE,Strawberries,0,1
+api_fresh_vegetables,5,0.9879,0.4255,FALSE,Strawberries,0,1
+api_fresh_vegetables,6,0.9673,0.4478,FALSE,Strawberries,0,1
+api_fresh_vegetables,7,1.2237,0.2898,FALSE,Strawberries,0,1
+api_fresh_vegetables,8,0.9958,0.4396,FALSE,Strawberries,0,1
+fuel_petrol_price,1,0.004,0.9499,FALSE,Strawberries,0,1
+fuel_petrol_price,2,0.3362,0.7148,FALSE,Strawberries,0,1
+fuel_petrol_price,3,0.2553,0.8575,FALSE,Strawberries,0,1
+fuel_petrol_price,4,2.3746,0.0525,FALSE,Strawberries,0,1
+fuel_petrol_price,5,2.2266,0.052,FALSE,Strawberries,0,1
+fuel_petrol_price,6,1.9425,0.0743,FALSE,Strawberries,0,1
+fuel_petrol_price,7,1.7796,0.0915,FALSE,Strawberries,0,1
+fuel_petrol_price,8,1.4092,0.1926,FALSE,Strawberries,0,1
+fuel_diesel_price,1,0.0055,0.9408,FALSE,Strawberries,0,1
+fuel_diesel_price,2,0.8547,0.4265,FALSE,Strawberries,0,1
+fuel_diesel_price,3,0.7497,0.5233,FALSE,Strawberries,0,1
+fuel_diesel_price,4,3.0954,0.0163,TRUE,Strawberries,0,1
+fuel_diesel_price,5,2.5328,0.0292,TRUE,Strawberries,0,1
+fuel_diesel_price,6,2.3947,0.0286,TRUE,Strawberries,0,1
+fuel_diesel_price,7,2.0829,0.0457,TRUE,Strawberries,0,1
+fuel_diesel_price,8,1.6912,0.1007,FALSE,Strawberries,0,1
+sppi_road_freight,1,34.7307,0,TRUE,Strawberries,0,1
+sppi_road_freight,2,14.3464,0,TRUE,Strawberries,0,1
+sppi_road_freight,3,10.0947,0,TRUE,Strawberries,0,1
+sppi_road_freight,4,7.4028,0,TRUE,Strawberries,0,1
+sppi_road_freight,5,5.8461,0,TRUE,Strawberries,0,1
+sppi_road_freight,6,4.8565,1e-4,TRUE,Strawberries,0,1
+sppi_road_freight,7,4.43,1e-4,TRUE,Strawberries,0,1
+sppi_road_freight,8,4.3655,1e-4,TRUE,Strawberries,0,1
+api_energy_and_lubricants,1,0.5576,0.4558,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,2,0.1866,0.8299,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,3,0.7971,0.4963,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,4,0.6893,0.5999,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,5,0.5813,0.7143,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,6,0.6952,0.6537,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,7,0.8023,0.586,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,8,1.3043,0.2411,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,1,1.289,0.2572,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,2,0.3042,0.738,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,3,0.8302,0.4782,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,4,0.7077,0.5872,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,5,0.6089,0.6931,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,6,0.684,0.6627,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,7,1.3015,0.2495,FALSE,Tomatoes (Round),0,1
+api_fertilisers_and_soil_improvers,8,1.7924,0.0785,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,1,0.0039,0.95,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,2,0.2984,0.7423,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,3,0.6548,0.5805,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,4,0.572,0.6832,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,5,0.4864,0.7864,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,6,0.4844,0.8198,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,7,0.4045,0.8992,FALSE,Tomatoes (Round),0,1
+api_plant_protection_products,8,0.3477,0.9464,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,1,0.4905,0.4843,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,2,0.5496,0.5778,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,3,0.557,0.6438,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,4,0.5383,0.7077,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,5,0.476,0.7941,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,6,0.5398,0.7778,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,7,0.529,0.8124,FALSE,Tomatoes (Round),0,1
+api_fresh_fruit,8,0.5519,0.8166,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,1,0.0277,0.8678,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,2,0.0117,0.9884,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,3,0.0905,0.9653,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,4,0.6552,0.6236,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,5,0.6597,0.6543,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,6,0.7848,0.5825,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,7,0.7132,0.6609,FALSE,Tomatoes (Round),0,1
+api_fresh_vegetables,8,0.6608,0.7259,FALSE,Tomatoes (Round),0,1
+fuel_petrol_price,1,0.0363,0.849,FALSE,Tomatoes (Round),0,1
+fuel_petrol_price,2,0.3228,0.7244,FALSE,Tomatoes (Round),0,1
+fuel_petrol_price,3,0.3506,0.7888,FALSE,Tomatoes (Round),0,1
+fuel_petrol_price,4,0.2881,0.8856,FALSE,Tomatoes (Round),0,1
+fuel_petrol_price,5,6.7935,0,TRUE,Tomatoes (Round),0,1
+fuel_petrol_price,6,5.8707,0,TRUE,Tomatoes (Round),0,1
+fuel_petrol_price,7,5.0846,0,TRUE,Tomatoes (Round),0,1
+fuel_petrol_price,8,4.6503,0,TRUE,Tomatoes (Round),0,1
+fuel_diesel_price,1,0.0633,0.8016,FALSE,Tomatoes (Round),0,1
+fuel_diesel_price,2,0.4857,0.6158,FALSE,Tomatoes (Round),0,1
+fuel_diesel_price,3,0.2232,0.8802,FALSE,Tomatoes (Round),0,1
+fuel_diesel_price,4,0.2217,0.9262,FALSE,Tomatoes (Round),0,1
+fuel_diesel_price,5,4.5618,5e-4,TRUE,Tomatoes (Round),0,1
+fuel_diesel_price,6,4.1838,5e-4,TRUE,Tomatoes (Round),0,1
+fuel_diesel_price,7,3.6359,9e-4,TRUE,Tomatoes (Round),0,1
+fuel_diesel_price,8,3.2567,0.0015,TRUE,Tomatoes (Round),0,1
+sppi_road_freight,1,0.928,0.3362,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,2,2.1975,0.113,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,3,0.8538,0.4655,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,4,1.2326,0.2972,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,5,1.1096,0.3555,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,6,0.9606,0.4523,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,7,0.8129,0.5772,FALSE,Tomatoes (Round),0,1
+sppi_road_freight,8,0.7809,0.6199,FALSE,Tomatoes (Round),0,1
+api_energy_and_lubricants,1,1.242,0.2661,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,2,0.9082,0.4045,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,3,0.8846,0.4496,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,4,0.6586,0.6213,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,5,0.5534,0.7357,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,6,0.4186,0.8663,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,7,0.6344,0.7272,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,8,0.5224,0.8392,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,1,0.0918,0.7621,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,2,0.1679,0.8456,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,3,0.2946,0.8293,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,4,0.2211,0.9265,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,5,0.2438,0.9426,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,6,0.1889,0.9798,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,7,0.3767,0.9154,FALSE,Tomatoes (Vine),0,1
+api_fertilisers_and_soil_improvers,8,0.3259,0.9556,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,1,0.0059,0.9387,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,2,0.0695,0.9329,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,3,0.0497,0.9853,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,4,0.0989,0.9827,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,5,0.1749,0.9718,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,6,0.1536,0.9882,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,7,0.1437,0.9946,FALSE,Tomatoes (Vine),0,1
+api_plant_protection_products,8,0.1562,0.996,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,1,0.2517,0.6163,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,2,0.4679,0.6268,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,3,0.2985,0.8264,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,4,0.4376,0.7814,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,5,0.6883,0.6327,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,6,0.605,0.7263,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,7,0.5164,0.8218,FALSE,Tomatoes (Vine),0,1
+api_fresh_fruit,8,0.466,0.8793,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,1,0.6546,0.4192,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,2,0.2965,0.7437,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,3,0.5417,0.6542,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,4,0.456,0.7679,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,5,0.9529,0.4474,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,6,0.8966,0.4979,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,7,0.761,0.6206,FALSE,Tomatoes (Vine),0,1
+api_fresh_vegetables,8,0.6435,0.7407,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,1,0.1981,0.6566,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,2,1.6262,0.1986,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,3,1.0195,0.3845,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,4,1.1431,0.3367,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,5,0.9631,0.441,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,6,0.9561,0.4556,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,7,1.9317,0.0652,FALSE,Tomatoes (Vine),0,1
+fuel_petrol_price,8,2.2083,0.0275,TRUE,Tomatoes (Vine),0,1
+fuel_diesel_price,1,1.1606,0.2823,FALSE,Tomatoes (Vine),0,1
+fuel_diesel_price,2,3.2502,0.0403,TRUE,Tomatoes (Vine),0,1
+fuel_diesel_price,3,2.0556,0.1065,FALSE,Tomatoes (Vine),0,1
+fuel_diesel_price,4,1.8305,0.1234,FALSE,Tomatoes (Vine),0,1
+fuel_diesel_price,5,1.5099,0.1871,FALSE,Tomatoes (Vine),0,1
+fuel_diesel_price,6,1.2861,0.264,FALSE,Tomatoes (Vine),0,1
+fuel_diesel_price,7,2.2175,0.0334,TRUE,Tomatoes (Vine),0,1
+fuel_diesel_price,8,2.4678,0.0137,TRUE,Tomatoes (Vine),0,1
+sppi_road_freight,1,0.7016,0.403,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,2,0.5515,0.5768,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,3,0.3911,0.7595,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,4,0.3873,0.8177,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,5,0.3755,0.8652,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,6,0.3557,0.9062,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,7,0.9418,0.4749,FALSE,Tomatoes (Vine),0,1
+sppi_road_freight,8,0.8219,0.584,FALSE,Tomatoes (Vine),0,1
+api_energy_and_lubricants,1,0.3234,0.5707,FALSE,Asparagus,0,1
+api_energy_and_lubricants,2,0.2887,0.7498,FALSE,Asparagus,0,1
+api_energy_and_lubricants,3,0.4823,0.6953,FALSE,Asparagus,0,1
+api_energy_and_lubricants,4,0.3688,0.8304,FALSE,Asparagus,0,1
+api_energy_and_lubricants,5,0.3996,0.848,FALSE,Asparagus,0,1
+api_energy_and_lubricants,6,0.4427,0.8485,FALSE,Asparagus,0,1
+api_energy_and_lubricants,7,0.3667,0.9195,FALSE,Asparagus,0,1
+api_energy_and_lubricants,8,0.3549,0.9413,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,1,0.577,0.4491,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,2,0.2824,0.7545,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,3,0.3908,0.7599,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,4,0.3146,0.8677,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,5,0.2871,0.9192,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,6,0.477,0.824,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,7,0.3994,0.9005,FALSE,Asparagus,0,1
+api_fertilisers_and_soil_improvers,8,0.3947,0.9208,FALSE,Asparagus,0,1
+api_plant_protection_products,1,0.2002,0.6555,FALSE,Asparagus,0,1
+api_plant_protection_products,2,0.2989,0.7422,FALSE,Asparagus,0,1
+api_plant_protection_products,3,0.5218,0.6682,FALSE,Asparagus,0,1
+api_plant_protection_products,4,1.3579,0.2538,FALSE,Asparagus,0,1
+api_plant_protection_products,5,0.92,0.4713,FALSE,Asparagus,0,1
+api_plant_protection_products,6,0.8151,0.5608,FALSE,Asparagus,0,1
+api_plant_protection_products,7,0.7547,0.6265,FALSE,Asparagus,0,1
+api_plant_protection_products,8,0.683,0.7054,FALSE,Asparagus,0,1
+api_fresh_fruit,1,0.7233,0.3969,FALSE,Asparagus,0,1
+api_fresh_fruit,2,4.974,0.0086,TRUE,Asparagus,0,1
+api_fresh_fruit,3,3.2738,0.024,TRUE,Asparagus,0,1
+api_fresh_fruit,4,3.0031,0.0218,TRUE,Asparagus,0,1
+api_fresh_fruit,5,2.75,0.0227,TRUE,Asparagus,0,1
+api_fresh_fruit,6,2.4261,0.0315,TRUE,Asparagus,0,1
+api_fresh_fruit,7,1.9122,0.0761,FALSE,Asparagus,0,1
+api_fresh_fruit,8,1.6002,0.1356,FALSE,Asparagus,0,1
+api_fresh_vegetables,1,0.9353,0.3356,FALSE,Asparagus,0,1
+api_fresh_vegetables,2,5.9212,0.0036,TRUE,Asparagus,0,1
+api_fresh_vegetables,3,3.6407,0.0151,TRUE,Asparagus,0,1
+api_fresh_vegetables,4,2.9021,0.0254,TRUE,Asparagus,0,1
+api_fresh_vegetables,5,2.4056,0.0419,TRUE,Asparagus,0,1
+api_fresh_vegetables,6,1.7321,0.1216,FALSE,Asparagus,0,1
+api_fresh_vegetables,7,1.5501,0.1601,FALSE,Asparagus,0,1
+api_fresh_vegetables,8,1.2805,0.2635,FALSE,Asparagus,0,1
+fuel_petrol_price,1,6e-4,0.9805,FALSE,Asparagus,0,1
+fuel_petrol_price,2,0.0925,0.9117,FALSE,Asparagus,0,1
+fuel_petrol_price,3,0.6227,0.6019,FALSE,Asparagus,0,1
+fuel_petrol_price,4,0.6125,0.6545,FALSE,Asparagus,0,1
+fuel_petrol_price,5,0.3209,0.8994,FALSE,Asparagus,0,1
+fuel_petrol_price,6,0.3282,0.9207,FALSE,Asparagus,0,1
+fuel_petrol_price,7,0.3104,0.9477,FALSE,Asparagus,0,1
+fuel_petrol_price,8,0.2265,0.9852,FALSE,Asparagus,0,1
+fuel_diesel_price,1,0.0132,0.9086,FALSE,Asparagus,0,1
+fuel_diesel_price,2,0.2187,0.8039,FALSE,Asparagus,0,1
+fuel_diesel_price,3,0.8648,0.4619,FALSE,Asparagus,0,1
+fuel_diesel_price,4,0.6287,0.6431,FALSE,Asparagus,0,1
+fuel_diesel_price,5,0.3925,0.853,FALSE,Asparagus,0,1
+fuel_diesel_price,6,0.3174,0.9265,FALSE,Asparagus,0,1
+fuel_diesel_price,7,0.2331,0.9762,FALSE,Asparagus,0,1
+fuel_diesel_price,8,0.1994,0.9903,FALSE,Asparagus,0,1
+sppi_road_freight,1,0.4823,0.4888,FALSE,Asparagus,0,1
+sppi_road_freight,2,0.3368,0.7148,FALSE,Asparagus,0,1
+sppi_road_freight,3,0.4041,0.7504,FALSE,Asparagus,0,1
+sppi_road_freight,4,0.4555,0.7682,FALSE,Asparagus,0,1
+sppi_road_freight,5,0.41,0.8408,FALSE,Asparagus,0,1
+sppi_road_freight,6,0.4664,0.8316,FALSE,Asparagus,0,1
+sppi_road_freight,7,0.3214,0.9426,FALSE,Asparagus,0,1
+sppi_road_freight,8,0.316,0.9582,FALSE,Asparagus,0,1
+api_energy_and_lubricants,1,2.0727,0.1516,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,2,2.3952,0.094,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,3,1.7149,0.1656,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,4,1.3066,0.2694,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,5,1.0442,0.3933,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,6,1.1023,0.363,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,7,1.076,0.381,FALSE,Capsicums (Red),0,1
+api_energy_and_lubricants,8,0.8948,0.5222,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,1,2.2575,0.1347,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,2,3.0035,0.0521,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,3,2.3785,0.0714,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,4,1.7828,0.1343,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,5,1.5002,0.1921,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,6,1.3609,0.2331,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,7,1.339,0.2348,FALSE,Capsicums (Red),0,1
+api_fertilisers_and_soil_improvers,8,1.1013,0.3649,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,1,0.1894,0.6639,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,2,0.0863,0.9173,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,3,0.1601,0.923,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,4,0.2878,0.8856,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,5,0.303,0.9106,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,6,1.1348,0.3442,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,7,0.9743,0.4517,FALSE,Capsicums (Red),0,1
+api_plant_protection_products,8,1.0545,0.3977,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,1,0.3267,0.5683,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,2,0.2702,0.7635,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,3,0.1465,0.9319,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,4,0.1536,0.9612,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,5,0.3994,0.8488,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,6,0.9082,0.4904,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,7,0.929,0.4856,FALSE,Capsicums (Red),0,1
+api_fresh_fruit,8,0.8629,0.5491,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,1,2.3657,0.1257,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,2,1.4818,0.2299,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,3,1.004,0.3924,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,4,0.8683,0.4841,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,5,0.8634,0.507,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,6,0.8123,0.5617,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,7,0.7399,0.6384,FALSE,Capsicums (Red),0,1
+api_fresh_vegetables,8,0.6408,0.7426,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,1,0.1074,0.7434,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,2,0.0618,0.9401,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,3,0.1782,0.9111,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,4,0.2688,0.8977,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,5,0.4614,0.8046,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,6,0.5336,0.7822,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,7,0.4681,0.8566,FALSE,Capsicums (Red),0,1
+fuel_petrol_price,8,0.7213,0.6725,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,1,0,0.9949,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,2,0.2381,0.7884,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,3,0.5006,0.6824,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,4,0.5057,0.7316,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,5,0.9468,0.4522,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,6,0.8774,0.5128,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,7,0.7688,0.6143,FALSE,Capsicums (Red),0,1
+fuel_diesel_price,8,1.1198,0.3524,FALSE,Capsicums (Red),0,1
+sppi_road_freight,1,0.2341,0.6291,FALSE,Capsicums (Red),0,1
+sppi_road_freight,2,0.2285,0.796,FALSE,Capsicums (Red),0,1
+sppi_road_freight,3,9.4793,0,TRUE,Capsicums (Red),0,1
+sppi_road_freight,4,7.4295,0,TRUE,Capsicums (Red),0,1
+sppi_road_freight,5,5.8818,0,TRUE,Capsicums (Red),0,1
+sppi_road_freight,6,4.9244,1e-4,TRUE,Capsicums (Red),0,1
+sppi_road_freight,7,4.3018,2e-4,TRUE,Capsicums (Red),0,1
+sppi_road_freight,8,3.6117,7e-4,TRUE,Capsicums (Red),0,1
+api_energy_and_lubricants,1,2.8467,0.0943,FALSE,Capsicums (Green),1,2
+api_energy_and_lubricants,2,6.5854,0.002,TRUE,Capsicums (Green),1,2
+api_energy_and_lubricants,3,4.2372,0.0071,TRUE,Capsicums (Green),1,2
+api_energy_and_lubricants,4,3.3835,0.012,TRUE,Capsicums (Green),1,2
+api_energy_and_lubricants,5,3.5914,0.0049,TRUE,Capsicums (Green),1,2
+api_energy_and_lubricants,6,3.0152,0.0095,TRUE,Capsicums (Green),1,2
+api_energy_and_lubricants,7,2.5839,0.0174,TRUE,Capsicums (Green),1,2
+api_energy_and_lubricants,8,2.1944,0.0347,TRUE,Capsicums (Green),1,2
+api_fertilisers_and_soil_improvers,1,2e-4,0.9889,FALSE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,2,1.7351,0.1811,FALSE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,3,2.9717,0.035,TRUE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,4,2.2171,0.072,FALSE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,5,1.9686,0.0895,FALSE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,6,1.9322,0.0828,FALSE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,7,1.6149,0.1402,FALSE,Capsicums (Green),1,1
+api_fertilisers_and_soil_improvers,8,1.4803,0.1748,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,1,0.0023,0.9622,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,2,2.067,0.1314,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,3,1.4649,0.2282,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,4,1.1574,0.3339,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,5,0.9351,0.4616,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,6,0.7944,0.5764,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,7,0.6927,0.678,FALSE,Capsicums (Green),1,1
+api_plant_protection_products,8,0.6467,0.7366,FALSE,Capsicums (Green),1,1
+api_fresh_fruit,1,0.2333,0.63,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,2,0.303,0.7392,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,3,0.8339,0.4781,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,4,0.6125,0.6546,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,5,0.7083,0.6185,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,6,0.561,0.7604,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,7,0.6451,0.7176,FALSE,Capsicums (Green),1,0
+api_fresh_fruit,8,1.5938,0.137,FALSE,Capsicums (Green),1,0
+api_fresh_vegetables,1,0.2063,0.6505,FALSE,Capsicums (Green),1,1
+api_fresh_vegetables,2,2.1805,0.1178,FALSE,Capsicums (Green),1,1
+api_fresh_vegetables,3,1.4564,0.2305,FALSE,Capsicums (Green),1,1
+api_fresh_vegetables,4,1.7937,0.1355,FALSE,Capsicums (Green),1,1
+api_fresh_vegetables,5,2.3317,0.0475,TRUE,Capsicums (Green),1,1
+api_fresh_vegetables,6,1.9134,0.0859,FALSE,Capsicums (Green),1,1
+api_fresh_vegetables,7,3.7086,0.0013,TRUE,Capsicums (Green),1,1
+api_fresh_vegetables,8,3.2342,0.0027,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,1,14.0809,3e-4,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,2,7.1193,0.0012,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,3,4.8127,0.0035,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,4,3.6182,0.0083,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,5,2.6261,0.0281,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,6,2.5904,0.0225,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,7,2.5429,0.019,TRUE,Capsicums (Green),1,1
+fuel_petrol_price,8,2.1987,0.0342,TRUE,Capsicums (Green),1,1
+fuel_diesel_price,1,10.1258,0.0019,TRUE,Capsicums (Green),1,1
+fuel_diesel_price,2,4.9696,0.0086,TRUE,Capsicums (Green),1,1
+fuel_diesel_price,3,3.4738,0.0186,TRUE,Capsicums (Green),1,1
+fuel_diesel_price,4,2.603,0.04,TRUE,Capsicums (Green),1,1
+fuel_diesel_price,5,2.1022,0.071,FALSE,Capsicums (Green),1,1
+fuel_diesel_price,6,1.7437,0.1186,FALSE,Capsicums (Green),1,1
+fuel_diesel_price,7,1.7288,0.1111,FALSE,Capsicums (Green),1,1
+fuel_diesel_price,8,1.4155,0.2002,FALSE,Capsicums (Green),1,1
+sppi_road_freight,1,10.9946,0.0012,TRUE,Capsicums (Green),1,1
+sppi_road_freight,2,6.4527,0.0022,TRUE,Capsicums (Green),1,1
+sppi_road_freight,3,5.6654,0.0012,TRUE,Capsicums (Green),1,1
+sppi_road_freight,4,4.4297,0.0024,TRUE,Capsicums (Green),1,1
+sppi_road_freight,5,3.5567,0.0052,TRUE,Capsicums (Green),1,1
+sppi_road_freight,6,2.9999,0.0098,TRUE,Capsicums (Green),1,1
+sppi_road_freight,7,2.5466,0.0189,TRUE,Capsicums (Green),1,1
+sppi_road_freight,8,2.2488,0.0304,TRUE,Capsicums (Green),1,1
+api_energy_and_lubricants,1,0.2046,0.6514,FALSE,Curly kale,0,1
+api_energy_and_lubricants,2,0.3234,0.724,FALSE,Curly kale,0,1
+api_energy_and_lubricants,3,0.1643,0.9204,FALSE,Curly kale,0,1
+api_energy_and_lubricants,4,0.7617,0.5509,FALSE,Curly kale,0,1
+api_energy_and_lubricants,5,1.0344,0.3975,FALSE,Curly kale,0,1
+api_energy_and_lubricants,6,0.8787,0.5109,FALSE,Curly kale,0,1
+api_energy_and_lubricants,7,0.7388,0.6392,FALSE,Curly kale,0,1
+api_energy_and_lubricants,8,0.6977,0.6936,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,1,0.0572,0.8111,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,2,0.1661,0.8471,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,3,0.3421,0.7949,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,4,0.7425,0.5637,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,5,0.7111,0.6155,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,6,0.7495,0.6103,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,7,0.6818,0.6875,FALSE,Curly kale,0,1
+api_fertilisers_and_soil_improvers,8,0.5961,0.7809,FALSE,Curly kale,0,1
+api_plant_protection_products,1,3.6523,0.057,FALSE,Curly kale,0,1
+api_plant_protection_products,2,1.9705,0.1412,FALSE,Curly kale,0,1
+api_plant_protection_products,3,1.6139,0.1863,FALSE,Curly kale,0,1
+api_plant_protection_products,4,1.3234,0.2613,FALSE,Curly kale,0,1
+api_plant_protection_products,5,2.5717,0.027,TRUE,Curly kale,0,1
+api_plant_protection_products,6,2.2048,0.0427,TRUE,Curly kale,0,1
+api_plant_protection_products,7,2.072,0.0467,TRUE,Curly kale,0,1
+api_plant_protection_products,8,2.2032,0.0274,TRUE,Curly kale,0,1
+api_fresh_fruit,1,1.8085,0.1797,FALSE,Curly kale,0,1
+api_fresh_fruit,2,0.8559,0.4259,FALSE,Curly kale,0,1
+api_fresh_fruit,3,1.168,0.3222,FALSE,Curly kale,0,1
+api_fresh_fruit,4,1.3839,0.2396,FALSE,Curly kale,0,1
+api_fresh_fruit,5,1.4438,0.2086,FALSE,Curly kale,0,1
+api_fresh_fruit,6,1.2069,0.3027,FALSE,Curly kale,0,1
+api_fresh_fruit,7,1.2561,0.2723,FALSE,Curly kale,0,1
+api_fresh_fruit,8,1.2887,0.2492,FALSE,Curly kale,0,1
+api_fresh_vegetables,1,5.2609,0.0225,TRUE,Curly kale,0,1
+api_fresh_vegetables,2,2.8192,0.0613,FALSE,Curly kale,0,1
+api_fresh_vegetables,3,2.1176,0.0981,FALSE,Curly kale,0,1
+api_fresh_vegetables,4,1.6563,0.1603,FALSE,Curly kale,0,1
+api_fresh_vegetables,5,1.9902,0.0801,FALSE,Curly kale,0,1
+api_fresh_vegetables,6,1.6643,0.1297,FALSE,Curly kale,0,1
+api_fresh_vegetables,7,2.019,0.0528,FALSE,Curly kale,0,1
+api_fresh_vegetables,8,1.7944,0.0781,FALSE,Curly kale,0,1
+fuel_petrol_price,1,0.3267,0.568,FALSE,Curly kale,0,1
+fuel_petrol_price,2,1.0246,0.3602,FALSE,Curly kale,0,1
+fuel_petrol_price,3,0.5867,0.6241,FALSE,Curly kale,0,1
+fuel_petrol_price,4,0.4503,0.7721,FALSE,Curly kale,0,1
+fuel_petrol_price,5,0.7569,0.5816,FALSE,Curly kale,0,1
+fuel_petrol_price,6,0.9194,0.4813,FALSE,Curly kale,0,1
+fuel_petrol_price,7,0.8157,0.5749,FALSE,Curly kale,0,1
+fuel_petrol_price,8,0.7326,0.6626,FALSE,Curly kale,0,1
+fuel_diesel_price,1,0.0761,0.7829,FALSE,Curly kale,0,1
+fuel_diesel_price,2,0.6674,0.5138,FALSE,Curly kale,0,1
+fuel_diesel_price,3,0.4447,0.7212,FALSE,Curly kale,0,1
+fuel_diesel_price,4,0.3596,0.8373,FALSE,Curly kale,0,1
+fuel_diesel_price,5,0.8352,0.5256,FALSE,Curly kale,0,1
+fuel_diesel_price,6,0.9917,0.4311,FALSE,Curly kale,0,1
+fuel_diesel_price,7,0.9143,0.4957,FALSE,Curly kale,0,1
+fuel_diesel_price,8,0.7888,0.6129,FALSE,Curly kale,0,1
+sppi_road_freight,1,6e-4,0.981,FALSE,Curly kale,0,1
+sppi_road_freight,2,0.9817,0.3759,FALSE,Curly kale,0,1
+sppi_road_freight,3,0.9988,0.3938,FALSE,Curly kale,0,1
+sppi_road_freight,4,0.9251,0.4496,FALSE,Curly kale,0,1
+sppi_road_freight,5,0.8285,0.5303,FALSE,Curly kale,0,1
+sppi_road_freight,6,0.7518,0.6084,FALSE,Curly kale,0,1
+sppi_road_freight,7,0.9148,0.4953,FALSE,Curly kale,0,1
+sppi_road_freight,8,0.7931,0.6091,FALSE,Curly kale,0,1
+api_energy_and_lubricants,1,1.7381,0.1884,FALSE,Pak choi,0,1
+api_energy_and_lubricants,2,0.728,0.4837,FALSE,Pak choi,0,1
+api_energy_and_lubricants,3,0.8537,0.4656,FALSE,Pak choi,0,1
+api_energy_and_lubricants,4,0.7001,0.5924,FALSE,Pak choi,0,1
+api_energy_and_lubricants,5,0.6621,0.6525,FALSE,Pak choi,0,1
+api_energy_and_lubricants,6,0.7049,0.6459,FALSE,Pak choi,0,1
+api_energy_and_lubricants,7,0.5936,0.7611,FALSE,Pak choi,0,1
+api_energy_and_lubricants,8,0.6093,0.7699,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,1,1.1125,0.2924,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,2,0.4629,0.6299,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,3,0.6758,0.5675,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,4,0.5023,0.7341,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,5,0.7462,0.5895,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,6,0.6779,0.6676,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,7,0.6235,0.7364,FALSE,Pak choi,0,1
+api_fertilisers_and_soil_improvers,8,0.739,0.657,FALSE,Pak choi,0,1
+api_plant_protection_products,1,0.0787,0.7793,FALSE,Pak choi,0,1
+api_plant_protection_products,2,0.8099,0.4459,FALSE,Pak choi,0,1
+api_plant_protection_products,3,0.8485,0.4683,FALSE,Pak choi,0,1
+api_plant_protection_products,4,1.3965,0.2352,FALSE,Pak choi,0,1
+api_plant_protection_products,5,1.1252,0.3471,FALSE,Pak choi,0,1
+api_plant_protection_products,6,0.8779,0.5115,FALSE,Pak choi,0,1
+api_plant_protection_products,7,0.73740000000000006,0.6404,FALSE,Pak choi,0,1
+api_plant_protection_products,8,0.9453,0.4795,FALSE,Pak choi,0,1
+api_fresh_fruit,1,0.332,0.5649,FALSE,Pak choi,0,1
+api_fresh_fruit,2,0.3295,0.7195,FALSE,Pak choi,0,1
+api_fresh_fruit,3,0.2081,0.8908,FALSE,Pak choi,0,1
+api_fresh_fruit,4,0.5887,0.6711,FALSE,Pak choi,0,1
+api_fresh_fruit,5,0.986,0.4265,FALSE,Pak choi,0,1
+api_fresh_fruit,6,2.0344,0.0612,FALSE,Pak choi,0,1
+api_fresh_fruit,7,1.9168,0.0668,FALSE,Pak choi,0,1
+api_fresh_fruit,8,1.6599,0.1081,FALSE,Pak choi,0,1
+api_fresh_vegetables,1,0.0509,0.8217,FALSE,Pak choi,0,1
+api_fresh_vegetables,2,0.0585,0.9432,FALSE,Pak choi,0,1
+api_fresh_vegetables,3,0.0793,0.9712,FALSE,Pak choi,0,1
+api_fresh_vegetables,4,1.5249,0.1949,FALSE,Pak choi,0,1
+api_fresh_vegetables,5,1.5229,0.1825,FALSE,Pak choi,0,1
+api_fresh_vegetables,6,1.2014,0.3056,FALSE,Pak choi,0,1
+api_fresh_vegetables,7,1.1132,0.3548,FALSE,Pak choi,0,1
+api_fresh_vegetables,8,1.0927,0.3683,FALSE,Pak choi,0,1
+fuel_petrol_price,1,0.1282,0.7205,FALSE,Pak choi,0,1
+fuel_petrol_price,2,0.3905,0.6771,FALSE,Pak choi,0,1
+fuel_petrol_price,3,0.3904,0.76,FALSE,Pak choi,0,1
+fuel_petrol_price,4,0.3148,0.868,FALSE,Pak choi,0,1
+fuel_petrol_price,5,0.3016,0.9117,FALSE,Pak choi,0,1
+fuel_petrol_price,6,0.3489,0.9103,FALSE,Pak choi,0,1
+fuel_petrol_price,7,0.3297,0.9401,FALSE,Pak choi,0,1
+fuel_petrol_price,8,0.398,0.9212,FALSE,Pak choi,0,1
+fuel_diesel_price,1,0.2982,0.5854,FALSE,Pak choi,0,1
+fuel_diesel_price,2,0.4193,0.6579,FALSE,Pak choi,0,1
+fuel_diesel_price,3,0.3458,0.7922,FALSE,Pak choi,0,1
+fuel_diesel_price,4,0.2534,0.9075,FALSE,Pak choi,0,1
+fuel_diesel_price,5,0.2247,0.9517,FALSE,Pak choi,0,1
+fuel_diesel_price,6,0.2448,0.9611,FALSE,Pak choi,0,1
+fuel_diesel_price,7,0.2235,0.9796,FALSE,Pak choi,0,1
+fuel_diesel_price,8,0.2292,0.9853,FALSE,Pak choi,0,1
+sppi_road_freight,1,0.2582,0.6117,FALSE,Pak choi,0,1
+sppi_road_freight,2,0.3229,0.7243,FALSE,Pak choi,0,1
+sppi_road_freight,3,0.5928,0.6201,FALSE,Pak choi,0,1
+sppi_road_freight,4,0.6802,0.6062,FALSE,Pak choi,0,1
+sppi_road_freight,5,0.6648,0.6504,FALSE,Pak choi,0,1
+sppi_road_freight,6,1.0833,0.3725,FALSE,Pak choi,0,1
+sppi_road_freight,7,1.6356,0.1252,FALSE,Pak choi,0,1
+sppi_road_freight,8,2.2872,0.0219,TRUE,Pak choi,0,1
+api_energy_and_lubricants,1,0.2539,0.6147,FALSE,Spring greens,0,1
+api_energy_and_lubricants,2,0.3216,0.7252,FALSE,Spring greens,0,1
+api_energy_and_lubricants,3,0.2246,0.8793,FALSE,Spring greens,0,1
+api_energy_and_lubricants,4,0.3329,0.8557,FALSE,Spring greens,0,1
+api_energy_and_lubricants,5,0.2562,0.9365,FALSE,Spring greens,0,1
+api_energy_and_lubricants,6,0.2607,0.9546,FALSE,Spring greens,0,1
+api_energy_and_lubricants,7,0.3014,0.9529,FALSE,Spring greens,0,1
+api_energy_and_lubricants,8,0.9089,0.5094,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,1,0.1622,0.6874,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,2,0.1621,0.8504,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,3,0.117,0.9501,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,4,0.1529,0.9616,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,5,0.1097,0.9901,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,6,0.1166,0.9944,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,7,0.1173,0.9972,FALSE,Spring greens,0,1
+api_fertilisers_and_soil_improvers,8,0.106,0.999,FALSE,Spring greens,0,1
+api_plant_protection_products,1,0.2205,0.639,FALSE,Spring greens,0,1
+api_plant_protection_products,2,0.1099,0.896,FALSE,Spring greens,0,1
+api_plant_protection_products,3,0.149,0.9303,FALSE,Spring greens,0,1
+api_plant_protection_products,4,0.1183,0.9759,FALSE,Spring greens,0,1
+api_plant_protection_products,5,0.1025,0.9916,FALSE,Spring greens,0,1
+api_plant_protection_products,6,0.1094,0.9953,FALSE,Spring greens,0,1
+api_plant_protection_products,7,0.2093,0.9832,FALSE,Spring greens,0,1
+api_plant_protection_products,8,0.5421,0.8243,FALSE,Spring greens,0,1
+api_fresh_fruit,1,0.4549,0.5006,FALSE,Spring greens,0,1
+api_fresh_fruit,2,0.221,0.8018,FALSE,Spring greens,0,1
+api_fresh_fruit,3,0.2265,0.8779,FALSE,Spring greens,0,1
+api_fresh_fruit,4,0.1771,0.9501,FALSE,Spring greens,0,1
+api_fresh_fruit,5,0.2077,0.9591,FALSE,Spring greens,0,1
+api_fresh_fruit,6,0.2337,0.9653,FALSE,Spring greens,0,1
+api_fresh_fruit,7,0.2004,0.9852,FALSE,Spring greens,0,1
+api_fresh_fruit,8,1.1721,0.316,FALSE,Spring greens,0,1
+api_fresh_vegetables,1,3e-4,0.9863,FALSE,Spring greens,0,1
+api_fresh_vegetables,2,0.0019,0.9981,FALSE,Spring greens,0,1
+api_fresh_vegetables,3,0.0291,0.9933,FALSE,Spring greens,0,1
+api_fresh_vegetables,4,0.1018,0.9818,FALSE,Spring greens,0,1
+api_fresh_vegetables,5,0.1243,0.9869,FALSE,Spring greens,0,1
+api_fresh_vegetables,6,0.1045,0.9959,FALSE,Spring greens,0,1
+api_fresh_vegetables,7,0.0999,0.9983,FALSE,Spring greens,0,1
+api_fresh_vegetables,8,0.1202,0.9984,FALSE,Spring greens,0,1
+fuel_petrol_price,1,0.264,0.6078,FALSE,Spring greens,0,1
+fuel_petrol_price,2,1.2539,0.2869,FALSE,Spring greens,0,1
+fuel_petrol_price,3,0.8321,0.4771,FALSE,Spring greens,0,1
+fuel_petrol_price,4,0.7207,0.5784,FALSE,Spring greens,0,1
+fuel_petrol_price,5,0.5607,0.7301,FALSE,Spring greens,0,1
+fuel_petrol_price,6,0.61240000000000006,0.7204,FALSE,Spring greens,0,1
+fuel_petrol_price,7,0.4637,0.8604,FALSE,Spring greens,0,1
+fuel_petrol_price,8,0.7071,0.6852,FALSE,Spring greens,0,1
+fuel_diesel_price,1,0.4242,0.5154,FALSE,Spring greens,0,1
+fuel_diesel_price,2,0.9781,0.3772,FALSE,Spring greens,0,1
+fuel_diesel_price,3,0.8307,0.4779,FALSE,Spring greens,0,1
+fuel_diesel_price,4,0.7148,0.5824,FALSE,Spring greens,0,1
+fuel_diesel_price,5,0.5572,0.7328,FALSE,Spring greens,0,1
+fuel_diesel_price,6,0.6284,0.7075,FALSE,Spring greens,0,1
+fuel_diesel_price,7,0.4694,0.8564,FALSE,Spring greens,0,1
+fuel_diesel_price,8,0.6548,0.7311,FALSE,Spring greens,0,1
+sppi_road_freight,1,4e-4,0.9836,FALSE,Spring greens,0,1
+sppi_road_freight,2,0.1453,0.8648,FALSE,Spring greens,0,1
+sppi_road_freight,3,0.1006,0.9596,FALSE,Spring greens,0,1
+sppi_road_freight,4,0.1968,0.9399,FALSE,Spring greens,0,1
+sppi_road_freight,5,0.1568,0.9779,FALSE,Spring greens,0,1
+sppi_road_freight,6,0.1943,0.9783,FALSE,Spring greens,0,1
+sppi_road_freight,7,0.23,0.9779,FALSE,Spring greens,0,1
+sppi_road_freight,8,0.2188,0.98740000000000006,FALSE,Spring greens,0,1

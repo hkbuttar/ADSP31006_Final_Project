@@ -1,0 +1,21 @@
+model,RMSE,MAE,MASE,sMAPE,MAPE
+Asparagus — S-Mamba,5.1639,4.4172,2.7223,33.0874,28.6774
+Beetroot — S-Mamba,0.1013,0.0792,4.191,9.9769,10.8338
+Bulb Onions (Red) — S-Mamba,0.141,0.1134,2.7233,15.3041,16.5021
+Bulb Onions (Yellow) — S-Mamba,0.078,0.0613,1.6109,11.5388,10.8101
+Cabbage — S-Mamba,0.1516,0.1307,6.0652,17.386,19.6206
+Capsicums (Green) — S-Mamba,0.3798,0.2741,1.1159,18.6703,19.3915
+Capsicums (Red) — S-Mamba,0.6126,0.4671,1.9968,30.0588,32.5477
+Carrots — S-Mamba,0.0541,0.0372,1.9488,6.9116,6.9233
+Cooking Apples — S-Mamba,0.1868,0.1654,2.4271,13.0906,12.1053
+Cucumbers — S-Mamba,0.2252,0.1896,1.5024,17.5563,19.7614
+Curly kale — S-Mamba,0.5642,0.5057,3.7968,11.052,11.8639
+Dessert Apples — S-Mamba,0.093,0.0762,1.1337,5.9455,5.7725
+Leeks — S-Mamba,0.1181,0.0834,1.3512,5.4424,5.3741
+Lettuce — S-Mamba,0.0384,0.0307,1.347,4.4258,4.359
+Pak choi — S-Mamba,0.1557,0.124,0.9411,3.4643,3.5542
+Pears — S-Mamba,0.2097,0.1602,1.5302,14.4297,16.6087
+Spring greens — S-Mamba,0.2619,0.2056,2.6881,14.5523,15.7707
+Strawberries — S-Mamba,1.9985,1.5963,1.6451,29.0243,31.1415
+Tomatoes (Round) — S-Mamba,0.2653,0.2234,1.1692,20.5306,23.308
+Tomatoes (Vine) — S-Mamba,0.3863,0.2153,0.7039,13.1327,12.3396
