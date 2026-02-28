@@ -1,0 +1,388 @@
+```{r}
+library(tidyverse)
+library(forecast)
+library(tseries)
+library(ggplot2)
+library(patchwork)
+library(scales)
+library(nortest)
+```
+```{r}
+INPUT_FILE  <- "../../data/merged_features_weekly.csv"
+OUTPUT_DIR  <- "outputs"
+FREQ        <- 52
+ALPHA       <- 0.05
+```
+```{r}
+df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
+  mutate(date = as.Date(date)) %>%
+  arrange(date)
+
+commodities <- unique(df$commodity)
+cat("Commodities found:", paste(commodities, collapse = ", "), "\n")
+```
+```{r}
+calc_rmse  <- function(actual, pred) sqrt(mean((actual - pred)^2, na.rm = TRUE))
+calc_mae   <- function(actual, pred) mean(abs(actual - pred), na.rm = TRUE)
+calc_mape  <- function(actual, pred) mean(abs((actual - pred) / actual) * 100, na.rm = TRUE)
+calc_smape <- function(actual, pred) {
+  mean(200 * abs(actual - pred) / (abs(actual) + abs(pred)), na.rm = TRUE)
+}
+calc_mase  <- function(actual, pred, train) {
+  naive_mae <- mean(abs(diff(train)), na.rm = TRUE)
+  mean(abs(actual - pred), na.rm = TRUE) / naive_mae
+}
+
+compile_metrics <- function(actual, pred, train, model_obj, label) {
+  tibble(
+    model = label,
+    RMSE  = round(calc_rmse(actual, pred),        4),
+    MAE   = round(calc_mae(actual, pred),         4),
+    MASE  = round(calc_mase(actual, pred, train), 4),
+    sMAPE = round(calc_smape(actual, pred),       4),
+    MAPE  = round(calc_mape(actual, pred),        4),
+    AIC   = round(AIC(model_obj),                 2),
+    BIC   = round(BIC(model_obj),                 2)
+  )
+}
+
+residual_diagnostics <- function(resid_vec, model_obj, label) {
+  resid_clean <- resid_vec[!is.na(resid_vec)]
+  lb10 <- Box.test(resid_clean, lag = 10, type = "Ljung-Box")
+  lb20 <- Box.test(resid_clean, lag = 20, type = "Ljung-Box")
+  if (length(resid_clean) <= 5000) {
+    norm_test <- shapiro.test(resid_clean); norm_name <- "Shapiro-Wilk"
+  } else {
+    norm_test <- nortest::ad.test(resid_clean); norm_name <- "Anderson-Darling"
+  }
+  tibble(
+    model             = label,
+    resid_mean        = round(mean(resid_clean),     6),
+    resid_sd          = round(sd(resid_clean),       4),
+    ljung_box_lag10_p = round(lb10$p.value,          4),
+    ljung_box_lag20_p = round(lb20$p.value,          4),
+    normality_test    = norm_name,
+    normality_p       = round(norm_test$p.value,     4),
+    autocorr_ok       = lb10$p.value > ALPHA,
+    normality_ok      = norm_test$p.value > ALPHA
+  )
+}
+
+plot_residuals <- function(resid_vec, fitted_vec, label) {
+  resid_clean <- resid_vec[!is.na(resid_vec)]
+  time_idx    <- seq_along(resid_vec)
+  ci_bound    <- qnorm(0.975) / sqrt(length(resid_clean))
+
+  p1 <- ggplot(data.frame(t = time_idx, r = resid_vec), aes(t, r)) +
+    geom_line(color = "#2c3e50", linewidth = 0.45) +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    labs(title = "Residuals over time", x = "Week index", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  acf_data <- acf(resid_clean, plot = FALSE, lag.max = 52)
+  acf_df   <- data.frame(lag = acf_data$lag[-1], acf = acf_data$acf[-1])
+  p2 <- ggplot(acf_df, aes(lag, acf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#2980b9") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "ACF of residuals", x = "Lag (weeks)", y = "ACF") +
+    theme_minimal(base_size = 11)
+
+  pacf_data <- pacf(resid_clean, plot = FALSE, lag.max = 52)
+  pacf_df   <- data.frame(lag = pacf_data$lag, pacf = pacf_data$acf)
+  p3 <- ggplot(pacf_df, aes(lag, pacf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#8e44ad") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "PACF of residuals", x = "Lag (weeks)", y = "PACF") +
+    theme_minimal(base_size = 11)
+
+  p4 <- ggplot(data.frame(r = resid_clean), aes(r)) +
+    geom_histogram(aes(y = after_stat(density)), bins = 40,
+                   fill = "#3498db", color = "white", alpha = 0.7) +
+    stat_function(fun = dnorm,
+                  args = list(mean = mean(resid_clean), sd = sd(resid_clean)),
+                  color = "red", linewidth = 1) +
+    labs(title = "Residual distribution", x = "Residual", y = "Density") +
+    theme_minimal(base_size = 11)
+
+  qq    <- qqnorm(resid_clean, plot.it = FALSE)
+  qq_df <- data.frame(theoretical = qq$x, sample = qq$y)
+  p5 <- ggplot(qq_df, aes(theoretical, sample)) +
+    geom_point(alpha = 0.4, color = "#2c3e50", size = 0.8) +
+    geom_abline(color = "red", linewidth = 1) +
+    labs(title = "Q-Q plot", x = "Theoretical quantiles", y = "Sample quantiles") +
+    theme_minimal(base_size = 11)
+
+  p6 <- ggplot(data.frame(f = fitted_vec, r = resid_vec), aes(f, r)) +
+    geom_point(alpha = 0.35, size = 0.9, color = "#16a085") +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    geom_smooth(method = "loess", formula = y ~ x, se = FALSE,
+                color = "#e67e22", linewidth = 0.8) +
+    labs(title = "Residuals vs Fitted", x = "Fitted values", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  combined <- (p1 | p4) / (p2 | p3) / (p5 | p6) +
+    plot_annotation(
+      title    = paste0("Residual Diagnostics — ", label),
+      subtitle = "Row 1: Time series & distribution | Row 2: ACF & PACF | Row 3: Q-Q & Residuals vs Fitted",
+      theme    = theme(plot.title = element_text(face = "bold", size = 14))
+    )
+  print(combined)
+}
+
+plot_forecast <- function(train_dates, train_vals,
+                          test_dates,  test_vals,
+                          fc_list, label) {
+  train_df <- data.frame(date = train_dates, value = train_vals) %>%
+    filter(date >= max(date) - 365 * 2)
+  test_df  <- data.frame(date = test_dates, value = test_vals)
+
+  model_colors <- c(
+    "Train"          = "#bdc3c7",
+    "Actual"         = "#2c3e50",
+    "Additive"       = "#e74c3c",
+    "Multiplicative" = "#2980b9",
+    "ETS (auto)"     = "#27ae60"
+  )
+
+  p <- ggplot() +
+    geom_line(data = train_df, aes(x = date, y = value, color = "Train"), linewidth = 0.6) +
+    geom_line(data = test_df,  aes(x = date, y = value, color = "Actual"), linewidth = 1)
+
+  ribbon_alpha <- c(0.12, 0.10, 0.09)
+  for (i in seq_along(fc_list)) {
+    fc_name <- names(fc_list)[i]
+    fc_obj  <- fc_list[[i]]
+    pred_df <- data.frame(
+      date  = test_dates,
+      pred  = as.numeric(fc_obj$mean),
+      lo95  = as.numeric(fc_obj$lower[, 2]),
+      hi95  = as.numeric(fc_obj$upper[, 2]),
+      model = fc_name
+    )
+    p <- p +
+      geom_ribbon(data = pred_df, aes(x = date, ymin = lo95, ymax = hi95),
+                  fill = model_colors[fc_name], alpha = ribbon_alpha[i]) +
+      geom_line(data = pred_df, aes(x = date, y = pred, color = model),
+                linewidth = 0.85, linetype = "dashed")
+  }
+
+  p <- p +
+    scale_color_manual(values = model_colors, name = NULL) +
+    labs(
+      title    = paste0("Holt-Winters Forecast — ", label),
+      subtitle = "Dashed = forecast | Shaded = 95% prediction interval",
+      x = NULL, y = "Price"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+
+  print(p)
+}
+
+plot_components <- function(model_obj, label) {
+  comp <- data.frame(
+    index    = seq_len(nrow(model_obj$states)),
+    level    = model_obj$states[, "l"],
+    trend    = if ("b"  %in% colnames(model_obj$states)) model_obj$states[, "b"]  else NA,
+    seasonal = if ("s1" %in% colnames(model_obj$states)) model_obj$states[, "s1"] else NA
+  )
+
+  plots <- list(
+    ggplot(comp, aes(index, level)) +
+      geom_line(color = "#2c3e50", linewidth = 0.7) +
+      labs(title = "Level component", x = "Week index", y = "Level") +
+      theme_minimal(base_size = 11)
+  )
+
+  if (!all(is.na(comp$trend))) {
+    plots <- c(plots, list(
+      ggplot(comp, aes(index, trend)) +
+        geom_line(color = "#e74c3c", linewidth = 0.7) +
+        geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+        labs(title = "Trend component", x = "Week index", y = "Trend (slope)") +
+        theme_minimal(base_size = 11)
+    ))
+  }
+
+  if (!all(is.na(comp$seasonal))) {
+    plots <- c(plots, list(
+      ggplot(comp, aes(index, seasonal)) +
+        geom_line(color = "#2980b9", linewidth = 0.7) +
+        geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+        labs(title = "Seasonal component (s1)", x = "Week index", y = "Seasonal") +
+        theme_minimal(base_size = 11)
+    ))
+  }
+
+  combined <- wrap_plots(plots, ncol = 1) +
+    plot_annotation(
+      title = paste0("Holt-Winters Components — ", label),
+      theme = theme(plot.title = element_text(face = "bold", size = 13))
+    )
+  print(combined)
+}
+```
+```{r}
+all_metrics <- list()
+all_diag    <- list()
+```
+```{r fig.width=14, fig.height=12}
+for (comm in commodities) {
+  cat("\n", strrep("=", 60), "\n")
+  cat("  Commodity:", comm, "\n")
+  cat(strrep("=", 60), "\n")
+
+  sub <- df %>% filter(commodity == comm) %>% arrange(date)
+
+  if (!"split" %in% names(sub)) stop("'split' column not found in data.")
+
+  train_df <- sub %>% filter(split == "train") %>% select(date, target_price) %>% drop_na(target_price)
+  test_df  <- sub %>% filter(split == "test")  %>% select(date, target_price) %>% drop_na(target_price)
+
+  if (nrow(train_df) < FREQ * 2 || nrow(test_df) == 0) {
+    cat("  !! Insufficient rows — skipping.\n"); next
+  }
+
+  n_test   <- nrow(test_df)
+  train_ts <- ts(train_df$target_price, frequency = FREQ)
+
+  cat(sprintf("  Train: %s -> %s (%d weeks)\n",
+              min(train_df$date), max(train_df$date), nrow(train_df)))
+  cat(sprintf("  Test:  %s -> %s (%d weeks)\n",
+              min(test_df$date),  max(test_df$date),  n_test))
+
+  fc_list <- list()
+
+  # ── Model A: HW Additive ──────────────────
+  cat("\n  Fitting HW Additive (AAA)...\n")
+  model_add <- tryCatch(
+    ets(train_ts, model = "AAA", damped = FALSE),
+    error = function(e) { cat("  !! HW Additive failed:", e$message, "\n"); NULL }
+  )
+  if (!is.null(model_add)) {
+    fc_add   <- forecast(model_add, h = n_test)
+    pred_add <- as.numeric(fc_add$mean)
+    cat(sprintf("  alpha=%.4f  beta=%.4f  gamma=%.4f\n",
+                model_add$par["alpha"], model_add$par["beta"], model_add$par["gamma"]))
+    all_metrics[[paste(comm, "additive")]] <- compile_metrics(
+      test_df$target_price, pred_add, train_df$target_price, model_add,
+      paste0(comm, " — HW Additive")
+    )
+    all_diag[[paste(comm, "additive")]] <- residual_diagnostics(
+      as.numeric(residuals(model_add)), model_add, paste0(comm, " — HW Additive")
+    )
+    fc_list[["Additive"]] <- fc_add
+    plot_residuals(as.numeric(residuals(model_add)), as.numeric(fitted(model_add)),
+                   paste0(comm, " — HW Additive"))
+    plot_components(model_add, paste0(comm, " — HW Additive"))
+  }
+
+  # ── Model B: HW Multiplicative ────────────
+  if (any(train_df$target_price <= 0, na.rm = TRUE)) {
+    cat("  !! Non-positive values — skipping Multiplicative.\n")
+    model_mult <- NULL
+  } else {
+    cat("  Fitting HW Multiplicative (MAM)...\n")
+    model_mult <- tryCatch(
+      ets(train_ts, model = "MAM", damped = FALSE),
+      error = function(e) { cat("  !! HW Multiplicative failed:", e$message, "\n"); NULL }
+    )
+  }
+  if (!is.null(model_mult)) {
+    fc_mult   <- forecast(model_mult, h = n_test)
+    pred_mult <- as.numeric(fc_mult$mean)
+    cat(sprintf("  alpha=%.4f  beta=%.4f  gamma=%.4f\n",
+                model_mult$par["alpha"], model_mult$par["beta"], model_mult$par["gamma"]))
+    all_metrics[[paste(comm, "multiplicative")]] <- compile_metrics(
+      test_df$target_price, pred_mult, train_df$target_price, model_mult,
+      paste0(comm, " — HW Multiplicative")
+    )
+    all_diag[[paste(comm, "multiplicative")]] <- residual_diagnostics(
+      as.numeric(residuals(model_mult)), model_mult, paste0(comm, " — HW Multiplicative")
+    )
+    fc_list[["Multiplicative"]] <- fc_mult
+    plot_residuals(as.numeric(residuals(model_mult)), as.numeric(fitted(model_mult)),
+                   paste0(comm, " — HW Multiplicative"))
+    plot_components(model_mult, paste0(comm, " — HW Multiplicative"))
+  }
+
+  # ── Model C: ETS auto ─────────────────────
+  cat("  Fitting ETS (auto ZZZ)...\n")
+  model_ets <- tryCatch(
+    ets(train_ts, model = "ZZZ"),
+    error = function(e) { cat("  !! ETS auto failed:", e$message, "\n"); NULL }
+  )
+  if (!is.null(model_ets)) {
+    fc_ets   <- forecast(model_ets, h = n_test)
+    pred_ets <- as.numeric(fc_ets$mean)
+    cat(sprintf("  ETS selected: %s\n", model_ets$method))
+    cat(sprintf("  alpha=%.4f  beta=%s  gamma=%s\n",
+                model_ets$par["alpha"],
+                ifelse("beta"  %in% names(model_ets$par), round(model_ets$par["beta"],  4), "N/A"),
+                ifelse("gamma" %in% names(model_ets$par), round(model_ets$par["gamma"], 4), "N/A")))
+    all_metrics[[paste(comm, "ets_auto")]] <- compile_metrics(
+      test_df$target_price, pred_ets, train_df$target_price, model_ets,
+      paste0(comm, " — ETS (", model_ets$method, ")")
+    )
+    all_diag[[paste(comm, "ets_auto")]] <- residual_diagnostics(
+      as.numeric(residuals(model_ets)), model_ets,
+      paste0(comm, " — ETS (", model_ets$method, ")")
+    )
+    fc_list[["ETS (auto)"]] <- fc_ets
+    plot_residuals(as.numeric(residuals(model_ets)), as.numeric(fitted(model_ets)),
+                   paste0(comm, " — ETS (", model_ets$method, ")"))
+    plot_components(model_ets, paste0(comm, " — ETS (", model_ets$method, ")"))
+  }
+
+  # ── Combined forecast plot ─────────────────
+  if (length(fc_list) > 0) {
+    plot_forecast(
+      train_dates = train_df$date,
+      train_vals  = train_df$target_price,
+      test_dates  = test_df$date,
+      test_vals   = test_df$target_price,
+      fc_list     = fc_list,
+      label       = comm
+    )
+  }
+}
+```
+```{r}
+metrics_df <- bind_rows(all_metrics)
+diag_df    <- bind_rows(all_diag)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  HOLT-WINTERS MODEL PERFORMANCE METRICS\n")
+cat(strrep("=", 70), "\n")
+print(metrics_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  RESIDUAL DIAGNOSTICS\n")
+cat(strrep("=", 70), "\n")
+print(diag_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  BEST MODEL PER COMMODITY (by RMSE)\n")
+cat(strrep("=", 70), "\n")
+metrics_df %>%
+  mutate(commodity = str_extract(model, "^.+(?= —)")) %>%
+  group_by(commodity) %>%
+  slice_min(RMSE, n = 1) %>%
+  ungroup() %>%
+  print(n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  SMOOTHING PARAMETERS INTERPRETATION GUIDE\n")
+cat(strrep("=", 70), "\n")
+cat("
+  alpha (level):    near 0 = slow adaptation | near 1 = weights recent obs heavily
+  beta  (trend):    near 0 = trend changes slowly | near 1 = trend adapts quickly
+  gamma (seasonal): near 0 = stable seasonal pattern | near 1 = updates aggressively\n\n")
+
+write_csv(metrics_df, file.path(OUTPUT_DIR, "hw_metrics.csv"))
+write_csv(diag_df,    file.path(OUTPUT_DIR, "hw_residual_diagnostics.csv"))
+
+cat("✅ Done.\n")
+```

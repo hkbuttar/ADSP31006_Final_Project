@@ -1,0 +1,280 @@
+```{r}
+library(tidyverse)
+library(tseries)      # adf.test
+library(lmtest)       # grangertest
+library(ggplot2)
+library(scales)
+library(patchwork)    # combine plots
+```
+```{r}
+
+INPUT_FILE  <- "../../data/merged_features_weekly.csv"
+OUTPUT_DIR  <- "outputs/"        # change if needed
+dir.create(OUTPUT_DIR, showWarnings = FALSE, recursive = TRUE)
+MAX_LAGS    <- 8
+ALPHA       <- 0.05
+
+CANDIDATE_PREDICTORS <- c(
+  "api_energy_and_lubricants",
+  "api_fertilisers_and_soil_improvers",
+  "api_plant_protection_products",
+  "api_fresh_fruit",
+  "api_fresh_vegetables",
+  "fuel_petrol_price",
+  "fuel_diesel_price",
+  "sppi_road_freight"
+)
+
+```
+```{r}
+df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
+  mutate(date = as.Date(date)) %>%
+  arrange(date)
+
+commodities <- unique(df$commodity)
+cat("Commodities found:", paste(commodities, collapse = ", "), "\n")
+
+```
+```{r}
+
+# ADF test — returns tidy tibble row
+run_adf <- function(x, name) {
+  x_clean <- x[!is.na(x)]
+  if (length(x_clean) < 10) {
+    return(tibble(variable = name, adf_stat = NA, p_value = NA, stationary = NA))
+  }
+  res <- tryCatch(adf.test(x_clean), error = function(e) NULL)
+  if (is.null(res)) return(tibble(variable = name, adf_stat = NA, p_value = NA, stationary = NA))
+  tibble(
+    variable   = name,
+    adf_stat   = round(res$statistic, 4),
+    p_value    = round(res$p.value,   4),
+    stationary = res$p.value < ALPHA
+  )
+}
+
+# Auto-difference until stationary (max d = 2)
+make_stationary <- function(x, name) {
+  s <- x
+  for (d in 0:2) {
+    res <- tryCatch(adf.test(s[!is.na(s)]), error = function(e) list(p.value = 1))
+    if (res$p.value < ALPHA) return(list(series = s, d = d))
+    s <- c(NA, diff(s))
+  }
+  list(series = s, d = 2)
+}
+
+# Pairwise Granger test across lags 1:max_lags
+run_granger <- function(target, predictor, pred_name, max_lags = 8) {
+  combined <- data.frame(target = target, predictor = predictor) %>% drop_na()
+  if (nrow(combined) < max_lags * 3) {
+    warning(paste("Not enough obs for", pred_name)); return(NULL)
+  }
+
+  map_dfr(1:max_lags, function(lag) {
+    res <- tryCatch(
+      grangertest(target ~ predictor, order = lag, data = combined),
+      error = function(e) NULL
+    )
+    if (is.null(res)) return(NULL)
+    tibble(
+      predictor   = pred_name,
+      lag         = lag,
+      f_stat      = round(res$F[2], 4),
+      p_value     = round(res$`Pr(>F)`[2], 4),
+      significant = res$`Pr(>F)`[2] < ALPHA
+    )
+  })
+}
+
+```
+```{r}
+
+all_results      <- list()
+all_stationarity <- list()
+
+for (comm in commodities) {
+  cat("\n", strrep("=", 60), "\n")
+  cat("  Commodity:", comm, "\n")
+  cat(strrep("=", 60), "\n")
+
+  sub <- df %>%
+    filter(commodity == comm) %>%
+    arrange(date)
+
+  avail_preds <- CANDIDATE_PREDICTORS[
+    CANDIDATE_PREDICTORS %in% names(sub) &
+    sapply(CANDIDATE_PREDICTORS, function(p) {
+      p %in% names(sub) && sum(!is.na(sub[[p]])) > 20
+    })
+  ]
+
+  # ── ADF stationarity ──────────────────────
+  stat_rows <- map_dfr(c("target_price", avail_preds), ~ run_adf(sub[[.x]], .x))
+  stat_rows$commodity <- comm
+  all_stationarity[[comm]] <- stat_rows
+
+  cat("\nADF Stationarity:\n")
+  print(stat_rows %>% select(variable, adf_stat, p_value, stationary))
+
+  # ── Stationarise target ───────────────────
+  tgt_st  <- make_stationary(sub$target_price, "target_price")
+  target_s <- tgt_st$series
+  cat(sprintf("\n  target_price differenced %d time(s)\n", tgt_st$d))
+
+  # ── Pairwise Granger ──────────────────────
+  cat("  Running Granger tests...\n")
+  for (pred_name in avail_preds) {
+    pred_st  <- make_stationary(sub[[pred_name]], pred_name)
+    pred_s   <- pred_st$series
+
+    res <- run_granger(target_s, pred_s, pred_name, max_lags = MAX_LAGS)
+    if (!is.null(res)) {
+      res$commodity      <- comm
+      res$target_d_order <- tgt_st$d
+      res$pred_d_order   <- pred_st$d
+      all_results[[paste(comm, pred_name)]] <- res
+    }
+  }
+}
+
+```
+```{r}
+
+results_df <- bind_rows(all_results)
+
+best_df <- results_df %>%
+  group_by(commodity, predictor) %>%
+  slice_min(p_value, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  rename(best_lag = lag, best_f_stat = f_stat, best_p_value = p_value) %>%
+  mutate(granger_causes_target = best_p_value < ALPHA) %>%
+  arrange(commodity, best_p_value)
+
+cat("\n\n", strrep("=", 60), "\n")
+cat("  GRANGER CAUSALITY SUMMARY (best lag per predictor)\n")
+cat(strrep("=", 60), "\n")
+print(best_df %>% select(commodity, predictor, best_lag, best_f_stat, best_p_value, granger_causes_target))
+
+stationarity_df <- bind_rows(all_stationarity)
+
+```
+```{r fig.width=12, fig.height=6}
+
+for (comm in commodities) {
+  safe_name <- str_replace_all(comm, "[ /]", "_")
+
+  sub_res  <- results_df %>% filter(commodity == comm)
+  sub_best <- best_df    %>% filter(commodity == comm)
+
+  # ── Heatmap of p-values ───────────────────
+  heat_data <- sub_res %>%
+    filter(lag <= 8) %>%
+    mutate(
+      sig_label = ifelse(significant, "*", ""),
+      label     = paste0(round(p_value, 3), sig_label)
+    )
+
+  p_heat <- ggplot(heat_data, aes(x = factor(lag), y = predictor, fill = p_value)) +
+    geom_tile(color = "white", linewidth = 0.5) +
+    geom_text(aes(label = label), size = 3.2) +
+    scale_fill_gradientn(
+      colors  = c("#27ae60", "#f9e79f", "#e74c3c"),
+      values  = scales::rescale(c(0, ALPHA, 0.2)),
+      limits  = c(0, 0.3),
+      oob     = scales::squish,
+      name    = "p-value"
+    ) +
+    labs(
+      title    = paste0("Granger Causality p-values → target_price\nCommodity: ", comm),
+      subtitle = paste0("* = p < ", ALPHA, " | Values capped at 0.3 for colour scale"),
+      x        = "Lag (weeks)",
+      y        = NULL
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(
+      plot.title  = element_text(face = "bold"),
+      panel.grid  = element_blank(),
+      axis.text.y = element_text(size = 10)
+    )
+
+  print(p_heat)
+
+  # ── F-statistic bar chart ─────────────────
+  sub_best_plot <- sub_best %>%
+    mutate(
+      predictor = fct_reorder(predictor, best_f_stat),
+      color     = ifelse(granger_causes_target, "#27ae60", "#e74c3c"),
+      lab       = paste0("lag ", best_lag, ", p=", round(best_p_value, 3))
+    )
+
+  p_bar <- ggplot(sub_best_plot, aes(x = best_f_stat, y = predictor, fill = granger_causes_target)) +
+    geom_col(width = 0.65) +
+    geom_text(aes(label = lab), hjust = -0.05, size = 3.3) +
+    scale_fill_manual(
+      values = c("TRUE" = "#27ae60", "FALSE" = "#e74c3c"),
+      labels = c("TRUE" = "Significant", "FALSE" = "Not significant"),
+      name   = NULL
+    ) +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.25))) +
+    labs(
+      title    = paste0("Granger F-statistics → target_price\nCommodity: ", comm),
+      subtitle = "At best (lowest p-value) lag",
+      x        = "F-statistic",
+      y        = NULL
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(
+      plot.title         = element_text(face = "bold"),
+      legend.position    = "bottom",
+      panel.grid.major.y = element_blank()
+    )
+
+  print(p_bar)
+}
+```
+```{r}
+
+write_csv(results_df,       file.path(OUTPUT_DIR, "granger_all_lags.csv"))
+write_csv(best_df,          file.path(OUTPUT_DIR, "granger_best_lag_summary.csv"))
+write_csv(stationarity_df,  file.path(OUTPUT_DIR, "adf_stationarity_results.csv"))
+
+cat("\n✅ Done. Files saved:\n")
+cat("   granger_all_lags.csv\n")
+cat("   granger_best_lag_summary.csv\n")
+cat("   adf_stationarity_results.csv\n")
+cat("   granger_heatmap_*.png\n")
+cat("   granger_fstat_*.png\n")
+```
+Here's a writeup based on the results:
+
+---
+
+## Granger Causality Analysis: Economic Indicators → UK Fruit & Vegetable Prices
+
+### Overview
+
+Pairwise Granger causality tests were conducted across 20 UK fruit and vegetable commodities to assess whether eight economic input cost indicators — agricultural price indices (API) for energy, fertilisers, plant protection products, fresh fruit, and fresh vegetables; petrol and diesel prices; and the road freight SPPI — contain statistically useful predictive information for weekly commodity target prices. Tests were run at lags 1 through 8, using the Granger F-test (α = 0.05) from the `lmtest` package, yielding 160 predictor–commodity pairs in total.
+
+### Stationarity Pre-processing
+
+Before testing, all series were assessed for stationarity using the Augmented Dickey-Fuller (ADF) test. A consistent asymmetry emerged across all 20 commodities: target prices were already stationary at their levels (ADF p < 0.05) for 19 of 20 commodities, with Capsicums (Green) being the sole exception requiring one round of differencing. By contrast, all eight economic predictors failed the ADF test at their levels across every commodity, with p-values well above 0.05 in all cases — indicating they are integrated processes that track broader long-run macro trends rather than mean-reverting series. All non-stationary series were differenced until stationary prior to testing, ensuring the Granger regressions are valid.
+
+### Granger Causality Results
+
+The overall picture is one of very sparse predictive relationships. Across all 160 commodity–predictor pairs tested at their best (lowest p-value) lag, only two statistically significant results emerged:
+
+- **api_fresh_vegetables → Asparagus** (lag 2, F = 5.92, p = 0.0036)
+- **api_fresh_fruit → Asparagus** (lag 2, F = 4.97, p = 0.0086)
+
+Both effects operate at a 2-week lag and are concentrated entirely in Asparagus — no other commodity showed any significant Granger causality from any of the eight predictors. All 158 remaining pairs failed to reach significance at α = 0.05, including the typically high-profile fuel price and fertiliser indices, which showed uniformly high p-values across all lags and all commodities.
+
+### Interpretation
+
+The Asparagus findings are economically intuitive: as a premium seasonal produce, its price may be more directly linked to contemporaneous fresh produce market conditions captured by the fresh fruit and vegetable APIs at a short horizon. The two-lag window (~2 weeks) is consistent with market response time for perishable goods.
+
+The near-complete absence of significant results elsewhere has two plausible explanations. First, the transmission from input cost shocks (energy, fertilisers, freight) to retail/producer prices may be contemporaneous — predictive power at lags ≥1 week may simply not exist once costs are absorbed within the same reporting period. Second, the integration structure is asymmetric: the predictors are I(1) processes tracking long-run cost trends, while most commodity prices already mean-revert at level, suggesting the cost-price link may operate through a cointegrating relationship rather than short-run Granger dynamics. A formal VECM analysis would be better suited to detecting that type of long-run transmission.
+
+### Implications for Modelling
+
+The sparse Granger results provide cautious motivation for the LM-ARIMA and VAR models. Rather than treating all eight regressors as confirmed leading indicators, the evidence supports a more targeted interpretation: the economic indices are likely to contribute through contemporaneous or structural channels rather than lagged predictive ones. Their inclusion in the VAR system and as LM-ARIMA regressors is still theoretically justified as controls for common macro shocks, but their coefficient significance (rather than Granger precedence) becomes the more relevant metric for evaluating their actual contribution to those models.

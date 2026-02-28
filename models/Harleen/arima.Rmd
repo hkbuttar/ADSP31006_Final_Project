@@ -1,0 +1,346 @@
+```{r}
+library(tidyverse)
+library(forecast)
+library(tseries)
+library(ggplot2)
+library(patchwork)
+library(scales)
+library(nortest)
+```
+```{r}
+INPUT_FILE  <- "../../data/merged_features_weekly.csv"
+OUTPUT_DIR  <- "outputs"
+FREQ        <- 52
+ALPHA       <- 0.05
+```
+```{r}
+df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
+  mutate(date = as.Date(date)) %>%
+  arrange(date)
+
+commodities <- unique(df$commodity)
+cat("Commodities found:", paste(commodities, collapse = ", "), "\n")
+```
+```{r}
+calc_rmse  <- function(actual, pred) sqrt(mean((actual - pred)^2, na.rm = TRUE))
+calc_mae   <- function(actual, pred) mean(abs(actual - pred), na.rm = TRUE)
+calc_mape  <- function(actual, pred) mean(abs((actual - pred) / actual) * 100, na.rm = TRUE)
+calc_smape <- function(actual, pred) {
+  mean(200 * abs(actual - pred) / (abs(actual) + abs(pred)), na.rm = TRUE)
+}
+calc_mase  <- function(actual, pred, train) {
+  naive_mae <- mean(abs(diff(train)), na.rm = TRUE)
+  mean(abs(actual - pred), na.rm = TRUE) / naive_mae
+}
+
+compile_metrics <- function(actual, pred, train, model_obj, label) {
+  tibble(
+    model = label,
+    RMSE  = round(calc_rmse(actual, pred),        4),
+    MAE   = round(calc_mae(actual, pred),         4),
+    MASE  = round(calc_mase(actual, pred, train), 4),
+    sMAPE = round(calc_smape(actual, pred),       4),
+    MAPE  = round(calc_mape(actual, pred),        4),
+    AIC   = round(AIC(model_obj),                 2),
+    BIC   = round(BIC(model_obj),                 2)
+  )
+}
+
+residual_diagnostics <- function(model_obj, label) {
+  resid_clean <- as.numeric(residuals(model_obj))
+  resid_clean <- resid_clean[!is.na(resid_clean)]
+
+  lb10 <- Box.test(resid_clean, lag = 10, type = "Ljung-Box")
+  lb20 <- Box.test(resid_clean, lag = 20, type = "Ljung-Box")
+
+  if (length(resid_clean) <= 5000) {
+    norm_test <- shapiro.test(resid_clean); norm_name <- "Shapiro-Wilk"
+  } else {
+    norm_test <- nortest::ad.test(resid_clean); norm_name <- "Anderson-Darling"
+  }
+
+  tibble(
+    model             = label,
+    resid_mean        = round(mean(resid_clean),     6),
+    resid_sd          = round(sd(resid_clean),       4),
+    ljung_box_lag10_p = round(lb10$p.value,          4),
+    ljung_box_lag20_p = round(lb20$p.value,          4),
+    normality_test    = norm_name,
+    normality_p       = round(norm_test$p.value,     4),
+    autocorr_ok       = lb10$p.value > ALPHA,
+    normality_ok      = norm_test$p.value > ALPHA
+  )
+}
+
+plot_residuals <- function(model_obj, label) {
+  resid       <- as.numeric(residuals(model_obj))
+  fitted_v    <- as.numeric(fitted(model_obj))
+  resid_clean <- resid[!is.na(resid)]
+  time_idx    <- seq_along(resid)
+  ci_bound    <- qnorm(0.975) / sqrt(length(resid_clean))
+
+  p1 <- ggplot(data.frame(t = time_idx, r = resid), aes(t, r)) +
+    geom_line(color = "#2c3e50", linewidth = 0.45) +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    labs(title = "Residuals over time", x = "Week index", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  acf_data <- acf(resid_clean, plot = FALSE, lag.max = 52)
+  acf_df   <- data.frame(lag = acf_data$lag[-1], acf = acf_data$acf[-1])
+  p2 <- ggplot(acf_df, aes(lag, acf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#2980b9") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "ACF of residuals", x = "Lag (weeks)", y = "ACF") +
+    theme_minimal(base_size = 11)
+
+  pacf_data <- pacf(resid_clean, plot = FALSE, lag.max = 52)
+  pacf_df   <- data.frame(lag = pacf_data$lag, pacf = pacf_data$acf)
+  p3 <- ggplot(pacf_df, aes(lag, pacf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#8e44ad") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "PACF of residuals", x = "Lag (weeks)", y = "PACF") +
+    theme_minimal(base_size = 11)
+
+  p4 <- ggplot(data.frame(r = resid_clean), aes(r)) +
+    geom_histogram(aes(y = after_stat(density)), bins = 40,
+                   fill = "#3498db", color = "white", alpha = 0.7) +
+    stat_function(fun = dnorm,
+                  args = list(mean = mean(resid_clean), sd = sd(resid_clean)),
+                  color = "red", linewidth = 1) +
+    labs(title = "Residual distribution", x = "Residual", y = "Density") +
+    theme_minimal(base_size = 11)
+
+  qq    <- qqnorm(resid_clean, plot.it = FALSE)
+  qq_df <- data.frame(theoretical = qq$x, sample = qq$y)
+  p5 <- ggplot(qq_df, aes(theoretical, sample)) +
+    geom_point(alpha = 0.4, color = "#2c3e50", size = 0.8) +
+    geom_abline(color = "red", linewidth = 1) +
+    labs(title = "Q-Q plot", x = "Theoretical quantiles", y = "Sample quantiles") +
+    theme_minimal(base_size = 11)
+
+  p6 <- ggplot(data.frame(f = fitted_v, r = resid), aes(f, r)) +
+    geom_point(alpha = 0.35, size = 0.9, color = "#16a085") +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    geom_smooth(method = "loess", formula = y ~ x, se = FALSE,
+                color = "#e67e22", linewidth = 0.8) +
+    labs(title = "Residuals vs Fitted", x = "Fitted values", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  combined <- (p1 | p4) / (p2 | p3) / (p5 | p6) +
+    plot_annotation(
+      title    = paste0("Residual Diagnostics — ", label),
+      subtitle = "Row 1: Time series & distribution | Row 2: ACF & PACF | Row 3: Q-Q & Residuals vs Fitted",
+      theme    = theme(plot.title = element_text(face = "bold", size = 14))
+    )
+
+  print(combined)
+}
+
+plot_forecast <- function(train_dates, train_vals,
+                          test_dates,  test_vals,
+                          pred_vals,   pred_lo80, pred_hi80,
+                          pred_lo95,   pred_hi95,
+                          label) {
+
+  train_df <- data.frame(date = train_dates, value = train_vals) %>%
+    filter(date >= max(date) - 365 * 2)
+  test_df  <- data.frame(date = test_dates, value = test_vals)
+  pred_df  <- data.frame(
+    date = test_dates, pred = pred_vals,
+    lo80 = pred_lo80,  hi80 = pred_hi80,
+    lo95 = pred_lo95,  hi95 = pred_hi95
+  )
+
+  p <- ggplot() +
+    geom_ribbon(data = pred_df, aes(x = date, ymin = lo95, ymax = hi95),
+                fill = "#3498db", alpha = 0.15) +
+    geom_ribbon(data = pred_df, aes(x = date, ymin = lo80, ymax = hi80),
+                fill = "#3498db", alpha = 0.25) +
+    geom_line(data = train_df, aes(x = date, y = value, color = "Train"),   linewidth = 0.7) +
+    geom_line(data = test_df,  aes(x = date, y = value, color = "Actual"),  linewidth = 0.9) +
+    geom_line(data = pred_df,  aes(x = date, y = pred,  color = "Forecast"),
+              linewidth = 0.9, linetype = "dashed") +
+    scale_color_manual(
+      values = c("Train" = "#95a5a6", "Actual" = "#2c3e50", "Forecast" = "#e74c3c"),
+      name   = NULL
+    ) +
+    labs(
+      title    = paste0("ARIMA Forecast — ", label),
+      subtitle = "Shaded: 80% and 95% prediction intervals",
+      x = NULL, y = "Price"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+
+  print(p)
+}
+```{r fig.width=14, fig.height=12}
+all_metrics <- list()
+all_diag    <- list()
+
+for (comm in commodities) {
+  cat("\n", strrep("=", 60), "\n")
+  cat("  Commodity:", comm, "\n")
+  cat(strrep("=", 60), "\n")
+
+  safe_name <- str_replace_all(comm, "[ /]", "_")
+
+  sub <- df %>% filter(commodity == comm) %>% arrange(date)
+
+  if (!"split" %in% names(sub)) stop("'split' column not found in data.")
+
+  train_df <- sub %>% filter(split == "train") %>% select(date, target_price) %>% drop_na(target_price)
+  test_df  <- sub %>% filter(split == "test")  %>% select(date, target_price) %>% drop_na(target_price)
+
+  if (nrow(train_df) < 30 || nrow(test_df) == 0) {
+    cat("  !! Insufficient rows — skipping.\n"); next
+  }
+
+  n_test   <- nrow(test_df)
+  train_ts <- ts(train_df$target_price, frequency = FREQ)
+
+  cat(sprintf("  Train: %s -> %s (%d weeks)\n",
+              min(train_df$date), max(train_df$date), nrow(train_df)))
+  cat(sprintf("  Test:  %s -> %s (%d weeks)\n",
+              min(test_df$date),  max(test_df$date),  n_test))
+
+  adf_res <- adf.test(train_ts)
+  cat(sprintf("\n  ADF p-value: %.4f (%s)\n", adf_res$p.value,
+              ifelse(adf_res$p.value < ALPHA, "stationary",
+                     "non-stationary — auto.arima will difference")))
+
+  # ── Model A: auto.arima ───────────────────
+  cat("\n  Fitting auto.arima...\n")
+  model_auto <- auto.arima(
+    train_ts, seasonal = TRUE, stepwise = FALSE,
+    approximation = FALSE, trace = FALSE, ic = "aicc"
+  )
+  cat("  Order:", paste0("ARIMA(", paste(model_auto$arma[c(1,6,2)], collapse=","),
+      ")(", paste(model_auto$arma[c(3,7,4)], collapse=","), ")[", FREQ, "]"), "\n")
+
+  saveRDS(model_auto, file.path(OUTPUT_DIR, paste0("arima_auto_", safe_name, ".rds")))
+
+  fc_auto      <- forecast(model_auto, h = n_test)
+  pred_auto    <- as.numeric(fc_auto$mean)
+  metrics_auto <- compile_metrics(test_df$target_price, pred_auto,
+                                  train_df$target_price, model_auto,
+                                  paste0(comm, " — auto.arima"))
+  diag_auto    <- residual_diagnostics(model_auto, paste0(comm, " — auto.arima"))
+
+  # ── Model B: ARIMA(1,1,1) ─────────────────
+  cat("  Fitting ARIMA(1,1,1)...\n")
+  model_111 <- tryCatch(
+    Arima(train_ts, order = c(1,1,1), include.drift = FALSE),
+    error = function(e) { cat("  !! ARIMA(1,1,1) failed:", e$message, "\n"); NULL }
+  )
+  if (!is.null(model_111)) {
+    fc_111      <- forecast(model_111, h = n_test)
+    pred_111    <- as.numeric(fc_111$mean)
+    metrics_111 <- compile_metrics(test_df$target_price, pred_111,
+                                   train_df$target_price, model_111,
+                                   paste0(comm, " — ARIMA(1,1,1)"))
+    diag_111    <- residual_diagnostics(model_111, paste0(comm, " — ARIMA(1,1,1)"))
+  }
+
+  # ── Model C: SARIMA(1,1,1)(1,1,1)[52] ────
+  cat("  Fitting SARIMA(1,1,1)(1,1,1)[52]...\n")
+  model_sarima <- tryCatch(
+    Arima(train_ts, order = c(1,1,1), seasonal = list(order = c(1,1,1), period = FREQ)),
+    error = function(e) { cat("  !! SARIMA failed:", e$message, "\n"); NULL }
+  )
+  if (!is.null(model_sarima)) {
+    fc_sarima      <- forecast(model_sarima, h = n_test)
+    pred_sarima    <- as.numeric(fc_sarima$mean)
+    metrics_sarima <- compile_metrics(test_df$target_price, pred_sarima,
+                                      train_df$target_price, model_sarima,
+                                      paste0(comm, " — SARIMA(1,1,1)(1,1,1)[52]"))
+    diag_sarima    <- residual_diagnostics(model_sarima, paste0(comm, " — SARIMA(1,1,1)(1,1,1)[52]"))
+  }
+
+  # ── Collect ───────────────────────────────
+  all_metrics[[paste(comm, "auto")]] <- metrics_auto
+  all_diag[[paste(comm, "auto")]]    <- diag_auto
+
+  if (!is.null(model_111)) {
+    all_metrics[[paste(comm, "111")]] <- metrics_111
+    all_diag[[paste(comm, "111")]]    <- diag_111
+  }
+  if (!is.null(model_sarima)) {
+    all_metrics[[paste(comm, "sarima")]] <- metrics_sarima
+    all_diag[[paste(comm, "sarima")]]    <- diag_sarima
+  }
+
+  # ── Plots (inline) ────────────────────────
+  # ── Plots (inline) — all three models ────
+  plot_residuals(model_auto, paste0(comm, " — auto.arima"))
+  plot_forecast(
+    train_dates = train_df$date,       train_vals = train_df$target_price,
+    test_dates  = test_df$date,        test_vals  = test_df$target_price,
+    pred_vals   = pred_auto,
+    pred_lo80   = as.numeric(fc_auto$lower[, 1]),
+    pred_hi80   = as.numeric(fc_auto$upper[, 1]),
+    pred_lo95   = as.numeric(fc_auto$lower[, 2]),
+    pred_hi95   = as.numeric(fc_auto$upper[, 2]),
+    label       = paste0(comm, " — auto.arima")
+  )
+
+  if (!is.null(model_111)) {
+    plot_residuals(model_111, paste0(comm, " — ARIMA(1,1,1)"))
+    plot_forecast(
+      train_dates = train_df$date,     train_vals = train_df$target_price,
+      test_dates  = test_df$date,      test_vals  = test_df$target_price,
+      pred_vals   = pred_111,
+      pred_lo80   = as.numeric(fc_111$lower[, 1]),
+      pred_hi80   = as.numeric(fc_111$upper[, 1]),
+      pred_lo95   = as.numeric(fc_111$lower[, 2]),
+      pred_hi95   = as.numeric(fc_111$upper[, 2]),
+      label       = paste0(comm, " — ARIMA(1,1,1)")
+    )
+  }
+
+  if (!is.null(model_sarima)) {
+    plot_residuals(model_sarima, paste0(comm, " — SARIMA(1,1,1)(1,1,1)[52]"))
+    plot_forecast(
+      train_dates = train_df$date,     train_vals = train_df$target_price,
+      test_dates  = test_df$date,      test_vals  = test_df$target_price,
+      pred_vals   = pred_sarima,
+      pred_lo80   = as.numeric(fc_sarima$lower[, 1]),
+      pred_hi80   = as.numeric(fc_sarima$upper[, 1]),
+      pred_lo95   = as.numeric(fc_sarima$lower[, 2]),
+      pred_hi95   = as.numeric(fc_sarima$upper[, 2]),
+      label       = paste0(comm, " — SARIMA(1,1,1)(1,1,1)[52]")
+    )
+  }
+}
+```
+```{r}
+metrics_df <- bind_rows(all_metrics)
+diag_df    <- bind_rows(all_diag)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  MODEL PERFORMANCE METRICS\n")
+cat(strrep("=", 70), "\n")
+print(metrics_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  RESIDUAL DIAGNOSTICS\n")
+cat(strrep("=", 70), "\n")
+print(diag_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  BEST MODEL PER COMMODITY (by RMSE)\n")
+cat(strrep("=", 70), "\n")
+metrics_df %>%
+  mutate(commodity = str_extract(model, "^.+(?= —)")) %>%
+  group_by(commodity) %>%
+  slice_min(RMSE, n = 1) %>%
+  ungroup() %>%
+  print(n = Inf)
+
+write_csv(metrics_df, file.path(OUTPUT_DIR, "arima_metrics.csv"))
+write_csv(diag_df,    file.path(OUTPUT_DIR, "arima_residual_diagnostics.csv"))
+
+cat("\n✅ Done.\n")
+```

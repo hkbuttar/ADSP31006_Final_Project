@@ -1,0 +1,21 @@
+model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,normality_p,autocorr_ok,normality_ok
+"Beetroot — ETS (ETS(M,N,N))",0.002675,0.0498,0.2577,0.5472,Shapiro-Wilk,0,TRUE,FALSE
+"Bulb Onions (Red) — ETS (ETS(M,N,N))",0.005035,0.1099,0.0074,0.1516,Shapiro-Wilk,0,FALSE,FALSE
+"Bulb Onions (Yellow) — ETS (ETS(M,N,N))",0.00618,0.1198,0.0057,0.0394,Shapiro-Wilk,0,FALSE,FALSE
+"Cabbage — ETS (ETS(M,Ad,N))",0.002191,0.0526,0.5522,0.6243,Shapiro-Wilk,0,TRUE,FALSE
+"Carrots — ETS (ETS(M,Ad,N))",0.002936,0.0613,0.0096,0.0287,Shapiro-Wilk,0,FALSE,FALSE
+"Cooking Apples — ETS (ETS(M,N,N))",0.005173,0.0845,0.1007,0.2576,Shapiro-Wilk,0,TRUE,FALSE
+"Leeks — ETS (ETS(M,N,N))",0.004282,0.0821,0.058,0.3639,Shapiro-Wilk,0,TRUE,FALSE
+"Lettuce — ETS (ETS(M,N,N))",0.002509,0.0628,0.1516,0.3672,Shapiro-Wilk,0,TRUE,FALSE
+"Pears — ETS (ETS(A,N,N))",0.00154,0.1577,0.1665,0.5146,Shapiro-Wilk,0,TRUE,FALSE
+"Dessert Apples — ETS (ETS(A,N,N))",0.002323,0.0944,0.1273,0.1391,Shapiro-Wilk,0,TRUE,FALSE
+"Cucumbers — ETS (ETS(M,N,N))",0.012804,0.2143,4e-4,0.0155,Shapiro-Wilk,0,FALSE,FALSE
+"Strawberries — ETS (ETS(M,A,N))",-0.043782,0.3928,4e-4,1e-4,Shapiro-Wilk,0,FALSE,FALSE
+"Tomatoes (Round) — ETS (ETS(A,N,N))",0.002595,0.3129,0.0017,0.0368,Shapiro-Wilk,0,FALSE,FALSE
+"Tomatoes (Vine) — ETS (ETS(M,A,N))",-0.016576,0.322,0.0167,0.0528,Shapiro-Wilk,0,FALSE,FALSE
+"Asparagus — ETS (ETS(A,N,N))",0.009772,2.644,0.1736,0.0061,Shapiro-Wilk,0,TRUE,FALSE
+"Capsicums (Red) — ETS (ETS(A,N,N))",-9.55e-4,0.3739,0.7018,0.1304,Shapiro-Wilk,0,TRUE,FALSE
+"Capsicums (Green) — ETS (ETS(A,N,N))",-0.007292,0.3953,0.5478,0.5829,Shapiro-Wilk,0,TRUE,FALSE
+"Curly kale — ETS (ETS(M,N,N))",0.003322,0.0554,0.0158,0.0432,Shapiro-Wilk,0,FALSE,FALSE
+"Pak choi — ETS (ETS(M,N,N))",0.003903,0.0693,0.0494,0.2854,Shapiro-Wilk,0,FALSE,FALSE
+"Spring greens — ETS (ETS(M,N,N))",0.006641,0.096,0.4705,0.545,Shapiro-Wilk,0,TRUE,FALSE

@@ -1,0 +1,181 @@
+variable,adf_stat,p_value,stationary,commodity
+target_price,-5.1308,0.01,TRUE,Beetroot
+api_energy_and_lubricants,-1.2899,0.878,FALSE,Beetroot
+api_fertilisers_and_soil_improvers,-1.6675,0.7183,FALSE,Beetroot
+api_plant_protection_products,-1.9541,0.5971,FALSE,Beetroot
+api_fresh_fruit,-3.4028,0.0533,FALSE,Beetroot
+api_fresh_vegetables,-2.2628,0.4667,FALSE,Beetroot
+fuel_petrol_price,-2.8704,0.2098,FALSE,Beetroot
+fuel_diesel_price,-2.8873,0.2026,FALSE,Beetroot
+sppi_road_freight,-1.7591,0.6792,FALSE,Beetroot
+target_price,-3.6315,0.0298,TRUE,Bulb Onions (Red)
+api_energy_and_lubricants,-1.2792,0.8822,FALSE,Bulb Onions (Red)
+api_fertilisers_and_soil_improvers,-1.6531,0.7242,FALSE,Bulb Onions (Red)
+api_plant_protection_products,-1.9595,0.5947,FALSE,Bulb Onions (Red)
+api_fresh_fruit,-3.3405,0.0641,FALSE,Bulb Onions (Red)
+api_fresh_vegetables,-2.2467,0.4733,FALSE,Bulb Onions (Red)
+fuel_petrol_price,-2.817,0.2323,FALSE,Bulb Onions (Red)
+fuel_diesel_price,-2.8481,0.2191,FALSE,Bulb Onions (Red)
+sppi_road_freight,-1.7681,0.6751,FALSE,Bulb Onions (Red)
+target_price,-3.6746,0.0257,TRUE,Bulb Onions (Yellow)
+api_energy_and_lubricants,-1.2808,0.8817,FALSE,Bulb Onions (Yellow)
+api_fertilisers_and_soil_improvers,-1.6554,0.7233,FALSE,Bulb Onions (Yellow)
+api_plant_protection_products,-1.965,0.5925,FALSE,Bulb Onions (Yellow)
+api_fresh_fruit,-3.3831,0.0567,FALSE,Bulb Onions (Yellow)
+api_fresh_vegetables,-2.268,0.4644,FALSE,Bulb Onions (Yellow)
+fuel_petrol_price,-2.8555,0.216,FALSE,Bulb Onions (Yellow)
+fuel_diesel_price,-2.8783,0.2064,FALSE,Bulb Onions (Yellow)
+sppi_road_freight,-1.7647,0.6767,FALSE,Bulb Onions (Yellow)
+target_price,-4.8043,0.01,TRUE,Cabbage
+api_energy_and_lubricants,-1.279,0.8826,FALSE,Cabbage
+api_fertilisers_and_soil_improvers,-1.6557,0.7233,FALSE,Cabbage
+api_plant_protection_products,-1.9486,0.5995,FALSE,Cabbage
+api_fresh_fruit,-3.4028,0.0533,FALSE,Cabbage
+api_fresh_vegetables,-2.2663,0.4652,FALSE,Cabbage
+fuel_petrol_price,-2.8675,0.211,FALSE,Cabbage
+fuel_diesel_price,-2.8742,0.2082,FALSE,Cabbage
+sppi_road_freight,-1.7619,0.678,FALSE,Cabbage
+target_price,-4.5808,0.01,TRUE,Carrots
+api_energy_and_lubricants,-1.2737,0.8847,FALSE,Carrots
+api_fertilisers_and_soil_improvers,-1.6498,0.7257,FALSE,Carrots
+api_plant_protection_products,-1.9527,0.5977,FALSE,Carrots
+api_fresh_fruit,-3.4188,0.0506,FALSE,Carrots
+api_fresh_vegetables,-2.2546,0.4701,FALSE,Carrots
+fuel_petrol_price,-2.8525,0.2173,FALSE,Carrots
+fuel_diesel_price,-2.8724,0.2089,FALSE,Carrots
+sppi_road_freight,-1.7652,0.6765,FALSE,Carrots
+target_price,-3.7099,0.0236,TRUE,Cooking Apples
+api_energy_and_lubricants,-1.2899,0.878,FALSE,Cooking Apples
+api_fertilisers_and_soil_improvers,-1.6675,0.7183,FALSE,Cooking Apples
+api_plant_protection_products,-1.9541,0.5971,FALSE,Cooking Apples
+api_fresh_fruit,-3.4028,0.0533,FALSE,Cooking Apples
+api_fresh_vegetables,-2.2628,0.4667,FALSE,Cooking Apples
+fuel_petrol_price,-2.8704,0.2098,FALSE,Cooking Apples
+fuel_diesel_price,-2.8873,0.2026,FALSE,Cooking Apples
+sppi_road_freight,-1.7591,0.6792,FALSE,Cooking Apples
+target_price,-4.1607,0.01,TRUE,Leeks
+api_energy_and_lubricants,-1.3138,0.8675,FALSE,Leeks
+api_fertilisers_and_soil_improvers,-1.7097,0.7002,FALSE,Leeks
+api_plant_protection_products,-1.9963,0.5791,FALSE,Leeks
+api_fresh_fruit,-3.6104,0.032,TRUE,Leeks
+api_fresh_vegetables,-2.2259,0.4821,FALSE,Leeks
+fuel_petrol_price,-2.8494,0.2186,FALSE,Leeks
+fuel_diesel_price,-2.8967,0.1986,FALSE,Leeks
+sppi_road_freight,-1.7414,0.6864,FALSE,Leeks
+target_price,-5.4341,0.01,TRUE,Lettuce
+api_energy_and_lubricants,-1.3008,0.8733,FALSE,Lettuce
+api_fertilisers_and_soil_improvers,-1.6795,0.7132,FALSE,Lettuce
+api_plant_protection_products,-1.9596,0.5948,FALSE,Lettuce
+api_fresh_fruit,-3.4028,0.0533,FALSE,Lettuce
+api_fresh_vegetables,-2.2592,0.4682,FALSE,Lettuce
+fuel_petrol_price,-2.9676,0.1687,FALSE,Lettuce
+fuel_diesel_price,-2.9493,0.1764,FALSE,Lettuce
+sppi_road_freight,-1.7583,0.6795,FALSE,Lettuce
+target_price,-5.4844,0.01,TRUE,Pears
+api_energy_and_lubricants,-1.3646,0.8447,FALSE,Pears
+api_fertilisers_and_soil_improvers,-1.6936,0.7059,FALSE,Pears
+api_plant_protection_products,-1.9559,0.5953,FALSE,Pears
+api_fresh_fruit,-3.6799,0.0256,TRUE,Pears
+api_fresh_vegetables,-2.2285,0.4803,FALSE,Pears
+fuel_petrol_price,-2.7678,0.2528,FALSE,Pears
+fuel_diesel_price,-2.8962,0.1986,FALSE,Pears
+sppi_road_freight,-1.7545,0.68,FALSE,Pears
+target_price,-5.0697,0.01,TRUE,Dessert Apples
+api_energy_and_lubricants,-1.2009,0.9057,FALSE,Dessert Apples
+api_fertilisers_and_soil_improvers,-1.5479,0.7684,FALSE,Dessert Apples
+api_plant_protection_products,-1.8706,0.6321,FALSE,Dessert Apples
+api_fresh_fruit,-3.3139,0.0687,FALSE,Dessert Apples
+api_fresh_vegetables,-2.3103,0.4463,FALSE,Dessert Apples
+fuel_petrol_price,-2.9143,0.1911,FALSE,Dessert Apples
+fuel_diesel_price,-2.8386,0.2231,FALSE,Dessert Apples
+sppi_road_freight,-1.7944,0.6641,FALSE,Dessert Apples
+target_price,-5.6783,0.01,TRUE,Cucumbers
+api_energy_and_lubricants,-1.2186,0.9024,FALSE,Cucumbers
+api_fertilisers_and_soil_improvers,-1.5184,0.7799,FALSE,Cucumbers
+api_plant_protection_products,-1.8054,0.6588,FALSE,Cucumbers
+api_fresh_fruit,-3.1556,0.0957,FALSE,Cucumbers
+api_fresh_vegetables,-2.4852,0.372,FALSE,Cucumbers
+fuel_petrol_price,-2.704,0.2797,FALSE,Cucumbers
+fuel_diesel_price,-2.3967,0.4094,FALSE,Cucumbers
+sppi_road_freight,-1.7851,0.6671,FALSE,Cucumbers
+target_price,-5.5081,0.01,TRUE,Strawberries
+api_energy_and_lubricants,-1.1516,0.9129,FALSE,Strawberries
+api_fertilisers_and_soil_improvers,-1.4672,0.8007,FALSE,Strawberries
+api_plant_protection_products,-1.7021,0.7017,FALSE,Strawberries
+api_fresh_fruit,-2.8857,0.2029,FALSE,Strawberries
+api_fresh_vegetables,-2.6591,0.2984,FALSE,Strawberries
+fuel_petrol_price,-3.0319,0.1413,FALSE,Strawberries
+fuel_diesel_price,-2.3617,0.4237,FALSE,Strawberries
+sppi_road_freight,-1.7321,0.6889,FALSE,Strawberries
+target_price,-6.8394,0.01,TRUE,Tomatoes (Round)
+api_energy_and_lubricants,-1.098,0.9216,FALSE,Tomatoes (Round)
+api_fertilisers_and_soil_improvers,-1.4223,0.8198,FALSE,Tomatoes (Round)
+api_plant_protection_products,-1.7638,0.6759,FALSE,Tomatoes (Round)
+api_fresh_fruit,-2.8976,0.1979,FALSE,Tomatoes (Round)
+api_fresh_vegetables,-2.6638,0.2965,FALSE,Tomatoes (Round)
+fuel_petrol_price,-2.7325,0.2675,FALSE,Tomatoes (Round)
+fuel_diesel_price,-2.3215,0.4408,FALSE,Tomatoes (Round)
+sppi_road_freight,-1.751,0.6811,FALSE,Tomatoes (Round)
+target_price,-4.6072,0.01,TRUE,Tomatoes (Vine)
+api_energy_and_lubricants,-1.6025,0.7434,FALSE,Tomatoes (Vine)
+api_fertilisers_and_soil_improvers,-1.9493,0.5973,FALSE,Tomatoes (Vine)
+api_plant_protection_products,-1.9873,0.5813,FALSE,Tomatoes (Vine)
+api_fresh_fruit,-2.8912,0.2006,FALSE,Tomatoes (Vine)
+api_fresh_vegetables,-2.5892,0.3278,FALSE,Tomatoes (Vine)
+fuel_petrol_price,-3.2747,0.0758,FALSE,Tomatoes (Vine)
+fuel_diesel_price,-2.827,0.2276,FALSE,Tomatoes (Vine)
+sppi_road_freight,-1.683,0.7094,FALSE,Tomatoes (Vine)
+target_price,-5.1878,0.01,TRUE,Asparagus
+api_energy_and_lubricants,-1.6821,0.7086,FALSE,Asparagus
+api_fertilisers_and_soil_improvers,-1.5749,0.7531,FALSE,Asparagus
+api_plant_protection_products,-3.2675,0.0801,FALSE,Asparagus
+api_fresh_fruit,-2.5588,0.3446,FALSE,Asparagus
+api_fresh_vegetables,-2.8696,0.2155,FALSE,Asparagus
+fuel_petrol_price,-2.2931,0.4549,FALSE,Asparagus
+fuel_diesel_price,-2.319,0.4441,FALSE,Asparagus
+sppi_road_freight,-1.9608,0.5929,FALSE,Asparagus
+target_price,-4.5641,0.01,TRUE,Capsicums (Red)
+api_energy_and_lubricants,-1.0737,0.9243,FALSE,Capsicums (Red)
+api_fertilisers_and_soil_improvers,-1.4759,0.7955,FALSE,Capsicums (Red)
+api_plant_protection_products,-2.6515,0.3035,FALSE,Capsicums (Red)
+api_fresh_fruit,-3.0174,0.1505,FALSE,Capsicums (Red)
+api_fresh_vegetables,-1.7471,0.682,FALSE,Capsicums (Red)
+fuel_petrol_price,-2.1157,0.5277,FALSE,Capsicums (Red)
+fuel_diesel_price,-2.2792,0.4593,FALSE,Capsicums (Red)
+sppi_road_freight,-1.9175,0.6107,FALSE,Capsicums (Red)
+target_price,-3.3246000000000002,0.0702,FALSE,Capsicums (Green)
+api_energy_and_lubricants,-1.3119,0.86240000000000006,FALSE,Capsicums (Green)
+api_fertilisers_and_soil_improvers,-1.6975,0.7022,FALSE,Capsicums (Green)
+api_plant_protection_products,-1.1518,0.9109,FALSE,Capsicums (Green)
+api_fresh_fruit,-3.5062,0.0447,TRUE,Capsicums (Green)
+api_fresh_vegetables,-0.9438,0.9435,FALSE,Capsicums (Green)
+fuel_petrol_price,-2.0001,0.5765,FALSE,Capsicums (Green)
+fuel_diesel_price,-1.3567,0.8438,FALSE,Capsicums (Green)
+sppi_road_freight,-1.4126,0.8205,FALSE,Capsicums (Green)
+target_price,-3.9127,0.0137,TRUE,Curly kale
+api_energy_and_lubricants,-0.97,0.9423,FALSE,Curly kale
+api_fertilisers_and_soil_improvers,-1.2487,0.8929,FALSE,Curly kale
+api_plant_protection_products,-2.1195,0.5259,FALSE,Curly kale
+api_fresh_fruit,-3.0532,0.1324,FALSE,Curly kale
+api_fresh_vegetables,-1.8026,0.6595,FALSE,Curly kale
+fuel_petrol_price,-2.5645,0.3384,FALSE,Curly kale
+fuel_diesel_price,-2.5318,0.3521,FALSE,Curly kale
+sppi_road_freight,-1.9599,0.5932,FALSE,Curly kale
+target_price,-3.9294,0.0129,TRUE,Pak choi
+api_energy_and_lubricants,-0.961,0.9437,FALSE,Pak choi
+api_fertilisers_and_soil_improvers,-1.248,0.8933,FALSE,Pak choi
+api_plant_protection_products,-2.1057,0.5318,FALSE,Pak choi
+api_fresh_fruit,-3.0473,0.1349,FALSE,Pak choi
+api_fresh_vegetables,-1.7833,0.6677,FALSE,Pak choi
+fuel_petrol_price,-2.5554,0.3422,FALSE,Pak choi
+fuel_diesel_price,-2.5192,0.3575,FALSE,Pak choi
+sppi_road_freight,-1.9484,0.5981,FALSE,Pak choi
+target_price,-3.7455,0.0221,TRUE,Spring greens
+api_energy_and_lubricants,-0.9949,0.9383,FALSE,Spring greens
+api_fertilisers_and_soil_improvers,-1.2764,0.8813,FALSE,Spring greens
+api_plant_protection_products,-2.0991,0.5345,FALSE,Spring greens
+api_fresh_fruit,-3.0358,0.1397,FALSE,Spring greens
+api_fresh_vegetables,-1.7726,0.6721,FALSE,Spring greens
+fuel_petrol_price,-2.5585,0.3409,FALSE,Spring greens
+fuel_diesel_price,-2.5086,0.3619,FALSE,Spring greens
+sppi_road_freight,-1.9654,0.5909,FALSE,Spring greens

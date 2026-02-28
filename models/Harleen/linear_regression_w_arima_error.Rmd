@@ -1,0 +1,470 @@
+```{r}
+library(tidyverse)
+library(forecast)
+library(tseries)
+library(ggplot2)
+library(patchwork)
+library(scales)
+library(nortest)
+library(broom)
+```
+```{r}
+INPUT_FILE    <- "../../data/merged_features_weekly.csv"
+ARIMA_METRICS <- "outputs/arima_metrics.csv"
+OUTPUT_DIR    <- "outputs"
+FREQ          <- 52
+ALPHA         <- 0.05
+
+XREG_VARS <- c(
+  "api_energy_and_lubricants",
+  "api_fertilisers_and_soil_improvers",
+  "api_plant_protection_products",
+  "api_fresh_fruit",
+  "api_fresh_vegetables",
+  "fuel_petrol_price",
+  "fuel_diesel_price",
+  "sppi_road_freight"
+)
+
+DUMMY_VARS <- c("shock_2021q4_2023q1", "post_shock")
+```
+```{r}
+df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
+  mutate(date = as.Date(date)) %>%
+  arrange(date)
+
+arima_baseline <- read_csv(ARIMA_METRICS, show_col_types = FALSE)
+
+commodities <- unique(df$commodity)
+cat("Commodities found:", paste(commodities, collapse = ", "), "\n")
+cat("\nPre-loaded ARIMA baselines:\n")
+print(arima_baseline %>% select(model, RMSE, MAE, MASE, sMAPE, MAPE, AIC, BIC))
+```
+```{r}
+calc_rmse  <- function(actual, pred) sqrt(mean((actual - pred)^2, na.rm = TRUE))
+calc_mae   <- function(actual, pred) mean(abs(actual - pred), na.rm = TRUE)
+calc_mape  <- function(actual, pred) mean(abs((actual - pred) / actual) * 100, na.rm = TRUE)
+calc_smape <- function(actual, pred) {
+  mean(200 * abs(actual - pred) / (abs(actual) + abs(pred)), na.rm = TRUE)
+}
+calc_mase  <- function(actual, pred, train) {
+  naive_mae <- mean(abs(diff(train)), na.rm = TRUE)
+  mean(abs(actual - pred), na.rm = TRUE) / naive_mae
+}
+
+compile_metrics <- function(actual, pred, train, model_obj, label) {
+  tibble(
+    model = label,
+    RMSE  = round(calc_rmse(actual, pred),        4),
+    MAE   = round(calc_mae(actual, pred),         4),
+    MASE  = round(calc_mase(actual, pred, train), 4),
+    sMAPE = round(calc_smape(actual, pred),       4),
+    MAPE  = round(calc_mape(actual, pred),        4),
+    AIC   = round(AIC(model_obj),                 2),
+    BIC   = round(BIC(model_obj),                 2)
+  )
+}
+
+residual_diagnostics <- function(model_obj, label) {
+  resid_clean <- as.numeric(residuals(model_obj))
+  resid_clean <- resid_clean[!is.na(resid_clean)]
+  lb10 <- Box.test(resid_clean, lag = 10, type = "Ljung-Box")
+  lb20 <- Box.test(resid_clean, lag = 20, type = "Ljung-Box")
+  norm_test <- if (length(resid_clean) <= 5000) {
+    list(result = shapiro.test(resid_clean), name = "Shapiro-Wilk")
+  } else {
+    list(result = nortest::ad.test(resid_clean), name = "Anderson-Darling")
+  }
+  tibble(
+    model             = label,
+    resid_mean        = round(mean(resid_clean),           6),
+    resid_sd          = round(sd(resid_clean),             4),
+    ljung_box_lag10_p = round(lb10$p.value,                4),
+    ljung_box_lag20_p = round(lb20$p.value,                4),
+    normality_test    = norm_test$name,
+    normality_p       = round(norm_test$result$p.value,    4),
+    autocorr_ok       = lb10$p.value > ALPHA,
+    normality_ok      = norm_test$result$p.value > ALPHA
+  )
+}
+
+plot_residuals <- function(model_obj, label) {
+  resid_vec   <- as.numeric(residuals(model_obj))
+  fitted_vec  <- as.numeric(fitted(model_obj))
+  resid_clean <- resid_vec[!is.na(resid_vec)]
+  time_idx    <- seq_along(resid_vec)
+  ci_bound    <- qnorm(0.975) / sqrt(length(resid_clean))
+
+  p1 <- ggplot(data.frame(t = time_idx, r = resid_vec), aes(t, r)) +
+    geom_line(color = "#2c3e50", linewidth = 0.45) +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    labs(title = "Residuals over time", x = "Week index", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  acf_data <- acf(resid_clean, plot = FALSE, lag.max = 52)
+  acf_df   <- data.frame(lag = acf_data$lag[-1], acf = acf_data$acf[-1])
+  p2 <- ggplot(acf_df, aes(lag, acf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#2980b9") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "ACF of residuals", x = "Lag (weeks)", y = "ACF") +
+    theme_minimal(base_size = 11)
+
+  pacf_data <- pacf(resid_clean, plot = FALSE, lag.max = 52)
+  pacf_df   <- data.frame(lag = pacf_data$lag, pacf = pacf_data$acf)
+  p3 <- ggplot(pacf_df, aes(lag, pacf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#8e44ad") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "PACF of residuals", x = "Lag (weeks)", y = "PACF") +
+    theme_minimal(base_size = 11)
+
+  p4 <- ggplot(data.frame(r = resid_clean), aes(r)) +
+    geom_histogram(aes(y = after_stat(density)), bins = 40,
+                   fill = "#3498db", color = "white", alpha = 0.7) +
+    stat_function(fun = dnorm,
+                  args = list(mean = mean(resid_clean), sd = sd(resid_clean)),
+                  color = "red", linewidth = 1) +
+    labs(title = "Residual distribution", x = "Residual", y = "Density") +
+    theme_minimal(base_size = 11)
+
+  qq    <- qqnorm(resid_clean, plot.it = FALSE)
+  qq_df <- data.frame(theoretical = qq$x, sample = qq$y)
+  p5 <- ggplot(qq_df, aes(theoretical, sample)) +
+    geom_point(alpha = 0.4, color = "#2c3e50", size = 0.8) +
+    geom_abline(color = "red", linewidth = 1) +
+    labs(title = "Q-Q plot", x = "Theoretical quantiles", y = "Sample quantiles") +
+    theme_minimal(base_size = 11)
+
+  p6 <- ggplot(data.frame(f = fitted_vec, r = resid_vec), aes(f, r)) +
+    geom_point(alpha = 0.35, size = 0.9, color = "#16a085") +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    geom_smooth(method = "loess", formula = y ~ x, se = FALSE,
+                color = "#e67e22", linewidth = 0.8) +
+    labs(title = "Residuals vs Fitted", x = "Fitted values", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  combined <- (p1 | p4) / (p2 | p3) / (p5 | p6) +
+    plot_annotation(
+      title    = paste0("Residual Diagnostics — ", label),
+      subtitle = "Row 1: Time series & distribution | Row 2: ACF & PACF | Row 3: Q-Q & Residuals vs Fitted",
+      theme    = theme(plot.title = element_text(face = "bold", size = 14))
+    )
+  print(combined)
+}
+
+plot_coefficients <- function(coef_df, label) {
+  reg_coefs <- coef_df %>%
+    filter(!str_detect(term, "^ar|^ma|^sar|^sma|intercept|drift")) %>%
+    mutate(significant = p_value < ALPHA, term = fct_reorder(term, estimate))
+
+  if (nrow(reg_coefs) == 0) {
+    cat("  No regression coefficients to plot for:", label, "\n")
+    return(invisible(NULL))
+  }
+
+  p <- ggplot(reg_coefs, aes(x = estimate, y = term, color = significant)) +
+    geom_vline(xintercept = 0, linetype = "dashed", color = "grey50") +
+    geom_errorbarh(aes(xmin = conf_lo, xmax = conf_hi), height = 0.25, linewidth = 0.7) +
+    geom_point(size = 3) +
+    scale_color_manual(
+      values = c("TRUE" = "#27ae60", "FALSE" = "#e74c3c"),
+      labels = c("TRUE" = paste0("p < ", ALPHA), "FALSE" = paste0("p >= ", ALPHA)),
+      name   = "Significance"
+    ) +
+    labs(
+      title    = paste0("Regression Coefficients — ", label),
+      subtitle = "Error bars = 95% CI | Green = statistically significant",
+      x = "Coefficient estimate", y = NULL
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+  print(p)
+}
+
+plot_forecast <- function(train_dates, train_vals,
+                          test_dates,  test_vals,
+                          fc_list, label) {
+  train_df <- data.frame(date = train_dates, value = train_vals) %>%
+    filter(date >= max(date) - 365 * 2)
+  test_df  <- data.frame(date = test_dates, value = test_vals)
+
+  model_colors <- c(
+    "Train"        = "#bdc3c7",
+    "Actual"       = "#2c3e50",
+    "Full xreg"    = "#e74c3c",
+    "Dummies only" = "#2980b9"
+  )
+
+  p <- ggplot() +
+    geom_line(data = train_df, aes(x = date, y = value, color = "Train"), linewidth = 0.6) +
+    geom_line(data = test_df,  aes(x = date, y = value, color = "Actual"), linewidth = 1)
+
+  ribbon_fills <- c("#e74c3c", "#2980b9")
+  for (i in seq_along(fc_list)) {
+    nm  <- names(fc_list)[i]
+    fc  <- fc_list[[i]]
+    pdf <- data.frame(
+      date = test_dates,
+      pred = as.numeric(fc$mean),
+      lo95 = as.numeric(fc$lower[, 2]),
+      hi95 = as.numeric(fc$upper[, 2])
+    )
+    p <- p +
+      geom_ribbon(data = pdf, aes(x = date, ymin = lo95, ymax = hi95),
+                  fill = ribbon_fills[i], alpha = 0.10) +
+      geom_line(data = pdf, aes(x = date, y = pred, color = nm),
+                linewidth = 0.85, linetype = "dashed")
+  }
+
+  p <- p +
+    scale_color_manual(values = model_colors, name = NULL) +
+    labs(
+      title    = paste0("Regression with ARIMA Errors — Forecast: ", label),
+      subtitle = "Dashed = forecast | Shaded = 95% PI | ARIMA baselines in arima_metrics.csv",
+      x = NULL, y = "Price"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+  print(p)
+}
+
+extract_coefs <- function(model_obj, label) {
+  coef_vals <- coef(model_obj)
+  se_vals   <- sqrt(diag(vcov(model_obj)))[names(coef_vals)]
+  t_vals    <- coef_vals / se_vals
+  p_vals    <- 2 * pnorm(-abs(t_vals))
+  tibble(
+    model       = label,
+    term        = names(coef_vals),
+    estimate    = round(coef_vals,                  6),
+    std_err     = round(se_vals,                    6),
+    t_stat      = round(t_vals,                     4),
+    p_value     = round(p_vals,                     4),
+    conf_lo     = round(coef_vals - 1.96 * se_vals, 6),
+    conf_hi     = round(coef_vals + 1.96 * se_vals, 6),
+    significant = p_vals < ALPHA
+  )
+}
+
+build_xreg <- function(data, vars) {
+  avail <- vars[vars %in% names(data)]
+  if (length(avail) == 0) return(NULL)
+  mat <- data %>% select(all_of(avail)) %>% as.matrix()
+  for (j in seq_len(ncol(mat))) {
+    col_mean <- mean(mat[, j], na.rm = TRUE)
+    mat[is.na(mat[, j]), j] <- col_mean
+  }
+  mat
+}
+```
+```{r}
+all_metrics <- list()
+all_diag    <- list()
+all_coefs   <- list()
+```
+```{r fig.width=14, fig.height=12}
+for (comm in commodities) {
+  cat("\n", strrep("=", 60), "\n")
+  cat("  Commodity:", comm, "\n")
+  cat(strrep("=", 60), "\n")
+
+  sub <- df %>% filter(commodity == comm) %>% arrange(date)
+
+  if (!"split" %in% names(sub)) stop("'split' column not found in data.")
+
+  train_df <- sub %>% filter(split == "train")
+  test_df  <- sub %>% filter(split == "test")
+
+  if (nrow(train_df) < 30 || nrow(test_df) == 0) {
+    cat("  !! Insufficient rows — skipping.\n"); next
+  }
+
+  n_test    <- nrow(test_df)
+  train_ts  <- ts(train_df$target_price, frequency = FREQ)
+  safe_name <- str_replace_all(comm, "[ /]", "_")
+
+  cat(sprintf("  Train: %s -> %s (%d weeks)\n",
+              min(train_df$date), max(train_df$date), nrow(train_df)))
+  cat(sprintf("  Test:  %s -> %s (%d weeks)\n",
+              min(test_df$date),  max(test_df$date),  n_test))
+
+  rds_path <- file.path(OUTPUT_DIR, paste0("arima_auto_", safe_name, ".rds"))
+  if (!file.exists(rds_path)) {
+    stop(sprintf("RDS not found: %s\n  Run arima_model.R first.", rds_path))
+  }
+  saved_model <- readRDS(rds_path)
+  arma        <- saved_model$arma
+  pdq         <- c(arma[1], arma[6], arma[2])
+  PDQ         <- c(arma[3], arma[7], arma[4])
+
+  cat(sprintf("  Loaded ARIMA order: ARIMA(%d,%d,%d)(%d,%d,%d)[%d]\n",
+              pdq[1], pdq[2], pdq[3], PDQ[1], PDQ[2], PDQ[3], FREQ))
+
+  avail_xreg    <- XREG_VARS[XREG_VARS %in% names(sub) &
+                               sapply(XREG_VARS, function(v) sum(!is.na(train_df[[v]])) > 10)]
+  avail_dummies <- DUMMY_VARS[DUMMY_VARS %in% names(sub)]
+
+  cat("  xreg vars:", paste(avail_xreg,    collapse = ", "), "\n")
+  cat("  dummies:  ", paste(avail_dummies, collapse = ", "), "\n")
+
+  fc_list <- list()
+
+  # ── Model A: Full xreg ────────────────────
+  all_reg_vars    <- c(avail_xreg, avail_dummies)
+  xreg_train_full <- build_xreg(train_df, all_reg_vars)
+  xreg_test_full  <- build_xreg(test_df,  all_reg_vars)
+
+  cat("\n  Fitting Model A: Full xreg (", ncol(xreg_train_full), "regressors)...\n")
+  model_full <- tryCatch(
+    Arima(train_ts, order = pdq,
+          seasonal = list(order = PDQ, period = FREQ),
+          xreg = xreg_train_full, include.drift = FALSE),
+    error = function(e) { cat("  !! Model A failed:", e$message, "\n"); NULL }
+  )
+
+  if (!is.null(model_full)) {
+    fc_full   <- forecast(model_full, xreg = xreg_test_full, h = n_test)
+    pred_full <- as.numeric(fc_full$mean)
+
+    all_metrics[[paste(comm, "full")]] <- compile_metrics(
+      test_df$target_price, pred_full, train_df$target_price, model_full,
+      paste0(comm, " — Full xreg")
+    )
+    all_diag[[paste(comm, "full")]]  <- residual_diagnostics(model_full, paste0(comm, " — Full xreg"))
+    coefs_full                        <- extract_coefs(model_full, paste0(comm, " — Full xreg"))
+    all_coefs[[paste(comm, "full")]] <- coefs_full
+
+    fc_list[["Full xreg"]] <- fc_full
+
+    cat("\n  Full xreg coefficient table:\n")
+    print(coefs_full %>% select(term, estimate, std_err, t_stat, p_value, significant), n = Inf)
+
+    plot_residuals(model_full, paste0(comm, " — Full xreg"))
+    plot_coefficients(coefs_full, paste0(comm, " — Full xreg"))
+  }
+
+  # ── Model B: Dummies only ─────────────────
+  if (length(avail_dummies) > 0) {
+    xreg_train_dum <- build_xreg(train_df, avail_dummies)
+    xreg_test_dum  <- build_xreg(test_df,  avail_dummies)
+
+    cat("\n  Fitting Model B: Dummies only (", ncol(xreg_train_dum), "regressors)...\n")
+    model_dum <- tryCatch(
+      Arima(train_ts, order = pdq,
+            seasonal = list(order = PDQ, period = FREQ),
+            xreg = xreg_train_dum, include.drift = FALSE),
+      error = function(e) { cat("  !! Model B failed:", e$message, "\n"); NULL }
+    )
+
+    if (!is.null(model_dum)) {
+      fc_dum   <- forecast(model_dum, xreg = xreg_test_dum, h = n_test)
+      pred_dum <- as.numeric(fc_dum$mean)
+
+      all_metrics[[paste(comm, "dummies")]] <- compile_metrics(
+        test_df$target_price, pred_dum, train_df$target_price, model_dum,
+        paste0(comm, " — Dummies only")
+      )
+      all_diag[[paste(comm, "dummies")]]  <- residual_diagnostics(model_dum, paste0(comm, " — Dummies only"))
+      coefs_dum                            <- extract_coefs(model_dum, paste0(comm, " — Dummies only"))
+      all_coefs[[paste(comm, "dummies")]] <- coefs_dum
+
+      fc_list[["Dummies only"]] <- fc_dum
+
+      cat("\n  Dummies-only coefficient table:\n")
+      print(coefs_dum %>% select(term, estimate, std_err, t_stat, p_value, significant), n = Inf)
+
+      plot_residuals(model_dum, paste0(comm, " — Dummies only"))
+      plot_coefficients(coefs_dum, paste0(comm, " — Dummies only"))
+    }
+  }
+
+  # ── Combined forecast plot ─────────────────
+  if (length(fc_list) > 0) {
+    plot_forecast(
+      train_dates = train_df$date,  train_vals = train_df$target_price,
+      test_dates  = test_df$date,   test_vals  = test_df$target_price,
+      fc_list     = fc_list,        label      = comm
+    )
+  }
+}
+```
+```{r}
+metrics_df <- bind_rows(all_metrics)
+diag_df    <- bind_rows(all_diag)
+coefs_df   <- bind_rows(all_coefs)
+
+arima_for_compare    <- arima_baseline %>% mutate(source = "arima_model.R (pre-run)")
+all_metrics_combined <- bind_rows(
+  metrics_df %>% mutate(source = "lm_arima_model.Rmd (this file)"),
+  arima_for_compare
+)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  LM-ARIMA MODEL PERFORMANCE (this file)\n")
+cat(strrep("=", 70), "\n")
+print(metrics_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  RESIDUAL DIAGNOSTICS\n")
+cat(strrep("=", 70), "\n")
+print(diag_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  FULL COMPARISON: LM-ARIMA vs ARIMA BASELINES\n")
+cat(strrep("=", 70), "\n")
+print(
+  all_metrics_combined %>%
+    select(model, RMSE, MAE, MASE, sMAPE, MAPE, AIC, BIC, source) %>%
+    arrange(model),
+  n = Inf
+)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  BEST MODEL PER COMMODITY (by RMSE, across all models)\n")
+cat(strrep("=", 70), "\n")
+all_metrics_combined %>%
+  mutate(commodity = str_extract(model, "^.+(?= —)")) %>%
+  group_by(commodity) %>%
+  slice_min(RMSE, n = 1) %>%
+  ungroup() %>%
+  select(commodity, model, RMSE, MAE, MASE, AIC, source) %>%
+  print(n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  AIC IMPROVEMENT: Full xreg vs auto.arima baseline\n")
+cat(strrep("=", 70), "\n")
+aic_compare <- all_metrics_combined %>%
+  mutate(
+    commodity = str_extract(model, "^.+(?= —)"),
+    variant   = case_when(
+      str_detect(model, "Full xreg")  ~ "full_xreg",
+      str_detect(model, "auto.arima") ~ "auto_arima_baseline",
+      TRUE                            ~ NA_character_
+    )
+  ) %>%
+  filter(!is.na(variant)) %>%
+  select(commodity, variant, AIC) %>%
+  pivot_wider(names_from = variant, values_from = AIC) %>%
+  mutate(
+    aic_improvement = round(auto_arima_baseline - full_xreg, 2),
+    xreg_helps      = aic_improvement > 0
+  )
+print(aic_compare, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  SIGNIFICANT REGRESSORS\n")
+cat(strrep("=", 70), "\n")
+coefs_df %>%
+  filter(significant, !str_detect(term, "^ar|^ma|^sar|^sma|intercept|drift")) %>%
+  select(model, term, estimate, std_err, p_value) %>%
+  arrange(model, p_value) %>%
+  print(n = Inf)
+
+write_csv(metrics_df,           file.path(OUTPUT_DIR, "lm_arima_metrics.csv"))
+write_csv(diag_df,              file.path(OUTPUT_DIR, "lm_arima_residual_diagnostics.csv"))
+write_csv(coefs_df,             file.path(OUTPUT_DIR, "lm_arima_coefficients.csv"))
+write_csv(all_metrics_combined, file.path(OUTPUT_DIR, "all_models_comparison.csv"))
+
+cat("\n✅ Done.\n")
+```

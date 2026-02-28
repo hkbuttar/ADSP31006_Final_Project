@@ -1,0 +1,373 @@
+model,term,estimate,std_err,t_stat,p_value,conf_lo,conf_hi,significant
+Beetroot — Full xreg,ar1,0.822609,0.06211,13.2445,0,0.700874,0.944344,TRUE
+Beetroot — Full xreg,ma1,-1.010505,0.076787,-13.1599,0,-1.161007,-0.860003,TRUE
+Beetroot — Full xreg,ma2,0.194736,0.069651,2.7959,0.0052,0.058221,0.331251,TRUE
+Beetroot — Full xreg,ma3,-0.024944,0.064585,-0.3862,0.6993,-0.151532,0.101643,FALSE
+Beetroot — Full xreg,ma4,-0.09638,0.046885,-2.0556,0.0398,-0.188275,-0.004484,TRUE
+Beetroot — Full xreg,api_energy_and_lubricants,-1.34e-4,8.03e-4,-0.1669,0.8674,-0.001708,0.00144,FALSE
+Beetroot — Full xreg,api_fertilisers_and_soil_improvers,5.37e-4,2.59e-4,2.0755,0.0379,3e-5,0.001045,TRUE
+Beetroot — Full xreg,api_plant_protection_products,-0.001828,0.001291,-1.4158,0.1568,-0.004358,7.02e-4,FALSE
+Beetroot — Full xreg,api_fresh_fruit,-3.45e-4,3.99e-4,-0.8641,0.3875,-0.001126,4.37e-4,FALSE
+Beetroot — Full xreg,api_fresh_vegetables,6.77e-4,8.12e-4,0.8334,0.4046,-9.15e-4,0.002269,FALSE
+Beetroot — Full xreg,fuel_petrol_price,-0.002332,0.00152,-1.5338,0.1251,-0.005312,6.48e-4,FALSE
+Beetroot — Full xreg,fuel_diesel_price,0.001134,0.001055,1.0748,0.2824,-9.34e-4,0.003201,FALSE
+Beetroot — Full xreg,sppi_road_freight,-0.001414,0.001476,-0.9583,0.3379,-0.004306,0.001478,FALSE
+Beetroot — Full xreg,shock_2021q4_2023q1,-0.04937,0.031079,-1.5885,0.1122,-0.110284,0.011545,FALSE
+Beetroot — Full xreg,post_shock,0.001174,0.042465,0.0277,0.9779,-0.082057,0.084405,FALSE
+Beetroot — Dummies only,ar1,0.86114,0.043796,19.6627,0,0.775301,0.946979,TRUE
+Beetroot — Dummies only,ma1,-1.041168,0.062969,-16.5346,0,-1.164587,-0.917749,TRUE
+Beetroot — Dummies only,ma2,0.204538,0.06792,3.0114,0.0026,0.071414,0.337662,TRUE
+Beetroot — Dummies only,ma3,-0.039747,0.064039,-0.6207,0.5348,-0.165264,0.08577,FALSE
+Beetroot — Dummies only,ma4,-0.085656,0.044349,-1.9314,0.0534,-0.17258,0.001267,FALSE
+Beetroot — Dummies only,shock_2021q4_2023q1,-0.008127,0.029098,-0.2793,0.78,-0.065158,0.048905,FALSE
+Beetroot — Dummies only,post_shock,0.039841,0.042156,0.9451,0.3446,-0.042785,0.122467,FALSE
+Bulb Onions (Red) — Full xreg,ar1,0.893417,0.03519,25.3882,0,0.824444,0.96239,TRUE
+Bulb Onions (Red) — Full xreg,ma1,-1.379493,0.064063,-21.5335,0,-1.505056,-1.253931,TRUE
+Bulb Onions (Red) — Full xreg,ma2,0.379494,0.063732,5.9545,0,0.254579,0.504409,TRUE
+Bulb Onions (Red) — Full xreg,api_energy_and_lubricants,3.18e-4,0.001697,0.1872,0.8515,-0.003009,0.003645,FALSE
+Bulb Onions (Red) — Full xreg,api_fertilisers_and_soil_improvers,-9.4e-5,5.46e-4,-0.1723,0.8632,-0.001164,9.76e-4,FALSE
+Bulb Onions (Red) — Full xreg,api_plant_protection_products,0.003333,0.002195,1.5183,0.1289,-9.7e-4,0.007636,FALSE
+Bulb Onions (Red) — Full xreg,api_fresh_fruit,-4.03e-4,8.87e-4,-0.4542,0.6497,-0.002141,0.001335,FALSE
+Bulb Onions (Red) — Full xreg,api_fresh_vegetables,2.88e-4,0.001827,0.1573,0.875,-0.003294,0.003869,FALSE
+Bulb Onions (Red) — Full xreg,fuel_petrol_price,-0.001734,0.003218,-0.5389,0.5899,-0.00804,0.004572,FALSE
+Bulb Onions (Red) — Full xreg,fuel_diesel_price,0.001701,0.002303,0.7385,0.4602,-0.002813,0.006214,FALSE
+Bulb Onions (Red) — Full xreg,sppi_road_freight,0.004791,0.00293,1.6349,0.1021,-9.53e-4,0.010534,FALSE
+Bulb Onions (Red) — Full xreg,shock_2021q4_2023q1,0.001171,0.063539,0.0184,0.9853,-0.123366,0.125709,FALSE
+Bulb Onions (Red) — Full xreg,post_shock,0.031666,0.077252,0.4099,0.6819,-0.119748,0.183081,FALSE
+Bulb Onions (Red) — Dummies only,ar1,0.914738,0.035617,25.6826,0,0.844928,0.984547,TRUE
+Bulb Onions (Red) — Dummies only,ma1,-1.383294,0.066418,-20.8272,0,-1.513473,-1.253116,TRUE
+Bulb Onions (Red) — Dummies only,ma2,0.393264,0.062493,6.2929,0,0.270778,0.51575,TRUE
+Bulb Onions (Red) — Dummies only,shock_2021q4_2023q1,0.038914,0.067202,0.5791,0.5625,-0.092802,0.170629,FALSE
+Bulb Onions (Red) — Dummies only,post_shock,0.075229,0.100873,0.7458,0.4558,-0.122482,0.272939,FALSE
+Bulb Onions (Yellow) — Full xreg,ma1,-0.154737,0.048304,-3.2034,0.0014,-0.249412,-0.060062,TRUE
+Bulb Onions (Yellow) — Full xreg,ma2,-0.154107,0.053552,-2.8777,0.004,-0.25907,-0.049144,TRUE
+Bulb Onions (Yellow) — Full xreg,sar1,-0.099388,0.0531,-1.8717,0.0612,-0.203464,0.004689,FALSE
+Bulb Onions (Yellow) — Full xreg,api_energy_and_lubricants,-9.1e-5,0.001865,-0.0489,0.961,-0.003747,0.003564,FALSE
+Bulb Onions (Yellow) — Full xreg,api_fertilisers_and_soil_improvers,1.23e-4,5.98e-4,0.2062,0.8366,-0.001049,0.001296,FALSE
+Bulb Onions (Yellow) — Full xreg,api_plant_protection_products,-7.27e-4,0.003006,-0.2419,0.8088,-0.006619,0.005165,FALSE
+Bulb Onions (Yellow) — Full xreg,api_fresh_fruit,-5.63e-4,9.42e-4,-0.5981,0.5498,-0.002409,0.001282,FALSE
+Bulb Onions (Yellow) — Full xreg,api_fresh_vegetables,4.33e-4,0.001928,0.2246,0.8223,-0.003346,0.004213,FALSE
+Bulb Onions (Yellow) — Full xreg,fuel_petrol_price,0.003075,0.004066,0.7564,0.4494,-0.004894,0.011044,FALSE
+Bulb Onions (Yellow) — Full xreg,fuel_diesel_price,-0.002281,0.002852,-0.7996,0.4239,-0.007871,0.00331,FALSE
+Bulb Onions (Yellow) — Full xreg,sppi_road_freight,0.001043,0.003461,0.3013,0.7632,-0.005741,0.007827,FALSE
+Bulb Onions (Yellow) — Full xreg,shock_2021q4_2023q1,-0.016066,0.072838,-0.2206,0.8254,-0.158828,0.126696,FALSE
+Bulb Onions (Yellow) — Full xreg,post_shock,0.059917,0.098783,0.6066,0.5441,-0.133697,0.253532,FALSE
+Bulb Onions (Yellow) — Dummies only,ma1,-0.14764,0.047268,-3.1235,0.0018,-0.240285,-0.054996,TRUE
+Bulb Onions (Yellow) — Dummies only,ma2,-0.135984,0.046419,-2.9295,0.0034,-0.226965,-0.045002,TRUE
+Bulb Onions (Yellow) — Dummies only,sar1,-0.096979,0.052489,-1.8476,0.0647,-0.199858,0.0059,FALSE
+Bulb Onions (Yellow) — Dummies only,shock_2021q4_2023q1,-0.006622,0.066718,-0.0992,0.9209,-0.137388,0.124145,FALSE
+Bulb Onions (Yellow) — Dummies only,post_shock,0.066844,0.094403,0.7081,0.4789,-0.118185,0.251874,FALSE
+Cabbage — Full xreg,ar1,0.298806,0.16189,1.8457,0.0649,-0.018499,0.61611,FALSE
+Cabbage — Full xreg,ar2,0.07406,0.04993,1.4833,0.138,-0.023803,0.171923,FALSE
+Cabbage — Full xreg,ar3,0.186142,0.052348,3.5559,4e-4,0.08354,0.288744,TRUE
+Cabbage — Full xreg,ma1,-0.383051,0.162486,-2.3574,0.0184,-0.701523,-0.064579,TRUE
+Cabbage — Full xreg,api_energy_and_lubricants,0.001276,8.74e-4,1.4593,0.1445,-4.38e-4,0.00299,FALSE
+Cabbage — Full xreg,api_fertilisers_and_soil_improvers,-2.09e-4,2.82e-4,-0.7411,0.4586,-7.63e-4,3.44e-4,FALSE
+Cabbage — Full xreg,api_plant_protection_products,-2.98e-4,0.00142,-0.2102,0.8335,-0.003081,0.002484,FALSE
+Cabbage — Full xreg,api_fresh_fruit,-1.4e-4,4.41e-4,-0.3171,0.7512,-0.001004,7.24e-4,FALSE
+Cabbage — Full xreg,api_fresh_vegetables,-0.001337,8.98e-4,-1.4889,0.1365,-0.003097,4.23e-4,FALSE
+Cabbage — Full xreg,fuel_petrol_price,-0.002583,0.001671,-1.5464,0.122,-0.005858,6.91e-4,FALSE
+Cabbage — Full xreg,fuel_diesel_price,0.001722,0.001158,1.4876,0.1369,-5.47e-4,0.003991,FALSE
+Cabbage — Full xreg,sppi_road_freight,-0.001076,0.00164,-0.6563,0.5117,-0.004291,0.002138,FALSE
+Cabbage — Full xreg,shock_2021q4_2023q1,-0.011167,0.034031,-0.3281,0.7428,-0.077868,0.055534,FALSE
+Cabbage — Full xreg,post_shock,0.023589,0.046164,0.511,0.6094,-0.066893,0.114072,FALSE
+Cabbage — Dummies only,ar1,0.292404,0.171865,1.7014,0.0889,-0.044452,0.62926,FALSE
+Cabbage — Dummies only,ar2,0.084075,0.049673,1.6926,0.0905,-0.013284,0.181434,FALSE
+Cabbage — Dummies only,ar3,0.170906,0.051474,3.3202,9e-4,0.070016,0.271795,TRUE
+Cabbage — Dummies only,ma1,-0.389279,0.171997,-2.2633,0.0236,-0.726393,-0.052165,TRUE
+Cabbage — Dummies only,shock_2021q4_2023q1,0.009455,0.031255,0.3025,0.7623,-0.051805,0.070716,FALSE
+Cabbage — Dummies only,post_shock,0.045401,0.044383,1.0229,0.3063,-0.041589,0.132391,FALSE
+Carrots — Full xreg,ma1,-0.066536,0.050157,-1.3266,0.1847,-0.164843,0.031771,FALSE
+Carrots — Full xreg,ma2,-0.077606,0.047456,-1.6353,0.102,-0.17062,0.015409,FALSE
+Carrots — Full xreg,ma3,0.09117,0.046552,1.9584,0.0502,-7.3e-5,0.182412,FALSE
+Carrots — Full xreg,ma4,0.061286,0.047684,1.2852,0.1987,-0.032175,0.154747,FALSE
+Carrots — Full xreg,ma5,0.187089,0.046772,4,1e-4,0.095416,0.278763,TRUE
+Carrots — Full xreg,api_energy_and_lubricants,-4.97e-4,9.43e-4,-0.5274,0.5979,-0.002345,0.00135,FALSE
+Carrots — Full xreg,api_fertilisers_and_soil_improvers,2.89e-4,2.97e-4,0.9758,0.3292,-2.92e-4,8.71e-4,FALSE
+Carrots — Full xreg,api_plant_protection_products,-1.9e-4,0.001446,-0.1313,0.8955,-0.003023,0.002644,FALSE
+Carrots — Full xreg,api_fresh_fruit,-3.4e-5,4.5e-4,-0.0745,0.9406,-9.15e-4,8.48e-4,FALSE
+Carrots — Full xreg,api_fresh_vegetables,-0.001167,9.21e-4,-1.2664,0.2054,-0.002972,6.39e-4,FALSE
+Carrots — Full xreg,fuel_petrol_price,-0.002982,0.00175,-1.7043,0.0883,-0.006411,4.47e-4,FALSE
+Carrots — Full xreg,fuel_diesel_price,0.002088,0.001198,1.743,0.0813,-2.6e-4,0.004436,FALSE
+Carrots — Full xreg,sppi_road_freight,2.67e-4,0.001665,0.1605,0.8725,-0.002996,0.00353,FALSE
+Carrots — Full xreg,shock_2021q4_2023q1,-0.009807,0.034768,-0.2821,0.7779,-0.077953,0.058339,FALSE
+Carrots — Full xreg,post_shock,-0.051612,0.047403,-1.0888,0.2762,-0.144521,0.041297,FALSE
+Carrots — Dummies only,ma1,-0.074266,0.047354,-1.5683,0.1168,-0.167079,0.018547,FALSE
+Carrots — Dummies only,ma2,-0.074867,0.047288,-1.5832,0.1134,-0.167551,0.017817,FALSE
+Carrots — Dummies only,ma3,0.080467,0.046045,1.7475,0.0805,-0.009783,0.170716,FALSE
+Carrots — Dummies only,ma4,0.052959,0.047506,1.1148,0.2649,-0.040153,0.146071,FALSE
+Carrots — Dummies only,ma5,0.168263,0.045201,3.7226,2e-4,0.07967,0.256856,TRUE
+Carrots — Dummies only,shock_2021q4_2023q1,7.91e-4,0.032007,0.0247,0.9803,-0.061942,0.063525,FALSE
+Carrots — Dummies only,post_shock,-0.037183,0.045565,-0.816,0.4145,-0.12649,0.052124,FALSE
+Cooking Apples — Full xreg,ar1,-0.243871,0.046445,-5.2508,0,-0.334903,-0.152839,TRUE
+Cooking Apples — Full xreg,api_energy_and_lubricants,9.75e-4,0.004085,0.2387,0.8113,-0.007032,0.008983,FALSE
+Cooking Apples — Full xreg,api_fertilisers_and_soil_improvers,-1.59e-4,0.001305,-0.1218,0.9031,-0.002717,0.002399,FALSE
+Cooking Apples — Full xreg,api_plant_protection_products,-0.002948,0.006584,-0.4477,0.6544,-0.015853,0.009958,FALSE
+Cooking Apples — Full xreg,api_fresh_fruit,2.48e-4,0.002053,0.121,0.9037,-0.003776,0.004272,FALSE
+Cooking Apples — Full xreg,api_fresh_vegetables,-0.001034,0.004197,-0.2462,0.8055,-0.009261,0.007194,FALSE
+Cooking Apples — Full xreg,fuel_petrol_price,-0.001713,0.007698,-0.2225,0.8239,-0.016802,0.013376,FALSE
+Cooking Apples — Full xreg,fuel_diesel_price,0.001504,0.005344,0.2814,0.7784,-0.008971,0.011979,FALSE
+Cooking Apples — Full xreg,sppi_road_freight,0.004685,0.007594,0.617,0.5373,-0.010199,0.019569,FALSE
+Cooking Apples — Full xreg,shock_2021q4_2023q1,0.130504,0.160877,0.8112,0.4172,-0.184815,0.445822,FALSE
+Cooking Apples — Full xreg,post_shock,0.149392,0.216552,0.6899,0.4903,-0.27505,0.573835,FALSE
+Cooking Apples — Dummies only,ar1,-0.245158,0.046122,-5.3154,0,-0.335558,-0.154759,TRUE
+Cooking Apples — Dummies only,shock_2021q4_2023q1,0.138777,0.1462,0.9492,0.3425,-0.147776,0.425329,FALSE
+Cooking Apples — Dummies only,post_shock,0.156543,0.20607,0.7597,0.4475,-0.247354,0.56044,FALSE
+Leeks — Full xreg,ar1,-0.339975,0.048356,-7.0306,0,-0.434754,-0.245197,TRUE
+Leeks — Full xreg,ar2,-0.125872,0.050314,-2.5017,0.0124,-0.224488,-0.027257,TRUE
+Leeks — Full xreg,ar3,-0.234164,0.047257,-4.9551,0,-0.326789,-0.14154,TRUE
+Leeks — Full xreg,api_energy_and_lubricants,0.002686,0.003102,0.8659,0.3865,-0.003394,0.008767,FALSE
+Leeks — Full xreg,api_fertilisers_and_soil_improvers,-2.38e-4,9.89e-4,-0.2405,0.8099,-0.002176,0.0017,FALSE
+Leeks — Full xreg,api_plant_protection_products,-3.55e-4,0.004993,-0.0711,0.9433,-0.010141,0.00943,FALSE
+Leeks — Full xreg,api_fresh_fruit,-0.002803,0.001553,-1.8051,0.0711,-0.005847,2.41e-4,FALSE
+Leeks — Full xreg,api_fresh_vegetables,0.001966,0.003183,0.6178,0.5367,-0.004272,0.008205,FALSE
+Leeks — Full xreg,fuel_petrol_price,8.74e-4,0.005871,0.1488,0.8817,-0.010634,0.012382,FALSE
+Leeks — Full xreg,fuel_diesel_price,5.02e-4,0.00405,0.1239,0.9014,-0.007436,0.008439,FALSE
+Leeks — Full xreg,sppi_road_freight,-9.99e-4,0.005753,-0.1736,0.8622,-0.012275,0.010278,FALSE
+Leeks — Full xreg,shock_2021q4_2023q1,-0.043528,0.120865,-0.3601,0.7187,-0.280423,0.193368,FALSE
+Leeks — Full xreg,post_shock,-0.086227,0.163808,-0.5264,0.5986,-0.407291,0.234837,FALSE
+Leeks — Dummies only,ar1,-0.318116,0.047333,-6.7208,0,-0.410889,-0.225344,TRUE
+Leeks — Dummies only,ar2,-0.106467,0.049387,-2.1558,0.0311,-0.203265,-0.009669,TRUE
+Leeks — Dummies only,ar3,-0.228443,0.047179,-4.8421,0,-0.320914,-0.135973,TRUE
+Leeks — Dummies only,shock_2021q4_2023q1,0.027379,0.111723,0.2451,0.8064,-0.191598,0.246355,FALSE
+Leeks — Dummies only,post_shock,-0.011572,0.158328,-0.0731,0.9417,-0.321895,0.29875,FALSE
+Lettuce — Full xreg,ar1,0.698367,0.048526,14.3916,0,0.603256,0.793478,TRUE
+Lettuce — Full xreg,ar2,0.110406,0.048676,2.2682,0.0233,0.015001,0.205812,TRUE
+Lettuce — Full xreg,ma1,-0.999999,0.012089,-82.7211,0,-1.023693,-0.976305,TRUE
+Lettuce — Full xreg,api_energy_and_lubricants,9.92e-4,8.08e-4,1.227,0.2198,-5.93e-4,0.002576,FALSE
+Lettuce — Full xreg,api_fertilisers_and_soil_improvers,-3.4e-5,2.59e-4,-0.1333,0.894,-5.42e-4,4.73e-4,FALSE
+Lettuce — Full xreg,api_plant_protection_products,4.41e-4,0.001016,0.434,0.6643,-0.001551,0.002433,FALSE
+Lettuce — Full xreg,api_fresh_fruit,0.001199,4.11e-4,2.9173,0.0035,3.94e-4,0.002005,TRUE
+Lettuce — Full xreg,api_fresh_vegetables,-4.3e-4,8.48e-4,-0.5067,0.61240000000000006,-0.002091,0.001232,FALSE
+Lettuce — Full xreg,fuel_petrol_price,0.00232,0.001567,1.4808,0.1387,-7.51e-4,0.005391,FALSE
+Lettuce — Full xreg,fuel_diesel_price,-0.001587,0.001108,-1.4323,0.1521,-0.003758,5.85e-4,FALSE
+Lettuce — Full xreg,sppi_road_freight,8.79e-4,0.00138,0.6367,0.5243,-0.001826,0.003584,FALSE
+Lettuce — Full xreg,shock_2021q4_2023q1,0.011383,0.029911,0.3806,0.7035,-0.047242,0.070007,FALSE
+Lettuce — Full xreg,post_shock,0.045653,0.036721,1.2433,0.2138,-0.02632,0.117626,FALSE
+Lettuce — Dummies only,ar1,0.699712,0.048766,14.3484,0,0.604131,0.795293,TRUE
+Lettuce — Dummies only,ar2,0.120744,0.048158,2.5073,0.0122,0.026355,0.215134,TRUE
+Lettuce — Dummies only,ma1,-0.974056,0.011856,-82.1558,0,-0.997294,-0.950818,TRUE
+Lettuce — Dummies only,shock_2021q4_2023q1,0.025318,0.031709,0.7985,0.4246,-0.036831,0.087467,FALSE
+Lettuce — Dummies only,post_shock,0.062085,0.041975,1.4791,0.1391,-0.020186,0.144356,FALSE
+Pears — Full xreg,ar1,0.779831,0.069288,11.2549,0,0.644026,0.915636,TRUE
+Pears — Full xreg,ma1,-1.149972,0.0877,-13.1126,0,-1.321864,-0.978081,TRUE
+Pears — Full xreg,ma2,0.329181,0.091522,3.5967,3e-4,0.149797,0.508564,TRUE
+Pears — Full xreg,ma3,-0.089458,0.084357,-1.0605,0.2889,-0.254798,0.075882,FALSE
+Pears — Full xreg,ma4,-0.089748,0.067552,-1.3286,0.184,-0.22215,0.042655,FALSE
+Pears — Full xreg,api_energy_and_lubricants,0.004102,0.003808,1.0773,0.2813,-0.003361,0.011565,FALSE
+Pears — Full xreg,api_fertilisers_and_soil_improvers,-6.87e-4,0.001187,-0.5785,0.5629,-0.003013,0.00164,FALSE
+Pears — Full xreg,api_plant_protection_products,-0.003214,0.004645,-0.6918,0.4891,-0.012318,0.005891,FALSE
+Pears — Full xreg,api_fresh_fruit,2.06e-4,0.001919,0.1075,0.9144,-0.003555,0.003968,FALSE
+Pears — Full xreg,api_fresh_vegetables,0.001209,0.003808,0.3174,0.7509,-0.006256,0.008673,FALSE
+Pears — Full xreg,fuel_petrol_price,-0.003985,0.006988,-0.5703,0.5685,-0.017682,0.009711,FALSE
+Pears — Full xreg,fuel_diesel_price,0.002933,0.005044,0.5815,0.5609,-0.006954,0.01282,FALSE
+Pears — Full xreg,sppi_road_freight,0.010537,0.006123,1.721,0.0853,-0.001463,0.022538,FALSE
+Pears — Full xreg,shock_2021q4_2023q1,-0.041804,0.132901,-0.3145,0.7531,-0.30229,0.218682,FALSE
+Pears — Full xreg,post_shock,-0.076781,0.165586,-0.4637,0.6429,-0.40133,0.247768,FALSE
+Pears — Dummies only,ar1,0.756159,0.068176,11.0913,0,0.622534,0.889784,TRUE
+Pears — Dummies only,ma1,-1.125389,0.093485,-12.0382,0,-1.30862,-0.942159,TRUE
+Pears — Dummies only,ma2,0.302076,0.087719,3.4437,6e-4,0.130147,0.474006,TRUE
+Pears — Dummies only,ma3,-0.081235,0.081952,-0.9912,0.3216,-0.241861,0.079392,FALSE
+Pears — Dummies only,ma4,-0.095334,0.065404,-1.4576,0.1449,-0.223525,0.032858,FALSE
+Pears — Dummies only,shock_2021q4_2023q1,0.174067,0.082221,2.1171,0.0343,0.012913000000000001,0.33522,TRUE
+Pears — Dummies only,post_shock,0.264071,0.093798,2.8153,0.0049,0.080227,0.447915,TRUE
+Dessert Apples — Full xreg,ar1,0.837404,0.039559,21.1684,0,0.759868,0.91494,TRUE
+Dessert Apples — Full xreg,ma1,-1.209921,0.066267,-18.2582,0,-1.339805,-1.080038,TRUE
+Dessert Apples — Full xreg,ma2,0.209922,0.065939,3.1836,0.0015,0.080681,0.339162,TRUE
+Dessert Apples — Full xreg,api_energy_and_lubricants,0.002167,0.002125,1.02,0.3077,-0.001997,0.006331,FALSE
+Dessert Apples — Full xreg,api_fertilisers_and_soil_improvers,-9.39e-4,6.76e-4,-1.3903,0.1644,-0.002264,3.85e-4,FALSE
+Dessert Apples — Full xreg,api_plant_protection_products,0.006974,0.002575,2.709,0.0067,0.001928,0.01202,TRUE
+Dessert Apples — Full xreg,api_fresh_fruit,5.64e-4,0.001097,0.5142,0.6071,-0.001585,0.002713,FALSE
+Dessert Apples — Full xreg,api_fresh_vegetables,1.64e-4,0.002236,0.0734,0.9415,-0.004218,0.004547,FALSE
+Dessert Apples — Full xreg,fuel_petrol_price,0.005028,0.004058,1.239,0.2154,-0.002926,0.012983,FALSE
+Dessert Apples — Full xreg,fuel_diesel_price,-0.004292,0.002847,-1.5075,0.1317,-0.009873,0.001288,FALSE
+Dessert Apples — Full xreg,sppi_road_freight,-0.001079,0.003574,-0.302,0.7626,-0.008084,0.005925,FALSE
+Dessert Apples — Full xreg,shock_2021q4_2023q1,0.046682,0.076213,0.6125,0.5402,-0.102696,0.196061,FALSE
+Dessert Apples — Full xreg,post_shock,0.107185,0.09322,1.1498,0.2502,-0.075527,0.289897,FALSE
+Dessert Apples — Dummies only,ar1,0.842158,0.04656,18.0875,0,0.7509,0.933416,TRUE
+Dessert Apples — Dummies only,ma1,-1.22396,0.075274,-16.26,0,-1.371498,-1.076422,TRUE
+Dessert Apples — Dummies only,ma2,0.243292,0.069515,3.4998,5e-4,0.107043,0.379542,TRUE
+Dessert Apples — Dummies only,shock_2021q4_2023q1,0.094587,0.069835,1.3544,0.1756,-0.042289,0.231463,FALSE
+Dessert Apples — Dummies only,post_shock,0.192332,0.096308,1.9971,0.0458,0.003569,0.381095,TRUE
+Cucumbers — Full xreg,ar1,0.658733,0.054516,12.0833,0,0.551881,0.765584,TRUE
+Cucumbers — Full xreg,ar2,-0.225339,0.064784,-3.4783,5e-4,-0.352315,-0.098362,TRUE
+Cucumbers — Full xreg,ar3,0.232891,0.063876,3.646,3e-4,0.107694,0.358088,TRUE
+Cucumbers — Full xreg,ar4,-0.110016,0.054765,-2.0089,0.0445,-0.217355,-0.002677,TRUE
+Cucumbers — Full xreg,ma1,-0.999999,0.007682,-130.1702,0,-1.015057,-0.984942,TRUE
+Cucumbers — Full xreg,api_energy_and_lubricants,0.008488,0.003833,2.2146,0.0268,9.76e-4,0.016,TRUE
+Cucumbers — Full xreg,api_fertilisers_and_soil_improvers,-0.002662,0.001178,-2.2592,0.0239,-0.004971,-3.53e-4,TRUE
+Cucumbers — Full xreg,api_plant_protection_products,-3.1e-4,0.003817,-0.0813,0.9352,-0.007792,0.007171,FALSE
+Cucumbers — Full xreg,api_fresh_fruit,0.001583,0.001771,0.8943,0.3712,-0.001887,0.005053,FALSE
+Cucumbers — Full xreg,api_fresh_vegetables,0.004433,0.003935,1.1265,0.26,-0.00328,0.012146,FALSE
+Cucumbers — Full xreg,fuel_petrol_price,0.005117,0.006152,0.8317,0.4056,-0.006941,0.017174,FALSE
+Cucumbers — Full xreg,fuel_diesel_price,-0.005353,0.004674,-1.1453,0.2521,-0.014514,0.003808,FALSE
+Cucumbers — Full xreg,sppi_road_freight,0.003067,0.006902,0.4443,0.6568,-0.010461,0.016595,FALSE
+Cucumbers — Full xreg,shock_2021q4_2023q1,5.2e-5,0.132377,4e-4,0.9997,-0.259407,0.259511,FALSE
+Cucumbers — Full xreg,post_shock,-0.318251,0.172864,-1.841,0.0656,-0.657064,0.020562,FALSE
+Cucumbers — Dummies only,ar1,0.679106,0.053975,12.5818,0,0.573314,0.784897,TRUE
+Cucumbers — Dummies only,ar2,-0.176057,0.064357,-2.7356,0.0062,-0.302198,-0.049917,TRUE
+Cucumbers — Dummies only,ar3,0.234211,0.06398,3.6607,3e-4,0.108809,0.359612,TRUE
+Cucumbers — Dummies only,ar4,-0.103907,0.054632,-1.9019,0.0572,-0.210986,0.003172,FALSE
+Cucumbers — Dummies only,ma1,-0.999992,0.015895,-62.9142,0,-1.031145,-0.968839,TRUE
+Cucumbers — Dummies only,shock_2021q4_2023q1,0.278056,0.077994,3.5651,4e-4,0.125188,0.430923,TRUE
+Cucumbers — Dummies only,post_shock,0.204373,0.071234,2.8691,0.0041,0.064756,0.343991,TRUE
+Strawberries — Full xreg,ar1,0.574428,0.123692,4.644,0,0.331993,0.816864,TRUE
+Strawberries — Full xreg,ma1,-1.127953,0.118799,-9.4946,0,-1.360799,-0.895108,TRUE
+Strawberries — Full xreg,ma2,0.241599,0.108383,2.2291,0.0258,0.029167,0.454031,TRUE
+Strawberries — Full xreg,ma3,0.064881,0.086249,0.7522,0.4519,-0.104168,0.23393,FALSE
+Strawberries — Full xreg,ma4,-0.178526,0.072837,-2.451,0.0142,-0.321287,-0.035765,TRUE
+Strawberries — Full xreg,api_energy_and_lubricants,0.058386,0.037533,1.5556,0.1198,-0.015178,0.131951,FALSE
+Strawberries — Full xreg,api_fertilisers_and_soil_improvers,-0.011577,0.010716,-1.0803,0.28,-0.03258,0.009427,FALSE
+Strawberries — Full xreg,api_plant_protection_products,-0.002765,0.035367,-0.0782,0.9377,-0.072084,0.066555,FALSE
+Strawberries — Full xreg,api_fresh_fruit,0.03252,0.015761,2.0633,0.0391,0.001627,0.063412,TRUE
+Strawberries — Full xreg,api_fresh_vegetables,0.020045,0.032156,0.6234,0.5331,-0.042981,0.083071,FALSE
+Strawberries — Full xreg,fuel_petrol_price,0.046512,0.052113,0.8925,0.3721,-0.055629,0.148654,FALSE
+Strawberries — Full xreg,fuel_diesel_price,-0.041752,0.038836,-1.0751,0.2823,-0.117872,0.034367,FALSE
+Strawberries — Full xreg,sppi_road_freight,-0.087644,0.058446,-1.4996,0.1337,-0.202198,0.02691,FALSE
+Strawberries — Full xreg,shock_2021q4_2023q1,-1.15659,1.081373,-1.0696,0.2848,-3.276081,0.962901,FALSE
+Strawberries — Full xreg,post_shock,-1.052363,1.358977,-0.7744,0.4387,-3.715958,1.611232,FALSE
+Strawberries — Dummies only,ar1,0.52508,0.114277,4.5948,0,0.301097,0.749064,TRUE
+Strawberries — Dummies only,ma1,-1.098042,0.115594,-9.4991,0,-1.324607,-0.871477,TRUE
+Strawberries — Dummies only,ma2,0.262021,0.10814,2.423,0.0154,0.050066,0.473976,TRUE
+Strawberries — Dummies only,ma3,0.079315,0.084988,0.9332,0.3507,-0.087262,0.245892,FALSE
+Strawberries — Dummies only,ma4,-0.211276,0.066715,-3.1669,0.0015,-0.342036,-0.080515,TRUE
+Strawberries — Dummies only,shock_2021q4_2023q1,0.178634,0.791336,0.2257,0.8214,-1.372384,1.729652,FALSE
+Strawberries — Dummies only,post_shock,0.125003,0.998513,0.1252,0.9004,-1.832082,2.082089,FALSE
+Tomatoes (Round) — Full xreg,ar1,-0.250561,0.065748,-3.8109,1e-4,-0.379426,-0.121696,TRUE
+Tomatoes (Round) — Full xreg,ar2,0.698321,0.058926,11.8509,0,0.582827,0.813815,TRUE
+Tomatoes (Round) — Full xreg,ma1,-0.021234,0.03892,-0.5456,0.5854,-0.097517,0.055049,FALSE
+Tomatoes (Round) — Full xreg,ma2,-0.978765,0.038872,-25.179,0,-1.054955,-0.902575,TRUE
+Tomatoes (Round) — Full xreg,api_energy_and_lubricants,0.012935,0.007857,1.6463,0.0997,-0.002465,0.028334,FALSE
+Tomatoes (Round) — Full xreg,api_fertilisers_and_soil_improvers,-0.001549,0.0022,-0.7042,0.4813,-0.00586,0.002762,FALSE
+Tomatoes (Round) — Full xreg,api_plant_protection_products,-0.006147,0.008158,-0.7534,0.4512,-0.022136,0.009843,FALSE
+Tomatoes (Round) — Full xreg,api_fresh_fruit,0.007811,0.003671,2.1274,0.0334,6.15e-4,0.015007,TRUE
+Tomatoes (Round) — Full xreg,api_fresh_vegetables,-0.004888,0.006949,-0.7034,0.4818,-0.018507,0.008732,FALSE
+Tomatoes (Round) — Full xreg,fuel_petrol_price,0.033785,0.011668,2.8955,0.0038,0.010916,0.056655,TRUE
+Tomatoes (Round) — Full xreg,fuel_diesel_price,-0.028375,0.008658,-3.2773,0.001,-0.045344,-0.011405,TRUE
+Tomatoes (Round) — Full xreg,sppi_road_freight,0.024069,0.014185,1.6968,0.0897,-0.003734,0.051871,FALSE
+Tomatoes (Round) — Full xreg,shock_2021q4_2023q1,-0.878195,0.238577,-3.681,2e-4,-1.345806,-0.410584,TRUE
+Tomatoes (Round) — Full xreg,post_shock,-0.874488,0.298379,-2.9308,0.0034,-1.459311,-0.289666,TRUE
+Tomatoes (Round) — Dummies only,ar1,1.609381,0.042999,37.4282,0,1.525102,1.693659,TRUE
+Tomatoes (Round) — Dummies only,ar2,-0.67397,0.042209000000000003,-15.9674,0,-0.7567,-0.59124,TRUE
+Tomatoes (Round) — Dummies only,ma1,-1.998061,NA,NA,NA,NA,NA,NA
+Tomatoes (Round) — Dummies only,ma2,0.998277,NA,NA,NA,NA,NA,NA
+Tomatoes (Round) — Dummies only,shock_2021q4_2023q1,0.262983,0.021526,12.2168,0,0.220792,0.305175,TRUE
+Tomatoes (Round) — Dummies only,post_shock,0.200069,0.016419,12.1853,0,0.167888,0.23225,TRUE
+Tomatoes (Vine) — Full xreg,ar1,0.58806,0.05732,10.2592,0,0.475712,0.700408,TRUE
+Tomatoes (Vine) — Full xreg,ma1,-1,0.014386,-69.5129,0,-1.028196,-0.971803,TRUE
+Tomatoes (Vine) — Full xreg,api_energy_and_lubricants,-0.003505,0.01152,-0.3042,0.761,-0.026085,0.019075,FALSE
+Tomatoes (Vine) — Full xreg,api_fertilisers_and_soil_improvers,0.003285,0.003271,1.0044,0.3152,-0.003126,0.009696,FALSE
+Tomatoes (Vine) — Full xreg,api_plant_protection_products,0.031683,0.012375,2.5603,0.0105,0.007428,0.055938,TRUE
+Tomatoes (Vine) — Full xreg,api_fresh_fruit,-0.005116,0.005456,-0.9378,0.3484,-0.01581,0.005577,FALSE
+Tomatoes (Vine) — Full xreg,api_fresh_vegetables,-0.023003,0.010461,-2.1989,0.0279,-0.043507,-0.002499,TRUE
+Tomatoes (Vine) — Full xreg,fuel_petrol_price,0.014151,0.016151,0.8762,0.3809,-0.017505,0.045807,FALSE
+Tomatoes (Vine) — Full xreg,fuel_diesel_price,-0.022592,0.012643,-1.787,0.0739,-0.047372,0.002187,FALSE
+Tomatoes (Vine) — Full xreg,sppi_road_freight,0.010504,0.024521,0.4284,0.6684,-0.037558,0.058566,FALSE
+Tomatoes (Vine) — Full xreg,shock_2021q4_2023q1,-0.741948,0.354644,-2.0921,0.0364,-1.437051,-0.046845,TRUE
+Tomatoes (Vine) — Full xreg,post_shock,0.31857,0.426182,0.7475,0.4548,-0.516746,1.153886,FALSE
+Tomatoes (Vine) — Dummies only,ar1,0.543372,0.056722,9.5796,0,0.432197,0.654548,TRUE
+Tomatoes (Vine) — Dummies only,ma1,-0.968732,0.019084,-50.7605,0,-1.006138,-0.931327,TRUE
+Tomatoes (Vine) — Dummies only,shock_2021q4_2023q1,-0.431843,0.24229,-1.7823,0.0747,-0.90673,0.043044,FALSE
+Tomatoes (Vine) — Dummies only,post_shock,0.272233,0.329416,0.8264,0.4086,-0.373422,0.917888,FALSE
+Asparagus — Full xreg,ar1,0.943752,0.09533,9.8999,0,0.756906,1.130598,TRUE
+Asparagus — Full xreg,ar2,-0.232329,0.099835,-2.3271,0.02,-0.428006,-0.036653,TRUE
+Asparagus — Full xreg,ma1,-1,0.025678,-38.9444,0,-1.050328,-0.949671,TRUE
+Asparagus — Full xreg,api_energy_and_lubricants,-0.155522,0.074939,-2.0753,0.038,-0.302403,-0.008641,TRUE
+Asparagus — Full xreg,api_fertilisers_and_soil_improvers,0.060952,0.029,2.1018,0.0356,0.004113,0.117792,TRUE
+Asparagus — Full xreg,api_plant_protection_products,0.185165,0.094609,1.9572,0.0503,-2.68e-4,0.370599,FALSE
+Asparagus — Full xreg,api_fresh_fruit,-0.064006,0.032066,-1.9961,0.0459,-0.126855,-0.001157,TRUE
+Asparagus — Full xreg,api_fresh_vegetables,-0.142356,0.089826,-1.5848,0.113,-0.318415,0.033704,FALSE
+Asparagus — Full xreg,fuel_petrol_price,-0.063815,0.141289,-0.4517,0.6515,-0.340741,0.213111,FALSE
+Asparagus — Full xreg,fuel_diesel_price,-0.376914,0.117278,-3.2138,0.0013,-0.606779,-0.147049,TRUE
+Asparagus — Full xreg,sppi_road_freight,2.072621,0.477943,4.3365,0,1.135852,3.00939,TRUE
+Asparagus — Full xreg,shock_2021q4_2023q1,-23.948592,7.359438,-3.2541,0.0011,-38.373091,-9.524093,TRUE
+Asparagus — Full xreg,post_shock,-27.635477,7.561883,-3.6546,3e-4,-42.456767,-12.814187,TRUE
+Asparagus — Dummies only,ar1,0.887409,0.092368,9.6073,0,0.706367,1.068451,TRUE
+Asparagus — Dummies only,ar2,-0.150645,0.096364,-1.5633,0.118,-0.339519,0.038229,FALSE
+Asparagus — Dummies only,ma1,-0.999997,0.023682,-42.2266,0,-1.046413,-0.953581,TRUE
+Asparagus — Dummies only,shock_2021q4_2023q1,4.900931,1.88931,2.594,0.0095,1.197883,8.603979,TRUE
+Asparagus — Dummies only,post_shock,3.479528,1.677383,2.0744,0.038,0.191858,6.767199,TRUE
+Capsicums (Red) — Full xreg,ar1,-0.371121,0.349265,-1.0626,0.288,-1.055681,0.313439,FALSE
+Capsicums (Red) — Full xreg,ma1,0.136686,0.377936,0.3617,0.7176,-0.604069,0.877441,FALSE
+Capsicums (Red) — Full xreg,api_energy_and_lubricants,-0.01588,0.010753,-1.4768,0.1397,-0.036955,0.005196,FALSE
+Capsicums (Red) — Full xreg,api_fertilisers_and_soil_improvers,0.007219,0.003427,2.1068,0.0351,5.03e-4,0.013936,TRUE
+Capsicums (Red) — Full xreg,api_plant_protection_products,-0.020025,0.018698,-1.071,0.2842,-0.056673,0.016622,FALSE
+Capsicums (Red) — Full xreg,api_fresh_fruit,0.002922,0.004904,0.5959,0.5512,-0.006689,0.012533,FALSE
+Capsicums (Red) — Full xreg,api_fresh_vegetables,0.037402,0.012312,3.0377,0.0024,0.01327,0.061534,TRUE
+Capsicums (Red) — Full xreg,fuel_petrol_price,0.055152,0.019893,2.7725,0.0056,0.016162,0.094142,TRUE
+Capsicums (Red) — Full xreg,fuel_diesel_price,-0.043605,0.013404,-3.2532,0.0011,-0.069876,-0.017334,TRUE
+Capsicums (Red) — Full xreg,sppi_road_freight,-0.001033,0.01855,-0.0557,0.9556,-0.037392,0.035325,FALSE
+Capsicums (Red) — Full xreg,shock_2021q4_2023q1,-0.047081,0.357281,-0.1318,0.8952,-0.747352,0.653191,FALSE
+Capsicums (Red) — Full xreg,post_shock,1.644662,0.562051,2.9262,0.0034,0.543041,2.746282,TRUE
+Capsicums (Red) — Dummies only,ar1,0.792632,0.054279,14.603,0,0.686246,0.899018,TRUE
+Capsicums (Red) — Dummies only,ma1,-1,0.022573,-44.3006,0,-1.044243,-0.955756,TRUE
+Capsicums (Red) — Dummies only,shock_2021q4_2023q1,-0.181473,0.240206,-0.7555,0.45,-0.652276,0.289329,FALSE
+Capsicums (Red) — Dummies only,post_shock,0.685854,0.260702,2.6308,0.0085,0.174878,1.19683,TRUE
+Capsicums (Green) — Full xreg,ar1,0.403033,0.251465,1.6027,0.109,-0.089839,0.895905,FALSE
+Capsicums (Green) — Full xreg,ma1,-0.712294,0.207833,-3.4272,6e-4,-1.119648,-0.304941,TRUE
+Capsicums (Green) — Full xreg,api_energy_and_lubricants,0.010633,0.011048,0.9624,0.3358,-0.011022,0.032287,FALSE
+Capsicums (Green) — Full xreg,api_fertilisers_and_soil_improvers,-0.003877,0.003693,-1.0498,0.2938,-0.011115,0.003361,FALSE
+Capsicums (Green) — Full xreg,api_plant_protection_products,-0.059523,0.033047,-1.8012,0.0717,-0.124296,0.005249,FALSE
+Capsicums (Green) — Full xreg,api_fresh_fruit,0.002268,0.006157,0.3683,0.7126,-0.0098,0.014335,FALSE
+Capsicums (Green) — Full xreg,api_fresh_vegetables,0.009861,0.013072,0.7544,0.4506,-0.015761,0.035483,FALSE
+Capsicums (Green) — Full xreg,fuel_petrol_price,0.010923,0.019291,0.5662,0.5712,-0.026887,0.048733,FALSE
+Capsicums (Green) — Full xreg,fuel_diesel_price,-0.032822,0.013104,-2.5047,0.0123,-0.058506,-0.007138,TRUE
+Capsicums (Green) — Full xreg,sppi_road_freight,0.061638,0.024387,2.5275,0.0115,0.013839,0.109436,TRUE
+Capsicums (Green) — Full xreg,shock_2021q4_2023q1,0.270637,0.421006,0.6428,0.5203,-0.554535,1.095808,FALSE
+Capsicums (Green) — Full xreg,post_shock,1.719058,0.537099,3.2006,0.0014,0.666344,2.771772,TRUE
+Capsicums (Green) — Dummies only,ar1,0.561754,0.317221,1.7709,0.0766,-0.059998,1.183507,FALSE
+Capsicums (Green) — Dummies only,ma1,-0.816409,0.255424,-3.1963,0.0014,-1.317041,-0.315777,TRUE
+Capsicums (Green) — Dummies only,shock_2021q4_2023q1,0.145562,0.342053,0.4256,0.6704,-0.524862,0.815987,FALSE
+Capsicums (Green) — Dummies only,post_shock,1.703365,0.558036,3.0524,0.0023,0.609614,2.797116,TRUE
+Curly kale — Full xreg,ar1,-0.929124,0.119442,-7.7789,0,-1.16323,-0.695019,TRUE
+Curly kale — Full xreg,ar2,-0.777531,0.087563,-8.8797,0,-0.949155,-0.605907,TRUE
+Curly kale — Full xreg,ma1,0.74609,0.143905,5.1846,0,0.464036,1.028143,TRUE
+Curly kale — Full xreg,ma2,0.605498,0.117992,5.1317,0,0.374233,0.836763,TRUE
+Curly kale — Full xreg,api_energy_and_lubricants,-0.001389,0.005925,-0.2344,0.8146,-0.013002,0.010224,FALSE
+Curly kale — Full xreg,api_fertilisers_and_soil_improvers,0.00102,0.001944,0.5244,0.6,-0.002791,0.00483,FALSE
+Curly kale — Full xreg,api_plant_protection_products,0.002318,0.018091,0.1281,0.8981,-0.03314,0.037776,FALSE
+Curly kale — Full xreg,api_fresh_fruit,-0.001436,0.003345,-0.4293,0.6677,-0.007993,0.005121,FALSE
+Curly kale — Full xreg,api_fresh_vegetables,0.002988,0.007919,0.3774,0.7059,-0.012534,0.018511,FALSE
+Curly kale — Full xreg,fuel_petrol_price,0.002128,0.0122,0.1745,0.8615,-0.021784,0.026041,FALSE
+Curly kale — Full xreg,fuel_diesel_price,6.94e-4,0.008098,0.0857,0.9317,-0.015178,0.016566,FALSE
+Curly kale — Full xreg,sppi_road_freight,-0.015426,0.01167,-1.3219,0.1862,-0.038299,0.007446,FALSE
+Curly kale — Full xreg,shock_2021q4_2023q1,0.054378,0.232707,0.2337,0.8152,-0.401727,0.510483,FALSE
+Curly kale — Full xreg,post_shock,0.230089,0.304959,0.7545,0.4506,-0.367632,0.827809,FALSE
+Curly kale — Dummies only,ar1,-0.916092,0.11958,-7.6609,0,-1.150469,-0.681715,TRUE
+Curly kale — Dummies only,ar2,-0.784633,0.083284,-9.4212,0,-0.947869,-0.621397,TRUE
+Curly kale — Dummies only,ma1,0.735558,0.142297,5.1692,0,0.456656,1.01446,TRUE
+Curly kale — Dummies only,ma2,0.619674,0.114361,5.4186,0,0.395527,0.843822,TRUE
+Curly kale — Dummies only,shock_2021q4_2023q1,0.103421,0.199084,0.5195,0.6034,-0.286784,0.493626,FALSE
+Curly kale — Dummies only,post_shock,0.280201,0.281794,0.9943,0.3201,-0.272114,0.832516,FALSE
+Pak choi — Full xreg,ar1,0.634539,0.072637,8.7357,0,0.49217,0.776907,TRUE
+Pak choi — Full xreg,ma1,-0.928141,0.039472,-23.5136,0,-1.005507,-0.850775,TRUE
+Pak choi — Full xreg,sma1,0.117445,0.075207,1.5616,0.1184,-0.029961,0.264851,FALSE
+Pak choi — Full xreg,api_energy_and_lubricants,0.002815,0.005118,0.5501,0.5823,-0.007216,0.012847,FALSE
+Pak choi — Full xreg,api_fertilisers_and_soil_improvers,-7.7e-4,0.001727,-0.446,0.6556,-0.004156,0.002615,FALSE
+Pak choi — Full xreg,api_plant_protection_products,0.012632000000000001,0.014964,0.8442,0.3986,-0.016697,0.041961,FALSE
+Pak choi — Full xreg,api_fresh_fruit,-2.95e-4,0.002842,-0.1038,0.9173,-0.005866,0.005276,FALSE
+Pak choi — Full xreg,api_fresh_vegetables,-0.010385,0.006722,-1.5449,0.1224,-0.023561,0.00279,FALSE
+Pak choi — Full xreg,fuel_petrol_price,0.006018,0.010318,0.5832,0.5597,-0.014206,0.026242,FALSE
+Pak choi — Full xreg,fuel_diesel_price,-0.003412,0.006818,-0.5004,0.6168,-0.016775,0.009952,FALSE
+Pak choi — Full xreg,sppi_road_freight,0.02821,0.00977,2.8873,0.0039,0.00906,0.04736,TRUE
+Pak choi — Full xreg,shock_2021q4_2023q1,-0.014071,0.187182,-0.0752,0.9401,-0.380948,0.352805,FALSE
+Pak choi — Full xreg,post_shock,-0.048464,0.248162,-0.1953,0.8452,-0.534861,0.437933,FALSE
+Pak choi — Dummies only,ar1,0.65444,0.095378,6.8615,0,0.467499,0.841382,TRUE
+Pak choi — Dummies only,ma1,-0.901819,0.061879,-14.574,0,-1.023101,-0.780537,TRUE
+Pak choi — Dummies only,sma1,0.121836,0.071824,1.6963,0.0898,-0.018938,0.262611,FALSE
+Pak choi — Dummies only,shock_2021q4_2023q1,0.084492,0.178442,0.4735,0.6359,-0.265254,0.434238,FALSE
+Pak choi — Dummies only,post_shock,0.01353,0.255682,0.0529,0.9578,-0.487606,0.514666,FALSE
+Spring greens — Full xreg,ar1,-0.246148,0.057842,-4.2556,0,-0.359517,-0.132779,TRUE
+Spring greens — Full xreg,api_energy_and_lubricants,6.16e-4,0.004286,0.1437,0.8858,-0.007785,0.009016,FALSE
+Spring greens — Full xreg,api_fertilisers_and_soil_improvers,9.6e-5,0.001405,0.0682,0.9457,-0.002659,0.00285,FALSE
+Spring greens — Full xreg,api_plant_protection_products,-0.002512,0.013037,-0.1927,0.8472,-0.028064,0.023041,FALSE
+Spring greens — Full xreg,api_fresh_fruit,0.001401,0.002429,0.5768,0.5641,-0.00336,0.006162,FALSE
+Spring greens — Full xreg,api_fresh_vegetables,-0.001156,0.005704,-0.2027,0.8394,-0.012335,0.010023,FALSE
+Spring greens — Full xreg,fuel_petrol_price,0.003479,0.008863,0.3925,0.6947,-0.013892,0.02085,FALSE
+Spring greens — Full xreg,fuel_diesel_price,-0.001611,0.005857,-0.2751,0.7833,-0.013091,0.009869,FALSE
+Spring greens — Full xreg,sppi_road_freight,1.26e-4,0.008509,0.0148,0.9882,-0.016552,0.016803,FALSE
+Spring greens — Full xreg,shock_2021q4_2023q1,0.011047,0.170637,0.0647,0.9484,-0.3234,0.345495,FALSE
+Spring greens — Full xreg,post_shock,-0.083488,0.226968,-0.3678,0.713,-0.528344,0.361369,FALSE
+Spring greens — Dummies only,ar1,-0.249509,0.057417,-4.3456,0,-0.362046,-0.136972,TRUE
+Spring greens — Dummies only,shock_2021q4_2023q1,0.019764,0.145074,0.1362,0.8916,-0.264581,0.304108,FALSE
+Spring greens — Dummies only,post_shock,-0.076382,0.208261,-0.3668,0.7138,-0.484573,0.331809,FALSE
