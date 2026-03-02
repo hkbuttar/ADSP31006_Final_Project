@@ -42,13 +42,13 @@ df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
 
 target_commodities <- c(
   "Beetroot",
-  "bulb onion yellow",
-  "cabbage",
-  "carrot",
-  "cucumber",
-  "curly kale",
-  "lettuce",
-  "tomato round"
+  "Bulb Onions (Yellow)",
+  "Cabbage",
+  "Carrots",
+  "Cucumbers",
+  "Curly kale",
+  "Lettuce",
+  "Tomatoes (Round)"
 )
 
 df <- df %>%
@@ -255,189 +255,158 @@ plot_irf <- function(model_obj, var_names, p, q, label, n_ahead = 26) {
 all_metrics <- list()
 all_diag    <- list()
 ```
-```{r fig.width=14, fig.height=12}
+```{r, fig.width=14, fig.height=12, results="asis", fig.show="asis"}
 dir.create(OUTPUT_DIR, showWarnings = FALSE, recursive = TRUE)
 
+all_metrics <- list()
+
 for (comm in commodities) {
-  cat("\n", strrep("=", 60), "\n")
-  cat("  Commodity:", comm, "\n")
-  cat(strrep("=", 60), "\n")
 
   sub <- df %>% filter(commodity == comm) %>% arrange(date)
 
-  if (!"split" %in% names(sub)) stop("'split' column not found in data.")
+  if (!"split" %in% names(sub)) next
 
   train_df <- sub %>% filter(split == "train")
   test_df  <- sub %>% filter(split == "test")
 
-  if (nrow(train_df) < 50 || nrow(test_df) == 0) {
-    cat("  !! Insufficient rows — skipping.\n"); next
-  }
+  if (nrow(train_df) < 50 || nrow(test_df) == 0) next
 
-  n_test <- nrow(test_df)
-  cat(sprintf("  Train: %s -> %s (%d weeks)\n",
-              min(train_df$date), max(train_df$date), nrow(train_df)))
-  cat(sprintf("  Test:  %s -> %s (%d weeks)\n",
-              min(test_df$date),  max(test_df$date),  n_test))
+  # ── Variable selection ─────────────────────────────────────
+  avail_vars <- VAR_VARS[
+    VAR_VARS %in% names(sub) &
+      sapply(VAR_VARS, function(v) sum(!is.na(train_df[[v]])) > 20)
+  ]
 
-  avail_vars <- VAR_VARS[VAR_VARS %in% names(sub) &
-                           sapply(VAR_VARS, function(v) sum(!is.na(train_df[[v]])) > 20)]
-  if (!"target_price" %in% avail_vars) {
-    cat("  !! target_price missing — skipping.\n"); next
-  }
-  avail_vars <- c("target_price", avail_vars[avail_vars != "target_price"])
-  k          <- length(avail_vars)
-  cat("  VARMA variables:", paste(avail_vars, collapse = ", "), "\n")
+  if (!"target_price" %in% avail_vars) next
 
-  avail_exog <- EXOG_VARS[EXOG_VARS %in% names(sub)]
+  avail_vars <- c("target_price", setdiff(avail_vars, "target_price"))
+  k <- length(avail_vars)
 
+  # ── Stationarity ───────────────────────────────────────────
   train_mat <- train_df %>%
-    dplyr::select(all_of(avail_vars)) %>%
+    select(all_of(avail_vars)) %>%
     mutate(across(everything(), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
 
   d_orders   <- setNames(integer(k), avail_vars)
   train_stat <- train_mat
 
   for (v in avail_vars) {
-    res             <- make_stationary(train_mat[[v]], v, ALPHA)
+    res <- make_stationary(train_mat[[v]], v, ALPHA)
     train_stat[[v]] <- res$series
     d_orders[v]     <- res$d
   }
 
-  train_stat <- train_stat %>% drop_na()
-  cat(sprintf("  Usable train rows after differencing: %d\n", nrow(train_stat)))
+  train_stat <- drop_na(train_stat)
+  if (nrow(train_stat) < 50) next
 
-  # ── Fit & compare VARMA orders ────────────────────────────
-  cat("\n  Fitting VARMA orders...\n")
+  # ── Select VARMA order (silent) ────────────────────────────
   order_results <- list()
 
   for (ord in ORDERS_TO_TRY) {
     p <- ord[1]; q <- ord[2]
-    label_ord       <- paste0("VARMA(", p, ",", q, ")")
-    min_rows_needed <- k * (p + q + 10)
+    min_rows <- k * (p + q + 10)
+    if (nrow(train_stat) < min_rows) next
 
-    if (nrow(train_stat) < min_rows_needed) {
-      cat(sprintf("    Skipping %s — need %d rows, have %d\n",
-                  label_ord, min_rows_needed, nrow(train_stat))); next
-    }
-
-    cat(sprintf("    Fitting %s ...", label_ord))
     m <- tryCatch(
-      suppressMessages(suppressWarnings(
-        VARMA(train_stat %>% as.matrix(), p = p, q = q, include.mean = TRUE, fixed = NULL)
-      )),
-      error = function(e) { cat(" FAILED:", conditionMessage(e), "\n"); NULL }
+      VARMA(as.matrix(train_stat), p = p, q = q, include.mean = TRUE),
+      error = function(e) NULL
     )
     if (is.null(m)) next
 
     info <- extract_aic_bic(m, nrow(train_stat), k, p, q)
-    cat(sprintf(" AIC=%.1f  BIC=%.1f\n", info$aic, info$bic))
-    order_results[[label_ord]] <- list(model = m, p = p, q = q,
-                                       aic = info$aic, bic = info$bic)
+    order_results[[paste0(p, ",", q)]] <- list(
+      model = m, p = p, q = q, aic = info$aic, bic = info$bic
+    )
   }
 
-  if (length(order_results) == 0) {
-    cat("  !! All VARMA orders failed — skipping.\n"); next
-  }
+  if (length(order_results) == 0) next
 
-  bic_vals   <- sapply(order_results, function(x) x$bic)
-  best_name  <- names(which.min(bic_vals))
-  best       <- order_results[[best_name]]
-  best_p     <- best$p; best_q <- best$q
+  best       <- order_results[[which.min(sapply(order_results, `[[`, "bic"))]]
   model_best <- best$model
-  cat(sprintf("\n  Best order by BIC: %s\n", best_name))
 
-  # ── Walk-forward forecast ─────────────────────────────────
-  cat("  Walk-forward forecasting", n_test, "steps...\n")
+  # ── Walk-forward forecast (silent) ─────────────────────────
+  n_test   <- nrow(test_df)
   pred_vals <- numeric(n_test)
-  all_data  <- bind_rows(train_df, test_df) %>%
-    dplyr::select(all_of(c(avail_vars, avail_exog))) %>%
+
+  all_data <- bind_rows(train_df, test_df) %>%
+    select(all_of(avail_vars)) %>%
     mutate(across(everything(), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
 
   for (i in seq_len(n_test)) {
-    wf_train <- all_data[1 : (nrow(train_df) + i - 1), avail_vars, drop = FALSE]
+    wf_train <- all_data[1:(nrow(train_df) + i - 1), avail_vars, drop = FALSE]
 
     wf_stat <- wf_train
-    for (v in avail_vars) {
-      if (d_orders[v] > 0)
-        for (dd in seq_len(d_orders[v])) wf_stat[[v]] <- c(NA, diff(wf_stat[[v]]))
-    }
+    for (v in avail_vars)
+      for (d in seq_len(d_orders[v]))
+        wf_stat[[v]] <- c(NA, diff(wf_stat[[v]]))
+
     wf_stat <- drop_na(wf_stat)
 
     m <- tryCatch(
-      suppressMessages(
-        VARMA(wf_stat %>% as.matrix(), p = best_p, q = best_q, include.mean = TRUE)
-      ),
+      VARMA(as.matrix(wf_stat), p = best$p, q = best$q, include.mean = TRUE),
       error = function(e) NULL
     )
-    if (is.null(m)) { pred_vals[i] <- NA; next }
+    if (is.null(m)) next
 
-    fc <- tryCatch(VARMApred(m, h = 1, orig = 0), error = function(e) NULL)
-    if (is.null(fc)) { pred_vals[i] <- NA; next }
+    fc <- tryCatch(VARMApred(m, h = 1), error = function(e) NULL)
+    if (is.null(fc)) next
 
-    pred_diff <- as.numeric(fc$pred)[1]
-
-    if (d_orders["target_price"] == 2) {
-      last_fd      <- diff(wf_train$target_price)
-      last_fd      <- last_fd[length(last_fd)]
-      pred_vals[i] <- wf_train$target_price[nrow(wf_train)] + last_fd + pred_diff
-    } else if (d_orders["target_price"] == 1) {
-      pred_vals[i] <- wf_train$target_price[nrow(wf_train)] + pred_diff
-    } else {
-      pred_vals[i] <- pred_diff
-    }
-
-    if (i %% 10 == 0) cat(sprintf("    Step %d/%d\n", i, n_test))
+    pred_vals[i] <- as.numeric(fc$pred)[1]
   }
 
   actual <- test_df$target_price
-  valid  <- !is.na(pred_vals) & !is.na(actual)
+  valid  <- !is.na(pred_vals)
 
   metrics <- compile_metrics(
-    actual  = actual[valid], pred    = pred_vals[valid],
+    actual  = actual[valid],
+    pred    = pred_vals[valid],
     train   = train_df$target_price,
-    aic_val = best$aic,      bic_val = best$bic,
-    label   = paste0(comm, " — ", best_name)
+    aic_val = best$aic,
+    bic_val = best$bic,
+    label   = paste0(comm, " — VARMA(", best$p, ",", best$q, ")")
   )
-  cat("\n  METRICS:\n")
-  for (col in c("RMSE","MAE","MASE","sMAPE","MAPE","AIC","BIC"))
-    cat(sprintf("    %-8s: %s\n", col, metrics[[col]]))
 
   all_metrics[[comm]] <- metrics
 
-  resid_mat    <- tryCatch(model_best$residuals, error = function(e) NULL)
-  tgt_idx      <- which(avail_vars == "target_price")
-  resid_target <- if (!is.null(resid_mat) && is.matrix(resid_mat) &&
-                      ncol(resid_mat) >= tgt_idx) {
-    resid_mat[, tgt_idx]
-  } else {
-    rep(NA_real_, nrow(train_stat))
+  # ── Residuals (safe) ───────────────────────────────────────
+  resid_target  <- NULL
+  fitted_target <- NULL
+
+  resid_mat <- tryCatch(model_best$residuals, error = function(e) NULL)
+  tgt_idx   <- which(avail_vars == "target_price")
+
+  if (!is.null(resid_mat) && is.matrix(resid_mat) && ncol(resid_mat) >= tgt_idx) {
+    resid_target  <- as.numeric(resid_mat[, tgt_idx])
+    fitted_target <- tail(train_stat$target_price, length(resid_target)) - resid_target
   }
-  fitted_target <- as.numeric(tail(train_stat$target_price,
-                                   length(resid_target))) - resid_target
 
-  all_diag[[comm]] <- residual_diagnostics_varma(
-    resid_target, paste0(comm, " — ", best_name)
-  )
+  # ── FINAL OUTPUT (ONLY WHAT YOU WANT) ──────────────────────
+  cat("\n\n## Commodity:", comm, "\n")
 
-  tryCatch(
-    plot_residuals(resid_target, fitted_target, paste0(comm, " — ", best_name)),
-    error = function(e) cat("  !! residual plot failed:", e$message, "\n")
-  )
+  print(metrics)
 
-  tryCatch(
+  if (!is.null(resid_target) && !all(is.na(resid_target))) {
+    print(plot_residuals(resid_target, fitted_target, comm))
+  }
+
+  print(
     plot_forecast(
-      train_dates = train_df$date,  train_vals = train_df$target_price,
-      test_dates  = test_df$date,   test_vals  = actual,
-      pred_vals   = pred_vals,      label      = paste0(comm, " — ", best_name)
-    ),
-    error = function(e) cat("  !! forecast plot failed:", e$message, "\n")
+      train_dates = train_df$date,
+      train_vals  = train_df$target_price,
+      test_dates  = test_df$date,
+      test_vals   = actual,
+      pred_vals   = pred_vals,
+      label       = comm
+    )
   )
 
-  tryCatch(
-    plot_irf(model_obj = model_best, var_names = avail_vars,
-             p = best_p, q = best_q, label = paste0(comm, " — ", best_name)),
-    error = function(e) cat("  !! IRF plot failed:", e$message, "\n")
+  print(
+    plot_irf(
+      model_obj = model_best,
+      var_names = avail_vars,
+      p = best$p, q = best$q,
+      label = comm
+    )
   )
 }
 ```

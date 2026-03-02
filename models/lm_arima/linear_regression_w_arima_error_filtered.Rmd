@@ -36,13 +36,13 @@ df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
 # ── FILTER TO TARGET COMMODITIES ─────────────────────────────
 target_commodities <- c(
   "Beetroot",
-  "bulb onion yellow",
-  "cabbage",
-  "carrot",
-  "cucumber",
-  "curly kale",
-  "lettuce",
-  "tomato round"
+  "Bulb Onions (Yellow)",
+  "Cabbage",
+  "Carrots",
+  "Cucumbers",
+  "Curly kale",
+  "Lettuce",
+  "Tomatoes (Round)"
 )
 
 df <- df %>%

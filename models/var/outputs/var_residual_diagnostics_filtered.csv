@@ -1,2 +1,9 @@
 model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,normality_p,autocorr_ok,normality_ok
 Beetroot — VAR(1),-0,0.0298,0.0017,0.0038,Shapiro-Wilk,0,FALSE,FALSE
+Bulb Onions (Yellow) — VAR(1),0,0.0684,0.4935,0.214,Shapiro-Wilk,0,TRUE,FALSE
+Cabbage — VAR(1),-0,0.0325,0.0017,0.0048,Shapiro-Wilk,0,FALSE,FALSE
+Carrots — VAR(1),-0,0.0332,0.0109,0.0128,Shapiro-Wilk,0,FALSE,FALSE
+Lettuce — VAR(1),-0,0.0343,0.2228,0.3828,Shapiro-Wilk,0,TRUE,FALSE
+Cucumbers — VAR(1),0,0.2032,0.1136,0.589,Shapiro-Wilk,0,TRUE,FALSE
+Tomatoes (Round) — VAR(1),0,0.2841,0.0203,0.1241,Shapiro-Wilk,0,FALSE,FALSE
+Curly kale — VAR(1),-0,0.207,0,0,Shapiro-Wilk,0,FALSE,FALSE

@@ -2,3 +2,23 @@ model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,nor
 Beetroot — auto.arima,0.002388,0.0296,0.2392,0.2281,Shapiro-Wilk,0,TRUE,FALSE
 "Beetroot — ARIMA(1,1,1)",8e-4,0.0302,0.02,0.0393,Shapiro-Wilk,0,FALSE,FALSE
 "Beetroot — SARIMA(1,1,1)(1,1,1)[52]",1.45e-4,0.0307,0.0029,0.0049,Shapiro-Wilk,0,FALSE,FALSE
+Bulb Onions (Yellow) — auto.arima,7.17e-4,0.0687,0.9382,0.6189,Shapiro-Wilk,0,TRUE,FALSE
+"Bulb Onions (Yellow) — ARIMA(1,1,1)",7.25e-4,0.0691,0.8393,0.3864,Shapiro-Wilk,0,TRUE,FALSE
+"Bulb Onions (Yellow) — SARIMA(1,1,1)(1,1,1)[52]",-3.23e-4,0.0703,0.7367,0.3516,Shapiro-Wilk,0,TRUE,FALSE
+Cabbage — auto.arima,3.08e-4,0.0321,0.9889,0.9656,Shapiro-Wilk,0,TRUE,FALSE
+"Cabbage — ARIMA(1,1,1)",4.65e-4,0.0329,0.0049,0.0042,Shapiro-Wilk,0,FALSE,FALSE
+Carrots — auto.arima,1.96e-4,0.033,0.9986,0.585,Shapiro-Wilk,0,TRUE,FALSE
+"Carrots — ARIMA(1,1,1)",2.39e-4,0.0337,0.0533,0.0082,Shapiro-Wilk,0,TRUE,FALSE
+"Carrots — SARIMA(1,1,1)(1,1,1)[52]",-2.5e-5,0.0349,0.268,0.2697,Shapiro-Wilk,0,TRUE,FALSE
+Lettuce — auto.arima,0.002633,0.0344,0.6431,0.8151,Shapiro-Wilk,0,TRUE,FALSE
+"Lettuce — ARIMA(1,1,1)",0.002604,0.0346,0.1574,0.4062,Shapiro-Wilk,0,TRUE,FALSE
+"Lettuce — SARIMA(1,1,1)(1,1,1)[52]",-3.36e-4,0.0344,0.1382,0.0691,Shapiro-Wilk,0,TRUE,FALSE
+Cucumbers — auto.arima,0.015545,0.2014,0.9753,0.9995,Shapiro-Wilk,0,TRUE,FALSE
+"Cucumbers — ARIMA(1,1,1)",0.015805,0.2056,0.05,0.4206,Shapiro-Wilk,0,TRUE,FALSE
+"Cucumbers — SARIMA(1,1,1)(1,1,1)[52]",0.009436,0.204,0.0384,0.3534,Shapiro-Wilk,0,FALSE,FALSE
+Tomatoes (Round) — auto.arima,0.021754,0.2796,0.921,0.9311,Shapiro-Wilk,0,TRUE,FALSE
+"Tomatoes (Round) — ARIMA(1,1,1)",0.020998,0.2861,0.0143,0.1333,Shapiro-Wilk,0,FALSE,FALSE
+"Tomatoes (Round) — SARIMA(1,1,1)(1,1,1)[52]",0.004381,0.2352,0.017,0.0374,Shapiro-Wilk,0,FALSE,FALSE
+Curly kale — auto.arima,0.006433,0.2049,0.1349,0.1786,Shapiro-Wilk,0,TRUE,FALSE
+"Curly kale — ARIMA(1,1,1)",0.007906,0.2085,0.0013,0.0053,Shapiro-Wilk,0,FALSE,FALSE
+"Curly kale — SARIMA(1,1,1)(1,1,1)[52]",0.001716,0.2165,2e-4,0.0022,Shapiro-Wilk,0,FALSE,FALSE

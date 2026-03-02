@@ -1,3 +1,17 @@
 model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,normality_p,autocorr_ok,normality_ok
 Beetroot — Full xreg,0.002657,0.0288,0.539,0.8146,Shapiro-Wilk,0,TRUE,FALSE
 Beetroot — Dummies only,0.002367,0.0296,0.1633,0.3917,Shapiro-Wilk,0,TRUE,FALSE
+Bulb Onions (Yellow) — Full xreg,5.88e-4,0.0685,0.9184,0.4153,Shapiro-Wilk,0,TRUE,FALSE
+Bulb Onions (Yellow) — Dummies only,4.93e-4,0.0686,0.9351,0.485,Shapiro-Wilk,0,TRUE,FALSE
+Cabbage — Full xreg,3.09e-4,0.0318,0.9725,0.9516,Shapiro-Wilk,0,TRUE,FALSE
+Cabbage — Dummies only,2.37e-4,0.0321,0.9882,0.9764,Shapiro-Wilk,0,TRUE,FALSE
+Carrots — Full xreg,4.42e-4,0.0327,0.9992,0.6759,Shapiro-Wilk,0,TRUE,FALSE
+Carrots — Dummies only,2.67e-4,0.0329,0.9971,0.5748,Shapiro-Wilk,0,TRUE,FALSE
+Lettuce — Full xreg,0.001019,0.0337,0.6215,0.8115,Shapiro-Wilk,0,TRUE,FALSE
+Lettuce — Dummies only,0.002276,0.0343,0.5616,0.7423,Shapiro-Wilk,0,TRUE,FALSE
+Cucumbers — Full xreg,-0.001763,0.1949,0.7328,0.9822,Shapiro-Wilk,0,TRUE,FALSE
+Cucumbers — Dummies only,0.011296,0.1995,0.95,0.9992,Shapiro-Wilk,0,TRUE,FALSE
+Tomatoes (Round) — Full xreg,-0.001148,0.2675,0.3406,0.5347,Shapiro-Wilk,0,TRUE,FALSE
+Tomatoes (Round) — Dummies only,0.006216,0.2719,0.4896,0.8028,Shapiro-Wilk,0,TRUE,FALSE
+Curly kale — Full xreg,0.006614,0.2035,0.0924,0.1318,Shapiro-Wilk,0,TRUE,FALSE
+Curly kale — Dummies only,0.00536,0.2045,0.1544,0.2129,Shapiro-Wilk,0,TRUE,FALSE
