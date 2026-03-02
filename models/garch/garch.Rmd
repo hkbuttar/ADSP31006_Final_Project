@@ -1,0 +1,601 @@
+---
+title: "Final Project: GARCH Model"
+author: "Minhao Zhang"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 12, fig.height = 6)
+```
+
+# 0 Load Libraries and Data
+
+```{r load_libraries}
+library(arrow)
+library(rugarch)
+library(TSA)
+library(ggplot2)
+library(gridExtra)
+library(tseries)
+library(moments)
+library(knitr)
+library(FinTS)
+library(dplyr)
+library(tidyr)
+```
+
+```{r define_colors}
+col_blue <- "#2E86AB"
+col_red <- "#F24236"
+col_green <- "#06A77D"
+col_purple <- "#9B59B6"
+```
+
+```{r load_data}
+df_raw <- read_parquet("../../data/processed/merged_features_weekly.parquet")
+
+commodities <- c(
+  "Beetroot", "Bulb Onions (Yellow)", "Cabbage", "Carrots",
+  "Cucumbers", "Curly kale", "Lettuce", "Tomatoes (Round)"
+)
+
+df <- df_raw %>%
+  filter(commodity %in% commodities) %>%
+  arrange(commodity, date)
+
+compute_log_returns <- function(prices) {
+  ret <- diff(log(prices)) * 100
+  return(ret)
+}
+
+test_weeks <- 52
+commodity_data <- list()
+
+for (comm in commodities) {
+  sub <- df %>% filter(commodity == comm)
+  prices <- sub$target_price
+
+  # Calculate returns for the whole series
+  ret_full <- compute_log_returns(prices)
+  dates_full <- sub$date[-1]
+
+  n <- length(ret_full)
+  if (n > test_weeks) {
+    # Split into train (everything except last 52 weeks) and test (last 52 weeks)
+    train_idx <- 1:(n - test_weeks)
+    test_idx <- (n - test_weeks + 1):n
+
+    ret_train <- ret_full[train_idx]
+    dates_train <- dates_full[train_idx]
+
+    ret_test <- ret_full[test_idx]
+    dates_test <- dates_full[test_idx]
+
+    commodity_data[[comm]] <- list(
+      prices = prices[c(train_idx, n)], # Approximate
+      returns = ret_train, # "returns" used by EDA is now TRAIN returns
+      dates = dates_train,
+      test_returns = ret_test,
+      test_dates = dates_test
+    )
+  } else {
+    warning(paste("Not enough data for", comm, "to split 52 weeks."))
+  }
+}
+```
+
+# 1 Exploratory Data Analysis
+
+We use **Carrots** as a representative commodity for the detailed EDA.
+
+## 1.1 Time Series Visualization
+
+```{r ts_plot}
+eda_comm <- "Carrots"
+eda <- commodity_data[[eda_comm]]
+
+df_returns <- data.frame(Date = eda$dates, Return = eda$returns)
+
+ggplot(df_returns, aes(x = Date, y = Return)) +
+  geom_line(color = col_blue, size = 0.5) +
+  theme_minimal() +
+  labs(
+    title = paste0(eda_comm, " Weekly Log Returns (%)"),
+    x = "Date", y = "Return (%)"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
+```
+
+## 1.2 Distribution Analysis
+
+```{r distribution, fig.height=5}
+p1 <- ggplot(df_returns, aes(x = Return)) +
+  geom_histogram(bins = 60, fill = col_blue, color = "white", alpha = 0.7) +
+  geom_vline(
+    xintercept = mean(eda$returns), color = col_red,
+    linetype = "dashed", size = 1
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Return Distribution",
+    subtitle = paste0("Mean = ", round(mean(eda$returns), 3), "%"),
+    x = "Return (%)", y = "Frequency"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
+    plot.subtitle = element_text(hjust = 0.5, size = 10)
+  )
+
+p2 <- ggplot(df_returns, aes(sample = Return)) +
+  stat_qq(color = col_blue) +
+  stat_qq_line(color = col_red, size = 1) +
+  theme_minimal() +
+  labs(
+    title = "Q-Q Plot (Normality Check)",
+    x = "Theoretical Quantiles", y = "Sample Quantiles"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5, size = 12, face = "bold"))
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## 1.3 Descriptive Statistics
+
+```{r desc_stats}
+ret <- eda$returns
+summary(ret)
+cat("Skewness:", round(skewness(ret), 4), "\n")
+cat("Kurtosis:", round(kurtosis(ret), 4), "\n")
+```
+
+## 1.4 Autocorrelation of Returns
+
+```{r acf_returns}
+par(mfrow = c(2, 1))
+acf(ret, main = paste0("ACF: ", eda_comm, " Returns"), col = col_blue, lwd = 2, lag.max = 40)
+pacf(ret, main = paste0("PACF: ", eda_comm, " Returns"), col = col_blue, lwd = 2, lag.max = 40)
+par(mfrow = c(1, 1))
+```
+
+## 1.5 Ljung-Box Test on Returns
+
+```{r ljung_box_returns}
+lags_test <- c(5, 10, 15, 20, 25, 30)
+lb_results_returns <- data.frame(Lag = numeric(), Statistic = numeric(), PValue = numeric())
+
+for (lag in lags_test) {
+  lb_test <- Box.test(ret, lag = lag, type = "Ljung-Box")
+  lb_results_returns <- rbind(lb_results_returns, data.frame(
+    Lag = lag,
+    Statistic = round(unname(lb_test$statistic), 4),
+    PValue = round(unname(lb_test$p.value), 6)
+  ))
+}
+kable(lb_results_returns, caption = "Ljung-Box Test on Returns")
+```
+
+## 1.6 Squared Returns (Volatility Proxy)
+
+```{r squared_returns}
+ret_sq <- ret^2
+df_squared <- data.frame(Date = eda$dates, SquaredReturn = ret_sq)
+
+ggplot(df_squared, aes(x = Date, y = SquaredReturn)) +
+  geom_line(color = col_red, size = 0.5) +
+  theme_minimal() +
+  labs(
+    title = "Squared Returns (Volatility Clustering)",
+    x = "Date", y = "Squared Return"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
+```
+
+## 1.7 ACF/PACF of Squared Returns
+
+```{r acf_squared}
+par(mfrow = c(2, 1))
+acf(ret_sq, main = "ACF: Squared Returns", col = col_red, lwd = 2, lag.max = 40)
+pacf(ret_sq, main = "PACF: Squared Returns", col = col_red, lwd = 2, lag.max = 40)
+par(mfrow = c(1, 1))
+```
+
+## 1.8 Test for Heteroscedasticity
+
+### 1.8.1 McLeod-Li Test
+
+```{r mcleod_li}
+mcleod_li_results <- data.frame(Lag = numeric(), PValue = numeric())
+for (lag in lags_test) {
+  ml_test <- McLeod.Li.test(y = ret, gof.lag = lag, plot = FALSE)
+  mcleod_li_results <- rbind(mcleod_li_results, data.frame(
+    Lag = lag,
+    PValue = round(ml_test$p.values[lag], 6)
+  ))
+}
+kable(mcleod_li_results, caption = "McLeod-Li Test for Heteroscedasticity")
+```
+
+### 1.8.2 Ljung-Box Test on Squared Returns
+
+```{r ljung_box_squared}
+lb_results_squared <- data.frame(Lag = numeric(), Statistic = numeric(), PValue = numeric())
+
+for (lag in lags_test) {
+  lb_test_sq <- Box.test(ret_sq, lag = lag, type = "Ljung-Box")
+  lb_results_squared <- rbind(lb_results_squared, data.frame(
+    Lag = lag,
+    Statistic = round(unname(lb_test_sq$statistic), 4),
+    PValue = round(unname(lb_test_sq$p.value), 6)
+  ))
+}
+kable(lb_results_squared, caption = "Ljung-Box Test on Squared Returns")
+```
+
+### 1.8.3 ARCH-LM Test
+
+```{r arch_lm_test}
+arch_test <- ArchTest(ret, lags = 12)
+cat("ARCH-LM Test:\n")
+cat("  Chi-squared:", round(arch_test$statistic, 4), "\n")
+cat("  p-value:", format(arch_test$p.value, scientific = TRUE), "\n")
+```
+
+### 1.8.4 Comparison Plot
+
+```{r hetero_comparison}
+comparison <- data.frame(
+  Lag = lags_test,
+  McLeod_Li = mcleod_li_results$PValue,
+  LB_Squared = lb_results_squared$PValue
+)
+
+ggplot(comparison, aes(x = Lag)) +
+  geom_line(aes(y = McLeod_Li, color = "McLeod-Li"), size = 1.2) +
+  geom_point(aes(y = McLeod_Li, color = "McLeod-Li"), size = 3) +
+  geom_line(aes(y = LB_Squared, color = "LB on Squared"),
+    size = 1.2, linetype = "dashed"
+  ) +
+  geom_point(aes(y = LB_Squared, color = "LB on Squared"), size = 3) +
+  geom_hline(yintercept = 0.05, linetype = "dotted", color = "gray30") +
+  scale_color_manual(values = c(
+    "McLeod-Li" = col_green,
+    "LB on Squared" = col_red
+  )) +
+  theme_minimal() +
+  labs(
+    title = "P-Values: McLeod-Li vs Ljung-Box on Squared Returns",
+    x = "Lag", y = "p-value",
+    color = "Test"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    legend.position = "top"
+  )
+```
+
+## 1.9 Rolling Volatility
+
+```{r rolling_vol}
+window_size <- 8
+rolling_vol <- zoo::rollapply(ret,
+  width = window_size, FUN = sd,
+  fill = NA, align = "right"
+)
+
+df_rolling <- data.frame(
+  Date = eda$dates,
+  Rolling_Vol = as.numeric(rolling_vol)
+)
+df_rolling <- na.omit(df_rolling)
+
+ggplot(df_rolling, aes(x = Date, y = Rolling_Vol)) +
+  geom_line(color = col_red, size = 1) +
+  theme_minimal() +
+  labs(
+    title = "8-Week Rolling Volatility",
+    x = "Date", y = "Volatility (%)"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
+```
+
+# 2 GARCH Model
+
+## 2.1 GARCH Order Selection (Per Commodity)
+
+```{r garch_order_selection}
+garch_orders <- expand.grid(p = 1:3, q = 1:3)
+garch_results <- list()
+
+for (comm in commodities) {
+  ret_c <- commodity_data[[comm]]$returns
+  garch_aic <- numeric(nrow(garch_orders))
+  garch_bic <- numeric(nrow(garch_orders))
+
+  for (i in 1:nrow(garch_orders)) {
+    spec <- ugarchspec(
+      variance.model = list(
+        model = "sGARCH",
+        garchOrder = c(garch_orders$p[i], garch_orders$q[i])
+      ),
+      mean.model = list(armaOrder = c(0, 0), include.mean = TRUE),
+      distribution.model = "norm"
+    )
+    fit <- tryCatch(
+      ugarchfit(spec, ret_c, solver = "hybrid"),
+      error = function(e) NULL
+    )
+    if (!is.null(fit)) {
+      garch_aic[i] <- infocriteria(fit)[1]
+      garch_bic[i] <- infocriteria(fit)[2]
+    } else {
+      garch_aic[i] <- NA
+      garch_bic[i] <- NA
+    }
+  }
+
+  best_idx <- which.min(garch_bic)
+  garch_results[[comm]] <- list(
+    aic = garch_aic,
+    bic = garch_bic,
+    best_p = garch_orders$p[best_idx],
+    best_q = garch_orders$q[best_idx]
+  )
+}
+
+order_summary <- data.frame(
+  Commodity = commodities,
+  Best_p = sapply(commodities, function(c) garch_results[[c]]$best_p),
+  Best_q = sapply(commodities, function(c) garch_results[[c]]$best_q),
+  Best_BIC = sapply(commodities, function(c) round(min(garch_results[[c]]$bic, na.rm = TRUE), 4))
+)
+order_summary$Model <- paste0("GARCH(", order_summary$Best_p, ",", order_summary$Best_q, ")")
+kable(order_summary[, c("Commodity", "Model", "Best_BIC")],
+  caption = "Best GARCH(p,q) Order by BIC", row.names = FALSE
+)
+```
+
+## 2.2 GARCH Order Selection Detail (Example)
+
+```{r garch_order_detail}
+garch_ic <- data.frame(
+  Model = paste0("GARCH(", garch_orders$p, ",", garch_orders$q, ")"),
+  p = garch_orders$p,
+  q = garch_orders$q,
+  AIC = round(garch_results[[eda_comm]]$aic, 4),
+  BIC = round(garch_results[[eda_comm]]$bic, 4)
+)
+kable(garch_ic[, c("Model", "AIC", "BIC")],
+  caption = paste0("GARCH(p,q) Information Criteria — ", eda_comm)
+)
+```
+
+## 2.3 Fit GARCH Models
+
+```{r fit_garch}
+garch_fits <- list()
+
+for (comm in commodities) {
+  ret_c <- commodity_data[[comm]]$returns
+  best_p <- garch_results[[comm]]$best_p
+  best_q <- garch_results[[comm]]$best_q
+
+  spec <- ugarchspec(
+    variance.model = list(model = "sGARCH", garchOrder = c(best_p, best_q)),
+    mean.model = list(armaOrder = c(0, 0), include.mean = TRUE),
+    distribution.model = "norm"
+  )
+  garch_fits[[comm]] <- ugarchfit(spec, ret_c, solver = "hybrid")
+}
+
+cat("Example: GARCH model for", eda_comm, "\n\n")
+garch_fits[[eda_comm]]
+```
+
+## 2.4 GARCH Residual Analysis
+
+```{r garch_residuals, fig.height=8}
+garch_std_resid <- as.numeric(residuals(garch_fits[[eda_comm]], standardize = TRUE))
+garch_sigma <- as.numeric(sigma(garch_fits[[eda_comm]]))
+
+par(mfrow = c(2, 2))
+plot(garch_std_resid,
+  type = "l", col = col_blue,
+  main = paste0(
+    "GARCH(", garch_results[[eda_comm]]$best_p, ",",
+    garch_results[[eda_comm]]$best_q, ") Standardized Residuals"
+  ),
+  xlab = "Observation", ylab = "Residual"
+)
+abline(h = 0, col = "red", lty = 2)
+
+hist(garch_std_resid,
+  breaks = 50, col = col_blue, border = "white",
+  main = "Residual Distribution", xlab = "Standardized Residual", probability = TRUE
+)
+curve(dnorm(x), add = TRUE, col = "red", lwd = 2)
+
+acf(garch_std_resid, main = "ACF: Standardized Residuals", col = col_blue, lwd = 2)
+acf(garch_std_resid^2, main = "ACF: Squared Std Residuals", col = col_red, lwd = 2)
+par(mfrow = c(1, 1))
+```
+
+```{r garch_resid_ljungbox}
+lb_garch_resid <- data.frame(
+  Lag       = lags_test,
+  Statistic = numeric(length(lags_test)),
+  PValue    = numeric(length(lags_test))
+)
+for (k in seq_along(lags_test)) {
+  lb <- Box.test(garch_std_resid, lag = lags_test[k], type = "Ljung-Box")
+  lb_garch_resid$Statistic[k] <- round(lb$statistic, 4)
+  lb_garch_resid$PValue[k] <- round(lb$p.value, 4)
+}
+kable(lb_garch_resid, caption = "Ljung-Box Test on GARCH Standardized Residuals")
+```
+
+## 2.5 Conditional Volatility
+
+```{r garch_conditional_vol}
+df_garch_vol <- data.frame(Date = commodity_data[[eda_comm]]$dates, Sigma = garch_sigma)
+
+ggplot(df_garch_vol, aes(x = Date, y = Sigma)) +
+  geom_line(color = col_red, size = 0.8) +
+  theme_minimal() +
+  labs(
+    title = paste0(
+      "GARCH(", garch_results[[eda_comm]]$best_p, ",",
+      garch_results[[eda_comm]]$best_q, ") Conditional Volatility — ", eda_comm
+    ),
+    x = "Date", y = "Conditional SD (%)"
+  ) +
+  theme(plot.title = element_text(hjust = 0.5, size = 14, face = "bold"))
+```
+
+# 3 Volatility Forecasting
+
+## 3.1 Forecasts (52 Weeks Ahead)
+
+```{r garch_forecast}
+n_ahead <- 52
+forecast_results <- list()
+
+for (comm in commodities) {
+  # Forecast using the fitted model (which was fit on training data)
+  fcast <- ugarchforecast(garch_fits[[comm]], n.ahead = n_ahead)
+  forecast_results[[comm]] <- as.numeric(sigma(fcast))
+}
+
+forecast_df <- data.frame(Week = 1:n_ahead)
+for (comm in commodities) {
+  forecast_df[[comm]] <- round(forecast_results[[comm]], 4)
+}
+
+# Show first 10 rows for brevity
+kable(head(forecast_df, 10), caption = "GARCH Volatility Forecast (First 10 of 52 Weeks Ahead)")
+```
+
+## 3.2 Forecast Visualization
+
+```{r garch_forecast_plot, fig.height=8}
+forecast_long <- forecast_df %>%
+  pivot_longer(cols = -Week, names_to = "Commodity", values_to = "Volatility")
+
+ggplot(forecast_long, aes(x = Week, y = Volatility, color = Commodity)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  scale_x_continuous(breaks = seq(1, n_ahead, by = 4)) +
+  theme_minimal() +
+  labs(
+    title = "GARCH Volatility Forecast (52 Weeks Ahead)",
+    x = "Weeks Ahead", y = "Forecasted Volatility (SD %)"
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+    legend.position = "right"
+  )
+```
+
+## 3.3 Forecast vs Actual Volatility (Test Set Proxy)
+
+We use squared returns of the held-out test set as a proxy for actual volatility to compare with our forecasts.
+
+```{r forecast_vs_actual, fig.height=10}
+plots_list <- list()
+
+for (comm in commodities) {
+  # Get test data
+  test_ret <- commodity_data[[comm]]$test_returns
+  test_dates <- commodity_data[[comm]]$test_dates
+
+  # Ensure lengths match (if test set is exactly n_ahead)
+  len <- min(length(test_ret), n_ahead)
+
+  df_comp <- data.frame(
+    Date = test_dates[1:len],
+    Week = 1:len,
+    Actual_Sq_Return = test_ret[1:len]^2,
+    Forecast_Vol_Sq = forecast_results[[comm]][1:len]^2 # Compare variance (sigma^2) with ret^2
+  )
+
+  # Or compare Volatility (Sigma) with Abs Return or just plot together
+  # Standard practice: compare sigma^2 with ret^2 or sigma with |ret|
+
+  p <- ggplot(df_comp, aes(x = Week)) +
+    geom_line(aes(y = sqrt(Actual_Sq_Return), color = "Actual |Return|"), alpha = 0.5) +
+    geom_line(aes(y = sqrt(Forecast_Vol_Sq), color = "Forecast Sigma"), size = 1) +
+    labs(
+      title = paste(comm, "- Forecast vs Actual Volatility"),
+      y = "Volatility / |Return|", x = "Weeks Ahead"
+    ) +
+    scale_color_manual(values = c("Actual |Return|" = "gray50", "Forecast Sigma" = "red")) +
+    theme_minimal()
+
+  plots_list[[comm]] <- p
+}
+
+grid.arrange(grobs = plots_list, ncol = 2)
+```
+
+## 3.4 Summary Table
+
+```{r garch_summary}
+summary_df <- data.frame(
+  Commodity = commodities,
+  Model = sapply(commodities, function(c) {
+    paste0(
+      "GARCH(", garch_results[[c]]$best_p, ",",
+      garch_results[[c]]$best_q, ")"
+    )
+  }),
+  BIC = sapply(commodities, function(c) round(min(garch_results[[c]]$bic, na.rm = TRUE), 4)),
+  LogLikelihood = sapply(commodities, function(c) round(likelihood(garch_fits[[c]]), 2)),
+  Alpha_Plus_Beta = sapply(commodities, function(c) {
+    coefs <- coef(garch_fits[[c]])
+    alpha_sum <- sum(coefs[grep("alpha", names(coefs))])
+    beta_sum <- sum(coefs[grep("beta", names(coefs))])
+    round(alpha_sum + beta_sum, 4)
+  }),
+  Vol_Week1 = sapply(commodities, function(c) round(forecast_results[[c]][1], 4)),
+  Vol_Week52 = sapply(commodities, function(c) round(forecast_results[[c]][min(52, length(forecast_results[[c]]))], 4))
+)
+kable(summary_df, caption = "GARCH Model Summary Across Commodities", row.names = FALSE)
+```
+
+# 4 Per-Commodity Forecast Metrics
+
+Metrics are computed by comparing the 52-week forecasted conditional volatility (sigma) against absolute test-set returns as a proxy for realized volatility.
+
+```{r garch_metrics}
+compute_metrics <- function(actual, predicted) {
+  rmse <- sqrt(mean((predicted - actual)^2))
+  mae <- mean(abs(predicted - actual))
+  # Exclude zeros from MAPE/sMAPE to avoid division by zero
+  nz <- actual != 0
+  mape <- mean(abs((actual[nz] - predicted[nz]) / actual[nz]))
+  smape <- mean(2 * abs(actual - predicted) / (abs(actual) + abs(predicted)))
+  c(RMSE = rmse, MAE = mae, MAPE = mape, sMAPE = smape)
+}
+
+metrics_list <- lapply(commodities, function(comm) {
+  test_ret <- commodity_data[[comm]]$test_returns
+  fcast_sigma <- forecast_results[[comm]]
+  len <- min(length(test_ret), length(fcast_sigma))
+  m <- compute_metrics(abs(test_ret[1:len]), fcast_sigma[1:len])
+  data.frame(
+    Commodity = comm,
+    RMSE = round(m["RMSE"], 6),
+    MAE = round(m["MAE"], 6),
+    MAPE = round(m["MAPE"], 6),
+    sMAPE = round(m["sMAPE"], 6),
+    row.names = NULL
+  )
+})
+
+metrics_df <- do.call(rbind, metrics_list)
+kable(metrics_df, caption = "Per-Commodity Forecast Metrics (Forecast Sigma vs |Return|)", row.names = FALSE)
+```
