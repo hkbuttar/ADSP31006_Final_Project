@@ -1,0 +1,6 @@
+model,RMSE,MAE,MASE,sMAPE,MAPE,AIC,BIC,source
+Beetroot — Full xreg,NA,NA,NA,NA,NA,-1858.11,-1792.54,lm_arima_model.Rmd (this file)
+Beetroot — Dummies only,0.073,0.0512,2.7077,6.9506,6.5422,-1851.98,-1819.19,lm_arima_model.Rmd (this file)
+Beetroot — auto.arima,0.0744,0.0529,2.7978,7.1982,6.7706,-1853.25,-1828.66,arima_model.R (pre-run)
+"Beetroot — ARIMA(1,1,1)",0.0804,0.0601,3.1816,8.2602,7.7434,-1844.93,-1832.64,arima_model.R (pre-run)
+"Beetroot — SARIMA(1,1,1)(1,1,1)[52]",0.0737,0.0505,2.6752,6.8538,6.4814,-1514.04,-1494.17,arima_model.R (pre-run)

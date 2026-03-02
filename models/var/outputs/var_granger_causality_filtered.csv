@@ -1,0 +1,9 @@
+model,cause,f_stat,p_value,significant
+Beetroot — VAR(1),api_energy_and_lubricants,0.0228,1,FALSE
+Beetroot — VAR(1),api_fertilisers_and_soil_improvers,0.019,1,FALSE
+Beetroot — VAR(1),api_plant_protection_products,0.185,0.993,FALSE
+Beetroot — VAR(1),api_fresh_fruit,0.1738,0.9944,FALSE
+Beetroot — VAR(1),api_fresh_vegetables,0.2534,0.9801,FALSE
+Beetroot — VAR(1),fuel_petrol_price,0.2034,0.9904,FALSE
+Beetroot — VAR(1),fuel_diesel_price,0.1595,0.9958,FALSE
+Beetroot — VAR(1),sppi_road_freight,0.1808,0.9935,FALSE

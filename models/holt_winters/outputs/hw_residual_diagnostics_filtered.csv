@@ -1,0 +1,2 @@
+model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,normality_p,autocorr_ok,normality_ok
+"Beetroot — ETS (ETS(M,N,N))",0.002675,0.0498,0.2577,0.5472,Shapiro-Wilk,0,TRUE,FALSE

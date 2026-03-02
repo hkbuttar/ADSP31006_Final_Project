@@ -1,0 +1,467 @@
+```{r}
+library(tidyverse)
+library(vars)
+library(tseries)
+library(ggplot2)
+library(patchwork)
+library(scales)
+library(nortest)
+
+select <- dplyr::select
+```
+```{r}
+INPUT_FILE <- "../../data/processed/merged_features_weekly.csv"
+OUTPUT_DIR <- "outputs"
+FREQ       <- 52
+ALPHA      <- 0.05
+MAX_LAG    <- 8
+
+VAR_VARS <- c(
+  "target_price",
+  "api_energy_and_lubricants",
+  "api_fertilisers_and_soil_improvers",
+  "api_plant_protection_products",
+  "api_fresh_fruit",
+  "api_fresh_vegetables",
+  "fuel_petrol_price",
+  "fuel_diesel_price",
+  "sppi_road_freight"
+)
+
+EXOG_VARS <- c("shock_2021q4_2023q1", "post_shock")
+```
+```{r}
+df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
+  mutate(date = as.Date(date)) %>%
+  arrange(date)
+
+target_commodities <- c(
+  "Beetroot",
+  "bulb onion yellow",
+  "cabbage",
+  "carrot",
+  "cucumber",
+  "curly kale",
+  "lettuce",
+  "tomato round"
+)
+
+df <- df %>%
+  filter(commodity %in% target_commodities)
+
+commodities <- unique(df$commodity)
+cat("Filtered commodities:", paste(commodities, collapse = ", "), "\n")
+```
+```{r}
+calc_rmse  <- function(actual, pred) sqrt(mean((actual - pred)^2, na.rm = TRUE))
+calc_mae   <- function(actual, pred) mean(abs(actual - pred), na.rm = TRUE)
+calc_mape  <- function(actual, pred) mean(abs((actual - pred) / actual) * 100, na.rm = TRUE)
+calc_smape <- function(actual, pred) {
+  mean(200 * abs(actual - pred) / (abs(actual) + abs(pred)), na.rm = TRUE)
+}
+calc_mase  <- function(actual, pred, train) {
+  naive_mae <- mean(abs(diff(train)), na.rm = TRUE)
+  mean(abs(actual - pred), na.rm = TRUE) / naive_mae
+}
+
+compile_metrics <- function(actual, pred, train, aic_val, bic_val, label) {
+  tibble(
+    model = label,
+    RMSE  = round(calc_rmse(actual, pred),        4),
+    MAE   = round(calc_mae(actual, pred),         4),
+    MASE  = round(calc_mase(actual, pred, train), 4),
+    sMAPE = round(calc_smape(actual, pred),       4),
+    MAPE  = round(calc_mape(actual, pred),        4),
+    AIC   = round(aic_val,                        2),
+    BIC   = round(bic_val,                        2)
+  )
+}
+
+make_stationary <- function(x, name, alpha = 0.05) {
+  s <- x
+  for (d in 0:2) {
+    pval <- tryCatch(adf.test(s[!is.na(s)])$p.value, error = function(e) 1)
+    if (pval < alpha) return(list(series = s, d = d))
+    s <- c(NA, diff(s))
+  }
+  list(series = s, d = 2)
+}
+
+residual_diagnostics_var <- function(resid_vec, label) {
+  resid_clean <- resid_vec[!is.na(resid_vec)]
+  lb10 <- Box.test(resid_clean, lag = 10, type = "Ljung-Box")
+  lb20 <- Box.test(resid_clean, lag = 20, type = "Ljung-Box")
+  norm_test <- if (length(resid_clean) <= 5000) {
+    list(result = shapiro.test(resid_clean), name = "Shapiro-Wilk")
+  } else {
+    list(result = nortest::ad.test(resid_clean), name = "Anderson-Darling")
+  }
+  tibble(
+    model             = label,
+    resid_mean        = round(mean(resid_clean),           6),
+    resid_sd          = round(sd(resid_clean),             4),
+    ljung_box_lag10_p = round(lb10$p.value,                4),
+    ljung_box_lag20_p = round(lb20$p.value,                4),
+    normality_test    = norm_test$name,
+    normality_p       = round(norm_test$result$p.value,    4),
+    autocorr_ok       = lb10$p.value > ALPHA,
+    normality_ok      = norm_test$result$p.value > ALPHA
+  )
+}
+
+plot_residuals <- function(resid_vec, fitted_vec, label) {
+  resid_clean <- resid_vec[!is.na(resid_vec)]
+  time_idx    <- seq_along(resid_vec)
+  ci_bound    <- qnorm(0.975) / sqrt(length(resid_clean))
+
+  p1 <- ggplot(data.frame(t = time_idx, r = resid_vec), aes(t, r)) +
+    geom_line(color = "#2c3e50", linewidth = 0.45) +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    labs(title = "Residuals over time", x = "Week index", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  acf_data <- acf(resid_clean, plot = FALSE, lag.max = 52)
+  acf_df   <- data.frame(lag = acf_data$lag[-1], acf = acf_data$acf[-1])
+  p2 <- ggplot(acf_df, aes(lag, acf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#2980b9") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "ACF of residuals", x = "Lag (weeks)", y = "ACF") +
+    theme_minimal(base_size = 11)
+
+  pacf_data <- pacf(resid_clean, plot = FALSE, lag.max = 52)
+  pacf_df   <- data.frame(lag = pacf_data$lag, pacf = pacf_data$acf)
+  p3 <- ggplot(pacf_df, aes(lag, pacf)) +
+    geom_segment(aes(xend = lag, yend = 0), color = "#8e44ad") +
+    geom_hline(yintercept = c(-ci_bound, ci_bound), linetype = "dashed", color = "red") +
+    geom_hline(yintercept = 0, color = "black") +
+    labs(title = "PACF of residuals", x = "Lag (weeks)", y = "PACF") +
+    theme_minimal(base_size = 11)
+
+  p4 <- ggplot(data.frame(r = resid_clean), aes(r)) +
+    geom_histogram(aes(y = after_stat(density)), bins = 40,
+                   fill = "#3498db", color = "white", alpha = 0.7) +
+    stat_function(fun = dnorm,
+                  args = list(mean = mean(resid_clean), sd = sd(resid_clean)),
+                  color = "red", linewidth = 1) +
+    labs(title = "Residual distribution", x = "Residual", y = "Density") +
+    theme_minimal(base_size = 11)
+
+  qq    <- qqnorm(resid_clean, plot.it = FALSE)
+  qq_df <- data.frame(theoretical = qq$x, sample = qq$y)
+  p5 <- ggplot(qq_df, aes(theoretical, sample)) +
+    geom_point(alpha = 0.4, color = "#2c3e50", size = 0.8) +
+    geom_abline(color = "red", linewidth = 1) +
+    labs(title = "Q-Q plot", x = "Theoretical quantiles", y = "Sample quantiles") +
+    theme_minimal(base_size = 11)
+
+  p6 <- ggplot(data.frame(f = fitted_vec, r = resid_vec), aes(f, r)) +
+    geom_point(alpha = 0.35, size = 0.9, color = "#16a085") +
+    geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+    geom_smooth(method = "loess", formula = y ~ x, se = FALSE,
+                color = "#e67e22", linewidth = 0.8) +
+    labs(title = "Residuals vs Fitted", x = "Fitted values", y = "Residual") +
+    theme_minimal(base_size = 11)
+
+  combined <- (p1 | p4) / (p2 | p3) / (p5 | p6) +
+    plot_annotation(
+      title    = paste0("Residual Diagnostics (target_price equation) — ", label),
+      subtitle = "Row 1: Time series & distribution | Row 2: ACF & PACF | Row 3: Q-Q & Residuals vs Fitted",
+      theme    = theme(plot.title = element_text(face = "bold", size = 13))
+    )
+  print(combined)
+}
+
+plot_forecast <- function(train_dates, train_vals,
+                          test_dates,  test_vals, pred_vals, label) {
+  cutoff   <- train_dates[length(train_dates)] - 365 * 2
+  mask     <- train_dates >= cutoff
+  train_df <- data.frame(date = train_dates[mask], value = train_vals[mask])
+  test_df  <- data.frame(date = test_dates,  value = test_vals)
+  pred_df  <- data.frame(date = test_dates,  value = pred_vals)
+
+  p <- ggplot() +
+    geom_line(data = train_df, aes(x = date, y = value),
+              color = "#bdc3c7", linewidth = 0.9) +
+    geom_line(data = test_df,  aes(x = date, y = value, color = "Actual"),
+              linewidth = 1.2) +
+    geom_line(data = pred_df,  aes(x = date, y = value, color = "VAR forecast"),
+              linewidth = 1.2, linetype = "dashed") +
+    scale_color_manual(
+      values = c("Actual" = "#2c3e50", "VAR forecast" = "#e74c3c"), name = NULL
+    ) +
+    labs(
+      title    = paste0("VAR Forecast — ", label),
+      subtitle = "Dashed = forecast | Grey = last 2 years of training",
+      x = NULL, y = "Price"
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+  print(p)
+}
+
+plot_irf <- function(model_obj, label, n_ahead = 26) {
+  irf_plots    <- list()
+  impulse_vars <- colnames(model_obj$y)
+  impulse_vars <- impulse_vars[impulse_vars != "target_price"]
+
+  for (imp in impulse_vars) {
+    irf_res <- tryCatch(
+      irf(model_obj, impulse = imp, response = "target_price",
+          n.ahead = n_ahead, boot = TRUE, ci = 0.95, runs = 100),
+      error = function(e) NULL
+    )
+    if (is.null(irf_res)) next
+
+    irf_df <- data.frame(
+      horizon = 0:n_ahead,
+      irf     = as.numeric(irf_res$irf[[1]]),
+      lo      = as.numeric(irf_res$Lower[[1]]),
+      hi      = as.numeric(irf_res$Upper[[1]])
+    )
+
+    irf_plots[[imp]] <- ggplot(irf_df, aes(x = horizon)) +
+      geom_ribbon(aes(ymin = lo, ymax = hi), fill = "#3498db", alpha = 0.2) +
+      geom_line(aes(y = irf), color = "#2c3e50", linewidth = 0.9) +
+      geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+      labs(title = imp, x = "Weeks ahead", y = "Response") +
+      theme_minimal(base_size = 10) +
+      theme(plot.title = element_text(size = 9, face = "bold"))
+  }
+
+  if (length(irf_plots) == 0) return(invisible(NULL))
+
+  n_cols   <- 3
+  combined <- wrap_plots(irf_plots, ncol = n_cols) +
+    plot_annotation(
+      title    = paste0("Impulse Response Functions → target_price\n", label),
+      subtitle = "Shaded = 95% bootstrap CI (100 runs)",
+      theme    = theme(plot.title = element_text(face = "bold", size = 13))
+    )
+  print(combined)
+}
+
+run_granger <- function(model_obj, label) {
+  vars_in_model <- colnames(model_obj$y)
+  other_vars    <- vars_in_model[vars_in_model != "target_price"]
+  map_dfr(other_vars, function(v) {
+    res <- tryCatch(causality(model_obj, cause = v), error = function(e) NULL)
+    if (is.null(res)) return(NULL)
+    tibble(
+      model       = label,
+      cause       = v,
+      f_stat      = round(as.numeric(res$Granger$statistic), 4),
+      p_value     = round(as.numeric(res$Granger$p.value),   4),
+      significant = as.numeric(res$Granger$p.value) < ALPHA
+    )
+  })
+}
+```
+```{r}
+all_metrics <- list()
+all_diag    <- list()
+all_granger <- list()
+```
+```{r fig.width=14, fig.height=12}
+for (comm in commodities) {
+  cat("\n", strrep("=", 60), "\n")
+  cat("  Commodity:", comm, "\n")
+  cat(strrep("=", 60), "\n")
+
+  safe_name <- str_replace_all(comm, "[ /]", "_")
+
+  sub <- df %>% filter(commodity == comm) %>% arrange(date)
+
+  if (!"split" %in% names(sub)) stop("'split' column not found in data.")
+
+  train_df <- sub %>% filter(split == "train")
+  test_df  <- sub %>% filter(split == "test")
+
+  if (nrow(train_df) < 30 || nrow(test_df) == 0) {
+    cat("  !! Insufficient rows — skipping.\n"); next
+  }
+
+  n_test <- nrow(test_df)
+  cat(sprintf("  Train: %s -> %s (%d weeks)\n",
+              min(train_df$date), max(train_df$date), nrow(train_df)))
+  cat(sprintf("  Test:  %s -> %s (%d weeks)\n",
+              min(test_df$date),  max(test_df$date),  n_test))
+
+  avail_vars <- VAR_VARS[VAR_VARS %in% names(sub) &
+                           sapply(VAR_VARS, function(v) sum(!is.na(train_df[[v]])) > MAX_LAG + 5)]
+  if (!"target_price" %in% avail_vars) {
+    cat("  !! target_price has too many NAs — skipping.\n"); next
+  }
+  avail_vars <- c("target_price", avail_vars[avail_vars != "target_price"])
+  cat("  VAR variables:", paste(avail_vars, collapse = ", "), "\n")
+
+  avail_exog <- EXOG_VARS[EXOG_VARS %in% names(sub)]
+  cat("  Exogenous:    ", paste(avail_exog, collapse = ", "), "\n")
+
+  train_mat <- train_df %>%
+    select(all_of(avail_vars)) %>%
+    mutate(across(everything(), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
+
+  d_orders   <- setNames(integer(length(avail_vars)), avail_vars)
+  train_stat <- train_mat
+
+  for (v in avail_vars) {
+    res             <- make_stationary(train_mat[[v]], v, ALPHA)
+    train_stat[[v]] <- res$series
+    d_orders[v]     <- res$d
+  }
+
+  max_d      <- max(d_orders)
+  train_stat <- train_stat %>% drop_na()
+  cat(sprintf("  Max differencing order: %d  |  Usable train rows: %d\n",
+              max_d, nrow(train_stat)))
+
+  exog_train <- if (length(avail_exog) > 0) {
+    train_df %>%
+      select(all_of(avail_exog)) %>%
+      tail(nrow(train_stat)) %>%
+      as.matrix()
+  } else NULL
+
+  cat("  Selecting lag order (VARselect, max =", MAX_LAG, ")...\n")
+  lag_sel <- tryCatch(
+    VARselect(train_stat, lag.max = MAX_LAG, type = "const", exogen = exog_train),
+    error = function(e) { cat("  !! VARselect failed:", e$message, "\n"); NULL }
+  )
+  if (is.null(lag_sel)) next
+
+  best_lag_bic <- lag_sel$selection["SC(n)"]
+  chosen_lag   <- best_lag_bic
+  cat(sprintf("  Lag selected — AIC: %d  |  BIC: %d\n",
+              lag_sel$selection["AIC(n)"], best_lag_bic))
+  cat(sprintf("  Using BIC lag: %d\n", chosen_lag))
+
+  cat("  Fitting VAR(", chosen_lag, ")...\n")
+  model_var <- tryCatch(
+    VAR(train_stat, p = chosen_lag, type = "const", exogen = exog_train),
+    error = function(e) { cat("  !! VAR fit failed:", e$message, "\n"); NULL }
+  )
+  if (is.null(model_var)) next
+
+  cat(sprintf("  AIC: %.2f  |  BIC: %.2f\n", AIC(model_var), BIC(model_var)))
+
+  cat("  Walk-forward forecasting", n_test, "steps...\n")
+  pred_vals <- numeric(n_test)
+  all_data  <- bind_rows(train_df, test_df) %>%
+    select(all_of(c(avail_vars, avail_exog))) %>%
+    mutate(across(everything(), ~ ifelse(is.na(.), mean(., na.rm = TRUE), .)))
+
+  for (i in seq_len(n_test)) {
+    wf_train <- all_data[1 : (nrow(train_df) + i - 1), avail_vars, drop = FALSE]
+
+    wf_stat <- wf_train
+    for (v in avail_vars) {
+      if (d_orders[v] > 0) {
+        for (dd in seq_len(d_orders[v])) wf_stat[[v]] <- c(NA, diff(wf_stat[[v]]))
+      }
+    }
+    wf_stat <- drop_na(wf_stat)
+
+    wf_exog <- if (length(avail_exog) > 0)
+      as.matrix(all_data[seq_len(nrow(train_df) + i - 1), avail_exog] %>% tail(nrow(wf_stat)))
+    else NULL
+
+    wf_exog_fc <- if (length(avail_exog) > 0)
+      as.matrix(all_data[nrow(train_df) + i, avail_exog])
+    else NULL
+
+    m <- tryCatch(
+      VAR(wf_stat, p = chosen_lag, type = "const", exogen = wf_exog),
+      error = function(e) NULL
+    )
+    if (is.null(m)) { pred_vals[i] <- NA; next }
+
+    fc <- tryCatch(predict(m, n.ahead = 1, dumvar = wf_exog_fc), error = function(e) NULL)
+    if (is.null(fc)) { pred_vals[i] <- NA; next }
+
+    pred_diff <- fc$fcst$target_price[1, "fcst"]
+
+    if (d_orders["target_price"] >= 1) {
+      pred_vals[i] <- wf_train$target_price[nrow(wf_train)] + pred_diff
+    } else {
+      pred_vals[i] <- pred_diff
+    }
+
+    if (d_orders["target_price"] == 2) {
+      last_fd      <- diff(wf_train$target_price)
+      last_fd      <- last_fd[length(last_fd)]
+      pred_vals[i] <- wf_train$target_price[nrow(wf_train)] + last_fd + pred_diff
+    }
+
+    if (i %% 10 == 0) cat(sprintf("    Step %d/%d\n", i, n_test))
+  }
+
+  actual <- test_df$target_price
+  valid  <- !is.na(pred_vals) & !is.na(actual)
+
+  metrics <- compile_metrics(
+    actual  = actual[valid], pred    = pred_vals[valid],
+    train   = train_df$target_price,
+    aic_val = AIC(model_var), bic_val = BIC(model_var),
+    label   = paste0(comm, " — VAR(", chosen_lag, ")")
+  )
+  cat("\n  METRICS:\n")
+  for (col in c("RMSE","MAE","MASE","sMAPE","MAPE","AIC","BIC"))
+    cat(sprintf("    %-8s: %s\n", col, metrics[[col]]))
+
+  all_metrics[[comm]] <- metrics
+
+  resid_target  <- as.numeric(residuals(model_var)[, "target_price"])
+  fitted_target <- as.numeric(fitted(model_var)[, "target_price"])
+
+  all_diag[[comm]] <- residual_diagnostics_var(
+    resid_target, paste0(comm, " — VAR(", chosen_lag, ")")
+  )
+
+  gc_res <- run_granger(model_var, paste0(comm, " — VAR(", chosen_lag, ")"))
+  if (!is.null(gc_res) && nrow(gc_res) > 0) {
+    all_granger[[comm]] <- gc_res
+    cat("\n  Granger causality (-> target_price):\n")
+    print(gc_res %>% select(cause, f_stat, p_value, significant), n = Inf)
+  }
+
+  plot_residuals(resid_target, fitted_target, paste0(comm, " — VAR(", chosen_lag, ")"))
+
+  plot_forecast(
+    train_dates = train_df$date,  train_vals = train_df$target_price,
+    test_dates  = test_df$date,   test_vals  = actual,
+    pred_vals   = pred_vals,      label      = paste0(comm, " — VAR(", chosen_lag, ")")
+  )
+
+  plot_irf(model_obj = model_var, label = paste0(comm, " — VAR(", chosen_lag, ")"))
+}
+```
+```{r}
+metrics_df <- bind_rows(all_metrics)
+diag_df    <- bind_rows(all_diag)
+granger_df <- bind_rows(all_granger)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  VAR MODEL PERFORMANCE METRICS\n")
+cat(strrep("=", 70), "\n")
+print(metrics_df, n = Inf)
+
+cat("\n\n", strrep("=", 70), "\n")
+cat("  RESIDUAL DIAGNOSTICS (target_price equation)\n")
+cat(strrep("=", 70), "\n")
+print(diag_df, n = Inf)
+
+if (nrow(granger_df) > 0) {
+  cat("\n\n", strrep("=", 70), "\n")
+  cat("  GRANGER CAUSALITY: variables -> target_price\n")
+  cat(strrep("=", 70), "\n")
+  print(granger_df %>% arrange(model, p_value), n = Inf)
+}
+
+write_csv(metrics_df, file.path(OUTPUT_DIR, "var_metrics_filtered.csv"))
+write_csv(diag_df,    file.path(OUTPUT_DIR, "var_residual_diagnostics_filtered.csv"))
+if (nrow(granger_df) > 0)
+  write_csv(granger_df, file.path(OUTPUT_DIR, "var_granger_causality_filtered.csv"))
+
+cat("\n✅ Done.\n")
+```

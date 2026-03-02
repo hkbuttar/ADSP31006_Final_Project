@@ -8,7 +8,7 @@ library(scales)
 library(nortest)
 ```
 ```{r}
-INPUT_FILE  <- "../../data/merged_features_weekly.csv"
+INPUT_FILE  <- "../../data/processed/merged_features_weekly.csv"
 OUTPUT_DIR  <- "outputs"
 FREQ        <- 52
 ALPHA       <- 0.05
@@ -18,8 +18,22 @@ df <- read_csv(INPUT_FILE, show_col_types = FALSE) %>%
   mutate(date = as.Date(date)) %>%
   arrange(date)
 
+target_commodities <- c(
+  "Beetroot",
+  "bulb onion yellow",
+  "cabbage",
+  "carrot",
+  "cucumber",
+  "curly kale",
+  "lettuce",
+  "tomato round"
+)
+
+df <- df %>%
+  filter(commodity %in% target_commodities)
+
 commodities <- unique(df$commodity)
-cat("Commodities found:", paste(commodities, collapse = ", "), "\n")
+cat("Filtered commodities:", paste(commodities, collapse = ", "), "\n")
 ```
 ```{r}
 calc_rmse  <- function(actual, pred) sqrt(mean((actual - pred)^2, na.rm = TRUE))
@@ -381,8 +395,8 @@ cat("
   beta  (trend):    near 0 = trend changes slowly | near 1 = trend adapts quickly
   gamma (seasonal): near 0 = stable seasonal pattern | near 1 = updates aggressively\n\n")
 
-write_csv(metrics_df, file.path(OUTPUT_DIR, "hw_metrics.csv"))
-write_csv(diag_df,    file.path(OUTPUT_DIR, "hw_residual_diagnostics.csv"))
+write_csv(metrics_df, file.path(OUTPUT_DIR, "hw_metrics_filtered.csv"))
+write_csv(diag_df,    file.path(OUTPUT_DIR, "hw_residual_diagnostics_filtered.csv"))
 
 cat("✅ Done.\n")
 ```

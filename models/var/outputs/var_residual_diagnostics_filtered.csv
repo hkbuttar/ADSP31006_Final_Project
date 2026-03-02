@@ -1,0 +1,2 @@
+model,resid_mean,resid_sd,ljung_box_lag10_p,ljung_box_lag20_p,normality_test,normality_p,autocorr_ok,normality_ok
+Beetroot — VAR(1),-0,0.0298,0.0017,0.0038,Shapiro-Wilk,0,FALSE,FALSE

@@ -4,3 +4,5 @@ models/holt_winters/holt_winters.html
 models/var/var.html
 models/lm_arima/linear_regression_w_arima_error.html
 models/granger_causality/grander_causality.html
+models/Harleen/varma.html
+models/Harleen/arima.html
