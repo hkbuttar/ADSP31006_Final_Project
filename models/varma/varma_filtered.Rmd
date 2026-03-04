@@ -380,33 +380,29 @@ for (comm in commodities) {
     fitted_target <- tail(train_stat$target_price, length(resid_target)) - resid_target
   }
 
-  # ── FINAL OUTPUT (ONLY WHAT YOU WANT) ──────────────────────
+  # ── FINAL OUTPUT ───────────────────────────────────────────
   cat("\n\n## Commodity:", comm, "\n")
 
   print(metrics)
 
   if (!is.null(resid_target) && !all(is.na(resid_target))) {
-    print(plot_residuals(resid_target, fitted_target, comm))
+    plot_residuals(resid_target, fitted_target, comm)
   }
 
-  print(
-    plot_forecast(
-      train_dates = train_df$date,
-      train_vals  = train_df$target_price,
-      test_dates  = test_df$date,
-      test_vals   = actual,
-      pred_vals   = pred_vals,
-      label       = comm
-    )
+  plot_forecast(
+    train_dates = train_df$date,
+    train_vals  = train_df$target_price,
+    test_dates  = test_df$date,
+    test_vals   = actual,
+    pred_vals   = pred_vals,
+    label       = comm
   )
 
-  print(
-    plot_irf(
-      model_obj = model_best,
-      var_names = avail_vars,
-      p = best$p, q = best$q,
-      label = comm
-    )
+  plot_irf(
+    model_obj = model_best,
+    var_names = avail_vars,
+    p = best$p, q = best$q,
+    label = comm
   )
 }
 ```
