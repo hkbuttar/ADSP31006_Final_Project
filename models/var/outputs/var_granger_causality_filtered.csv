@@ -7,3 +7,59 @@ Beetroot — VAR(1),api_fresh_vegetables,0.2534,0.9801,FALSE
 Beetroot — VAR(1),fuel_petrol_price,0.2034,0.9904,FALSE
 Beetroot — VAR(1),fuel_diesel_price,0.1595,0.9958,FALSE
 Beetroot — VAR(1),sppi_road_freight,0.1808,0.9935,FALSE
+Bulb Onions (Yellow) — VAR(1),api_energy_and_lubricants,0.059,0.9999,FALSE
+Bulb Onions (Yellow) — VAR(1),api_fertilisers_and_soil_improvers,0.1402,0.9974,FALSE
+Bulb Onions (Yellow) — VAR(1),api_plant_protection_products,0.2415,0.983,FALSE
+Bulb Onions (Yellow) — VAR(1),api_fresh_fruit,0.0567,0.9999,FALSE
+Bulb Onions (Yellow) — VAR(1),api_fresh_vegetables,0.0579,0.9999,FALSE
+Bulb Onions (Yellow) — VAR(1),fuel_petrol_price,0.0486,0.9999,FALSE
+Bulb Onions (Yellow) — VAR(1),fuel_diesel_price,0.0109,1,FALSE
+Bulb Onions (Yellow) — VAR(1),sppi_road_freight,0.1032,0.9991,FALSE
+Cabbage — VAR(1),api_energy_and_lubricants,0.043,1,FALSE
+Cabbage — VAR(1),api_fertilisers_and_soil_improvers,0.0838,0.9996,FALSE
+Cabbage — VAR(1),api_plant_protection_products,0.1795,0.9937,FALSE
+Cabbage — VAR(1),api_fresh_fruit,0.0553,0.9999,FALSE
+Cabbage — VAR(1),api_fresh_vegetables,0.006,1,FALSE
+Cabbage — VAR(1),fuel_petrol_price,0.0266,1,FALSE
+Cabbage — VAR(1),fuel_diesel_price,0.0131,1,FALSE
+Cabbage — VAR(1),sppi_road_freight,0.1011,0.9992,FALSE
+Carrots — VAR(1),api_energy_and_lubricants,0.2824,0.972,FALSE
+Carrots — VAR(1),api_fertilisers_and_soil_improvers,0.1647,0.9953,FALSE
+Carrots — VAR(1),api_plant_protection_products,0.2444,0.9823,FALSE
+Carrots — VAR(1),api_fresh_fruit,0.1897,0.9924,FALSE
+Carrots — VAR(1),api_fresh_vegetables,0.2133,0.9887,FALSE
+Carrots — VAR(1),fuel_petrol_price,0.071,0.9998,FALSE
+Carrots — VAR(1),fuel_diesel_price,0.0612,0.9999,FALSE
+Carrots — VAR(1),sppi_road_freight,0.0405,1,FALSE
+Lettuce — VAR(1),api_energy_and_lubricants,0.0256,1,FALSE
+Lettuce — VAR(1),api_fertilisers_and_soil_improvers,0.0083,1,FALSE
+Lettuce — VAR(1),api_plant_protection_products,0.245,0.9822,FALSE
+Lettuce — VAR(1),api_fresh_fruit,0.0392,1,FALSE
+Lettuce — VAR(1),api_fresh_vegetables,0.7251,0.6695,FALSE
+Lettuce — VAR(1),fuel_petrol_price,0.0178,1,FALSE
+Lettuce — VAR(1),fuel_diesel_price,0.0864,0.9995,FALSE
+Lettuce — VAR(1),sppi_road_freight,0.0394,1,FALSE
+Cucumbers — VAR(1),api_energy_and_lubricants,0.0301,1,FALSE
+Cucumbers — VAR(1),api_fertilisers_and_soil_improvers,0.0093,1,FALSE
+Cucumbers — VAR(1),api_plant_protection_products,0.2424,0.9828,FALSE
+Cucumbers — VAR(1),api_fresh_fruit,0.0511,0.9999,FALSE
+Cucumbers — VAR(1),api_fresh_vegetables,0.0238,1,FALSE
+Cucumbers — VAR(1),fuel_petrol_price,0.1943,0.9917,FALSE
+Cucumbers — VAR(1),fuel_diesel_price,0.165,0.9953,FALSE
+Cucumbers — VAR(1),sppi_road_freight,0.0655,0.9998,FALSE
+Tomatoes (Round) — VAR(1),api_energy_and_lubricants,0.0592,0.9999,FALSE
+Tomatoes (Round) — VAR(1),api_fertilisers_and_soil_improvers,0.1118,0.9988,FALSE
+Tomatoes (Round) — VAR(1),api_plant_protection_products,0.1479,0.9968,FALSE
+Tomatoes (Round) — VAR(1),api_fresh_fruit,0.0309,1,FALSE
+Tomatoes (Round) — VAR(1),api_fresh_vegetables,0.0082,1,FALSE
+Tomatoes (Round) — VAR(1),fuel_petrol_price,0.0262,1,FALSE
+Tomatoes (Round) — VAR(1),fuel_diesel_price,0.0243,1,FALSE
+Tomatoes (Round) — VAR(1),sppi_road_freight,0.1065,0.999,FALSE
+Curly kale — VAR(1),api_energy_and_lubricants,0.6181,0.7633,FALSE
+Curly kale — VAR(1),api_fertilisers_and_soil_improvers,0.4748,0.8747,FALSE
+Curly kale — VAR(1),api_plant_protection_products,0.0884,0.9995,FALSE
+Curly kale — VAR(1),api_fresh_fruit,0.0127,1,FALSE
+Curly kale — VAR(1),api_fresh_vegetables,0.4177,0.911,FALSE
+Curly kale — VAR(1),fuel_petrol_price,0.0832,0.9996,FALSE
+Curly kale — VAR(1),fuel_diesel_price,0.0453,1,FALSE
+Curly kale — VAR(1),sppi_road_freight,0.0479,1,FALSE
